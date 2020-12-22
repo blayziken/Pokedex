@@ -10,7 +10,6 @@ class _TabTestState extends State<TabTest> with SingleTickerProviderStateMixin {
 
   @override
   void initState() {
-    // TODO: implement initState
     _tabController = TabController(length: 4, vsync: this);
     super.initState();
   }
