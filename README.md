@@ -1,4 +1,4 @@
-# poke_search
+# Pokedex
 
 Pokedex Search App
 
