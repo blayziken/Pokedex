@@ -1,7 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:poke_search/tests/TabTest.dart';
 
 class DetailScreen extends StatelessWidget {
   @override
@@ -109,6 +107,7 @@ class DetailScreen extends StatelessWidget {
                       topRight: Radius.circular(35.0),
                     ),
                   ),
+                  child: TabTest(),
                 ),
               )
             ],

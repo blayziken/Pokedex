@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:poke_search/Screens/detail.dart';
 import 'package:poke_search/Screens/home.dart';
 import 'package:poke_search/Screens/splash.dart';
+import 'package:poke_search/tests/TabTest.dart';
+import 'package:poke_search/tests/screen.dart';
 import './tests/ChooseSplash.dart';
 
 void main() {
@@ -16,7 +19,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Home(),
+      home: DetailScreen(),
       routes: {
         Home.routeName: (context) => Home(),
         Splash.routeName: (context) => Splash(),
