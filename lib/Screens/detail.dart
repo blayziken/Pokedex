@@ -1,7 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:poke_search/services/NetworkAPI.dart';
 import 'package:poke_search/tests/TabTest.dart';
+import '../Screens/home.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
+  DetailScreen({this.pokemonName});
+
+  String pokemonName;
+  @override
+  _DetailScreenState createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  @override
+  void initState() {
+    //
+
+    super.initState();
+    getData();
+    print('---------------------------');
+    updateUI();
+  }
+
+  dynamic getData() async {
+    String pokemonName = widget.pokemonName;
+
+    NetworkAPI networkAPI =
+        NetworkAPI('https://pokeapi.co/api/v2/pokemon/$pokemonName');
+
+    var pokemonData = await networkAPI.getData();
+
+//    updateUI(pokemonData);
+
+    return pokemonData;
+//    print('0------');
+//    print(pokemonData['abilities'][0]['ability']['name']);
+
+//    print(data['abilities'][0]['ability']['name']);
+  }
+
+  void updateUI() async {
+    var ad = await getData();
+
+    String description = ad['abilities'][0]['ability']['name'];
+    print(description);
+
+//    String pokemonName = pokemonData['name'];
+//    String description = pokemonData['abilities'][0]['ability']['name'];
+  }
+
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
@@ -43,7 +90,7 @@ class DetailScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          'Bulbasaur',
+                          'asd',
                           style: TextStyle(
                             fontWeight: FontWeight.w900,
                             fontSize: 45.0,

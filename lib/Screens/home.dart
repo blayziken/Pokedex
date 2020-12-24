@@ -2,8 +2,38 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:poke_search/Screens/detail.dart';
 
-class Home extends StatelessWidget {
+//
+import 'package:http/http.dart' as http;
+import 'package:poke_search/tests/httpTest.dart';
+import 'dart:convert';
+import '../services/NetworkAPI.dart';
+
+class Home extends StatefulWidget {
   static const routeName = '/home';
+
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+//void getData(searchName) async {
+//  NetworkAPI networkAPI =
+//      NetworkAPI('https://pokeapi.co/api/v2/pokemon/$searchName');
+//
+//  var pokemonData = await networkAPI.getData();
+//
+//  Navigator.push(
+//    context,
+//    MaterialPageRoute(
+//      builder: (context) => DetailScreen(
+//        result: pokemonData,
+//      ),
+//    ),
+//  );
+//}
+
+class _HomeState extends State<Home> {
+  String searchName;
+
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
@@ -55,7 +85,7 @@ class Home extends StatelessWidget {
                               fontSize: 20.0,
                             ),
                             onChanged: (value) {
-                              // TODO SEARCH IMPLEMENTATION
+                              searchName = value;
                             },
                             decoration: InputDecoration(
                               enabledBorder: InputBorder.none,
@@ -80,10 +110,14 @@ class Home extends StatelessWidget {
                             color: Colors.lightGreen[700],
                             splashColor: Colors.black,
                             onPressed: () {
+//                              print(searchName);
+                              print('Pressed');
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => DetailScreen(),
+                                  builder: (context) => DetailScreen(
+                                    pokemonName: searchName,
+                                  ),
                                 ),
                               );
                             },
