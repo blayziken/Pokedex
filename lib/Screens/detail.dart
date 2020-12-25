@@ -23,25 +23,27 @@ class _DetailScreenState extends State<DetailScreen> {
   String pokeWeight; //CORRECT
   String pokePicture;
   String pokeDescription;
-  double pokeGenderMale; //CORRECT
-  double pokeGenderFemale; //CORRECT
+  var pokeGenderMale; //CORRECT
+  var pokeGenderFemale; //CORRECT
   String pokeType1;
   String pokeType2;
   int pokedexNumber; //CORRECT
   int pokeGen; //CORRECT
   bool starter; //CORRECT
 
+  List types = [];
+  List gender = [];
+
   @override
   void initState() {
-    //
-
     super.initState();
-    getData();
-    print('---------------------------');
+
+//    getDataFromAPI1();
+    print('---');
     updateUI();
   }
 
-  dynamic getData() async {
+  dynamic getDataFromAPI1() async {
     String pokemonName = widget.pokemonName;
 
     NetworkAPI networkAPI =
@@ -51,7 +53,6 @@ class _DetailScreenState extends State<DetailScreen> {
 //    return pokemonData;
     //TODO: OR INSIDE AN IF STATEMENT
     if (pokemonData != '' || pokemonData != null) {
-      print('here?');
       return pokemonData;
     } else {
       return showDialog(
@@ -76,7 +77,7 @@ class _DetailScreenState extends State<DetailScreen> {
     }
   }
 
-  dynamic getData2() async {
+  dynamic getDataFromAPI2() async {
     String pokemonName = widget.pokemonName;
 
     NetworkPokeDevAPI networkPokeDevAPI =
@@ -85,18 +86,15 @@ class _DetailScreenState extends State<DetailScreen> {
     return pokemonImage;
   }
 
-  void updateUI() async {
+  ////////////////////////////////////////////////////////////////////////////////////VOID - DYNAMIC
+  dynamic updateUI() async {
     print('Entered here');
-    var pokeData = await getData();
-    var pokeData2 = await getData2();
-    print(pokeData2);
-    print('--------------------------------');
+    var pokeData = await getDataFromAPI1();
+    var pokeData2 = await getDataFromAPI2();
 
     //FIRST API
     pokeName = pokeData['name'];
     pokeNameCapitalized = pokeName.capitalize();
-//    pokeAbility = pokeData['abilities'][0]['ability']['name'];
-
     pokedexNumber = pokeData['id'];
 
     //SECOND API
@@ -104,12 +102,28 @@ class _DetailScreenState extends State<DetailScreen> {
     pokeWeight = pokeData2[0]['weight'];
     pokePicture = pokeData2[0]['sprite'];
     pokeDescription = pokeData2[0]['description'];
-    pokeType1 = pokeData2[0]['types'][0];
-    pokeType2 = pokeData2[0]['types'][1];
-    pokeGenderMale = pokeData2[0]['gender'][0];
-    pokeGenderFemale = pokeData2[0]['gender'][1];
+//    pokeGenderMale = 33.2;
+//    pokeData2[0]['gender'][0];
+
+//    pokeGenderFemale = 31.5;
+//    pokeData2[0]['gender'][1];
+
+    // NOTE!
+    //  IMPLEMENTATION: IF THE GENDER LIST IS EMPTY:
+    gender = pokeData2[0]['gender'];
+    if (gender.isEmpty) {
+      pokeGenderMale = '❌';
+      pokeGenderFemale = '❌';
+    } else {
+      pokeGenderMale = pokeData2[0]['gender'][0];
+      pokeGenderFemale = pokeData2[0]['gender'][1];
+    }
+
     pokeGen = pokeData2[0]['gen'];
     starter = pokeData2[0]['starter'];
+
+    print('TYPES----');
+    types = pokeData2[0]['types']; //////////////I REMOVED AWAIT
 
     setState(() {
       showSpinner = false;
@@ -119,6 +133,23 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
+
+    Widget _pokemonTypes() {
+      if (types.length == 1) {
+        pokeType1 = types[0];
+        return PokeType(type: pokeType1);
+      } else {
+        pokeType1 = types[0];
+        pokeType2 = types[1];
+        return Row(
+          children: <Widget>[
+            PokeType(type: pokeType1),
+            SizedBox(width: 10),
+            PokeType(type: pokeType2),
+          ],
+        );
+      }
+    }
 
     return Scaffold(
       body: showSpinner
@@ -182,14 +213,16 @@ class _DetailScreenState extends State<DetailScreen> {
                             ],
                           ),
                           SizedBox(height: 5),
-                          Row(
-                            children: <Widget>[
-                              //TODO CHANGE POKEABILITY!!!
-                              PokeType(type: pokeType1),
-                              SizedBox(width: 10),
-                              PokeType(type: pokeType2),
-                            ],
-                          ),
+                          _pokemonTypes(),
+//note! Not needed anymore, _pokemonTypes() does the work, but keeping just in case.
+//                          Row(
+//                            children: <Widget>[
+//
+//                              PokeType(type: pokeType1),
+//                              SizedBox(width: 10),
+//                              PokeType(type: pokeType2),
+//                            ],
+//                          ),
                           SizedBox(height: 10),
                           Center(
                             child: Stack(
@@ -212,11 +245,11 @@ class _DetailScreenState extends State<DetailScreen> {
                                 Center(
                                   child: Container(
                                     height: 230,
-//                                    child: Image.network(
-//                                      pokePicture,
-////                                  height: 260,
-//                                      fit: BoxFit.fill,
-//                                    ),
+                                    child: Image.network(
+                                      pokePicture,
+//                                  height: 260,
+                                      fit: BoxFit.fill,
+                                    ),
                                   ),
                                 ),
                               ],

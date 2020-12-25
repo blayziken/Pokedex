@@ -14,8 +14,8 @@ class TabTest extends StatefulWidget {
   String pokeHeight;
   String pokeWeight;
   String description;
-  double genderMale;
-  double genderFemale;
+  var genderMale;
+  var genderFemale;
   int gen;
   bool starter;
 
@@ -37,8 +37,8 @@ class _TabTestState extends State<TabTest> with SingleTickerProviderStateMixin {
     String pokeHeight = widget.pokeHeight;
     String pokeWeight = widget.pokeWeight;
     String description = widget.description;
-    double genderMale = widget.genderMale;
-    double genderFemale = widget.genderFemale;
+    var genderMale = widget.genderMale;
+    var genderFemale = widget.genderFemale;
     int gen = widget.gen;
     bool starter = widget.starter;
 
@@ -95,7 +95,7 @@ class _TabTestState extends State<TabTest> with SingleTickerProviderStateMixin {
                   gen: gen,
                   starter: starter,
                 ),
-                Test1(),
+                BaseStats(),
                 Test2(),
                 Test3(),
               ],
@@ -120,8 +120,8 @@ class About extends StatelessWidget {
   String pokeHeight;
   String pokeWeight;
   String description;
-  double genderMale;
-  double genderFemale;
+  var genderMale;
+  var genderFemale;
   int gen;
   bool starter;
   @override
@@ -238,7 +238,7 @@ class About extends StatelessWidget {
                     ),
                     SizedBox(width: 36),
                     Text(
-                      '$genderMale% $genderFemale%',
+                      '$genderMale🍆        $genderFemale🍒',
                       style: TextStyle(
                         fontSize: 16,
                       ),
@@ -292,7 +292,7 @@ class About extends StatelessWidget {
   }
 }
 
-class Test1 extends StatelessWidget {
+class BaseStats extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
