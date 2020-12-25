@@ -1,6 +1,24 @@
 import 'package:flutter/material.dart';
 
 class TabTest extends StatefulWidget {
+  TabTest({
+    this.pokeHeight,
+    this.pokeWeight,
+    this.description,
+    this.genderMale,
+    this.genderFemale,
+    this.starter,
+    this.gen,
+  });
+
+  String pokeHeight;
+  String pokeWeight;
+  String description;
+  double genderMale;
+  double genderFemale;
+  int gen;
+  bool starter;
+
   @override
   _TabTestState createState() => _TabTestState();
 }
@@ -16,6 +34,14 @@ class _TabTestState extends State<TabTest> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    String pokeHeight = widget.pokeHeight;
+    String pokeWeight = widget.pokeWeight;
+    String description = widget.description;
+    double genderMale = widget.genderMale;
+    double genderFemale = widget.genderFemale;
+    int gen = widget.gen;
+    bool starter = widget.starter;
+
     return Container(
       margin: EdgeInsets.only(top: 14),
       width: double.infinity,
@@ -60,7 +86,15 @@ class _TabTestState extends State<TabTest> with SingleTickerProviderStateMixin {
             child: TabBarView(
               controller: _tabController,
               children: <Widget>[
-                Test(),
+                About(
+                  pokeHeight: pokeHeight,
+                  pokeWeight: pokeWeight,
+                  description: description,
+                  genderMale: genderMale,
+                  genderFemale: genderFemale,
+                  gen: gen,
+                  starter: starter,
+                ),
                 Test1(),
                 Test2(),
                 Test3(),
@@ -73,7 +107,23 @@ class _TabTestState extends State<TabTest> with SingleTickerProviderStateMixin {
   }
 }
 
-class Test extends StatelessWidget {
+class About extends StatelessWidget {
+  About({
+    this.pokeHeight,
+    this.pokeWeight,
+    this.description,
+    this.genderFemale,
+    this.gen,
+    this.genderMale,
+    this.starter,
+  });
+  String pokeHeight;
+  String pokeWeight;
+  String description;
+  double genderMale;
+  double genderFemale;
+  int gen;
+  bool starter;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -85,13 +135,13 @@ class Test extends StatelessWidget {
             Expanded(
               flex: 0,
               child: Text(
-                'Lorem Ipsum blah blah, Lorem Ipsum blah blah. ips Lorem Ipsum blah blah, Lorem Ipsum blah bla Ipsum blah blah, Lorem Ipsum lah blah,',
+                description,
                 style: TextStyle(
                   fontSize: 17,
                 ),
               ),
             ),
-            SizedBox(height: 35),
+            SizedBox(height: 15),
             Expanded(
               flex: 0,
               child: Center(
@@ -99,9 +149,16 @@ class Test extends StatelessWidget {
                   height: 80,
                   width: 300,
                   decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3),
+                        )
+                      ]),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 40.0, top: 15.0),
                     child: Row(
@@ -120,7 +177,8 @@ class Test extends StatelessWidget {
                             ),
                             SizedBox(height: 7),
                             Text(
-                              '2\' 04"',
+//                              '2\' 04"',
+                              pokeHeight,
                               style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.black54,
@@ -128,7 +186,7 @@ class Test extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(width: 100.0),
+                        SizedBox(width: 80.0),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
@@ -143,7 +201,8 @@ class Test extends StatelessWidget {
                             ),
                             SizedBox(height: 7),
                             Text(
-                              '15.2 lbs',
+//                              '15.2 lbs',
+                              pokeWeight,
                               style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.black54,
@@ -157,7 +216,7 @@ class Test extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 35),
+            SizedBox(height: 15),
             Text(
               'Breeding',
               style: TextStyle(
@@ -177,9 +236,9 @@ class Test extends StatelessWidget {
                         color: Colors.black54,
                       ),
                     ),
-                    SizedBox(width: 32),
+                    SizedBox(width: 36),
                     Text(
-                      '87.5%              12.5%',
+                      '$genderMale% $genderFemale%',
                       style: TextStyle(
                         fontSize: 16,
                       ),
@@ -190,7 +249,7 @@ class Test extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     Text(
-                      'Egg Group',
+                      'Generation',
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.black54,
@@ -198,7 +257,7 @@ class Test extends StatelessWidget {
                     ),
                     SizedBox(width: 10),
                     Text(
-                      'Grass, Monster',
+                      '$gen',
                       style: TextStyle(
                         fontSize: 16,
                       ),
@@ -209,15 +268,15 @@ class Test extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     Text(
-                      'Egg Cycle',
+                      'Starter',
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.black54,
                       ),
                     ),
-                    SizedBox(width: 14),
+                    SizedBox(width: 40),
                     Text(
-                      'Grass, Monster',
+                      '$starter',
                       style: TextStyle(
                         fontSize: 16,
                       ),
@@ -435,24 +494,29 @@ class Test3 extends StatelessWidget {
   }
 }
 
-//
-//return DefaultTabController(
-//length: 3,
-//child: Scaffold(
-//appBar: AppBar(
-//bottom: TabBar(
-//tabs: <Widget>[
-//Tab(
-//icon: Icon(Icons.directions_car),
-//),
-//Tab(
-//icon: Icon(Icons.directions_transit),
-//),
-//Tab(
-//icon: Icon(Icons.directions_bike),
-//),
-//],
+//Center(
+//child: Container(
+////                        color: Colors.white,
+//height: 170,
+//width: 170,
+//decoration: BoxDecoration(
+//image: DecorationImage(
+//image: AssetImage('images/pokeball32.png'),
+//fit: BoxFit.fill,
 //),
 //),
+//alignment: Alignment.bottomCenter,
+//child: Container(
+//height: 650,
+//width: 650,
+////                          color: Colors.white,
+//decoration: BoxDecoration(
+////                                color: Colors.teal,
+//image: DecorationImage(
+//image: NetworkImage(pokePicture),
+////                                  AssetImage('images/pikachu.png'),
+//fit: BoxFit.fill,
 //),
-//);
+//),
+//),
+//)),
