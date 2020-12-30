@@ -9,6 +9,13 @@ class TabTest extends StatefulWidget {
     this.genderFemale,
     this.starter,
     this.gen,
+    this.spDef,
+    this.spAtk,
+    this.defense,
+    this.attack,
+    this.hp,
+    this.speed,
+    this.total,
   });
 
   String pokeHeight;
@@ -18,6 +25,15 @@ class TabTest extends StatefulWidget {
   var genderFemale;
   int gen;
   bool starter;
+
+  //Base Stats
+  int hp;
+  int attack;
+  int defense;
+  int spAtk; //Special Attack
+  int spDef; //Special Defense
+  int speed;
+  int total;
 
   @override
   _TabTestState createState() => _TabTestState();
@@ -41,6 +57,13 @@ class _TabTestState extends State<TabTest> with SingleTickerProviderStateMixin {
     var genderFemale = widget.genderFemale;
     int gen = widget.gen;
     bool starter = widget.starter;
+    int hpAPI = widget.hp;
+    int attackAPI = widget.attack;
+    int defenseAPI = widget.defense;
+    int spAtkAPI = widget.spAtk; //Special Attack
+    int spDefAPI = widget.spDef; //Special Defense
+    int speedAPI = widget.speed;
+    int totalAPI = widget.total;
 
     return Container(
       margin: EdgeInsets.only(top: 14),
@@ -95,7 +118,15 @@ class _TabTestState extends State<TabTest> with SingleTickerProviderStateMixin {
                   gen: gen,
                   starter: starter,
                 ),
-                BaseStats(),
+                BaseStats(
+                  attack: attackAPI,
+                  defense: defenseAPI,
+                  hp: hpAPI,
+                  spAtk: spAtkAPI,
+                  spDef: spDefAPI,
+                  speed: speedAPI,
+//                  total: totalAPI,
+                ),
                 Test2(),
                 Test3(),
               ],
@@ -293,8 +324,28 @@ class About extends StatelessWidget {
 }
 
 class BaseStats extends StatelessWidget {
+  BaseStats({
+    this.hp,
+    this.attack,
+    this.defense,
+    this.spAtk,
+    this.spDef,
+    this.speed,
+    this.total,
+  });
+
+  int hp;
+  int attack;
+  int defense;
+  int spAtk; //Special Attack
+  int spDef; //Special Defense
+  int speed;
+  int total;
+
   @override
   Widget build(BuildContext context) {
+    total = hp + attack + defense + spAtk + spDef + speed;
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(
@@ -307,6 +358,8 @@ class BaseStats extends StatelessWidget {
               width: double.infinity,
 //              color: Colors.redAccent,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+//                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -317,52 +370,148 @@ class BaseStats extends StatelessWidget {
 //              BaseStatsRow(title: 'Sp. Atk', titleValue: '20'),
 //              BaseStatsRow(title: 'Sp. Def', titleValue: '20'),
 //              BaseStatsRow(title: 'Speed', titleValue: '20'),
-//              BaseStatsRow(title: 'Total', titleValue: '20'),
+//              BaseStatsRow(title: 'Total', titleValue: '20'),;
+
                       Text(
-                        'Hp',
+                        'hp',
                         style: TextStyle(fontSize: 16.0, color: Colors.black54),
                       ),
                       Text(
-                        'Attack',
+                        'attack',
                         style: TextStyle(fontSize: 16.0, color: Colors.black54),
                       ),
                       Text(
-                        'Defense',
+                        'defense',
                         style: TextStyle(fontSize: 16.0, color: Colors.black54),
                       ),
                       Text(
-                        'Sp. Atk',
+                        'spAtk',
                         style: TextStyle(fontSize: 16.0, color: Colors.black54),
                       ),
                       Text(
-                        'Sp. Def',
+                        'spDef',
                         style: TextStyle(fontSize: 16.0, color: Colors.black54),
                       ),
                       Text(
-                        'Speed',
+                        'speed',
                         style: TextStyle(fontSize: 16.0, color: Colors.black54),
                       ),
                       Text(
                         'Total',
-                        style: TextStyle(fontSize: 16.0, color: Colors.black54),
+                        style: TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                   SizedBox(width: 30),
+//                  Column(
+//                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                    crossAxisAlignment: CrossAxisAlignment.start,
+//                    children: <Widget>[
+//                      Text(
+//                        '$hp',
+//                        style: TextStyle(fontSize: 16.0),
+//                      ),
+//                      Text(
+//                        '$attack',
+//                        style: TextStyle(fontSize: 16.0),
+//                      ),
+//                      Text(
+//                        '$defense',
+//                        style: TextStyle(fontSize: 16.0),
+//                      ),
+//                      Text(
+//                        '$spAtk',
+//                        style: TextStyle(fontSize: 16.0),
+//                      ),
+//                      Text(
+//                        '$spDef',
+//                        style: TextStyle(fontSize: 16.0),
+//                      ),
+//                      Text(
+//                        '$speed',
+//                        style: TextStyle(fontSize: 16.0),
+//                      ),
+//                      Text(
+//                        '1000',
+//                        style: TextStyle(fontSize: 16.0),
+//                      ),
+////                      BaseStatsRow(value: '$hp'),
+////                      BaseStatsRow(value: '$attack'),
+////                      BaseStatsRow(value: '$defense'),
+////                      BaseStatsRow(value: '$spAtk'),
+////                      BaseStatsRow(value: '$spDef'),
+////                      BaseStatsRow(value: '$speed'),
+////                      BaseStatsRow(value: '1000'),
+//                    ],
+//                  ),
+//                  Column(
+//                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                    crossAxisAlignment: CrossAxisAlignment.start,
+//                    children: <Widget>[
+//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
+//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
+//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
+//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
+//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
+//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
+//                    ],
+//                  ),
+//                  SizedBox(width: 5),
+//                  Column(
+//                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                    crossAxisAlignment: CrossAxisAlignment.start,
+//                    children: <Widget>[
+//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
+//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
+//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
+//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
+//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
+//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
+//                      Container(
+//                          width: hp * 0.5, color: Colors.white, height: 5),
+//                    ],
+//                  ),
+                  //ssdsdsd
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       BaseStatsRow(
-                        value: '20',
-                        valueBar: 20.0 * 2,
+                        value: '$hp',
+                        valueBar: hp * 1.0,
                       ),
-                      BaseStatsRow(value: '40'),
-                      BaseStatsRow(value: '70'),
-                      BaseStatsRow(value: '20'),
-                      BaseStatsRow(value: '90'),
-                      BaseStatsRow(value: '20'),
-                      BaseStatsRow(value: '100'),
+                      BaseStatsRow(
+                        value: '$attack',
+                        valueBar: attack * 1.0,
+                      ),
+                      BaseStatsRow(
+                        value: '$defense',
+                        valueBar: defense * 1.0,
+                      ),
+                      BaseStatsRow(
+                        value: '$spAtk',
+                        valueBar: spAtk * 1.0,
+                      ),
+                      BaseStatsRow(
+                        value: '$spDef',
+                        valueBar: spDef * 1.0,
+                      ),
+                      BaseStatsRow(
+                        value: '$speed',
+                        valueBar: speed * 1.0,
+                      ),
+//                      BaseStatsRow(value: '$total', st),
+                      Text(
+                        '$total',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red,
+                        ),
+                      )
                     ],
                   ),
 //              Column(
@@ -437,11 +586,15 @@ class BaseStatsRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        Text(
-          value,
-          style: TextStyle(fontSize: 16.0),
+        Container(
+          width: 40,
+//          color: Colors.teal,
+          child: Text(
+            value,
+            style: TextStyle(fontSize: 16.0),
+          ),
         ),
-        SizedBox(width: 20),
+        SizedBox(width: 5),
         Container(width: valueBar, color: Colors.red, height: 5),
       ],
     );
