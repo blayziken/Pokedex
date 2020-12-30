@@ -63,7 +63,7 @@ class _TabTestState extends State<TabTest> with SingleTickerProviderStateMixin {
     int spAtkAPI = widget.spAtk; //Special Attack
     int spDefAPI = widget.spDef; //Special Defense
     int speedAPI = widget.speed;
-    int totalAPI = widget.total;
+//    int totalAPI = widget.total;
 
     return Container(
       margin: EdgeInsets.only(top: 14),
@@ -365,13 +365,6 @@ class BaseStats extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-//              BaseStatsRow(title: 'Hp', titleValue: '20'),
-//              BaseStatsRow(title: 'Attack', titleValue: '20'),
-//              BaseStatsRow(title: 'Sp. Atk', titleValue: '20'),
-//              BaseStatsRow(title: 'Sp. Def', titleValue: '20'),
-//              BaseStatsRow(title: 'Speed', titleValue: '20'),
-//              BaseStatsRow(title: 'Total', titleValue: '20'),;
-
                       Text(
                         'hp',
                         style: TextStyle(fontSize: 16.0, color: Colors.black54),
@@ -406,75 +399,6 @@ class BaseStats extends StatelessWidget {
                     ],
                   ),
                   SizedBox(width: 30),
-//                  Column(
-//                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                    crossAxisAlignment: CrossAxisAlignment.start,
-//                    children: <Widget>[
-//                      Text(
-//                        '$hp',
-//                        style: TextStyle(fontSize: 16.0),
-//                      ),
-//                      Text(
-//                        '$attack',
-//                        style: TextStyle(fontSize: 16.0),
-//                      ),
-//                      Text(
-//                        '$defense',
-//                        style: TextStyle(fontSize: 16.0),
-//                      ),
-//                      Text(
-//                        '$spAtk',
-//                        style: TextStyle(fontSize: 16.0),
-//                      ),
-//                      Text(
-//                        '$spDef',
-//                        style: TextStyle(fontSize: 16.0),
-//                      ),
-//                      Text(
-//                        '$speed',
-//                        style: TextStyle(fontSize: 16.0),
-//                      ),
-//                      Text(
-//                        '1000',
-//                        style: TextStyle(fontSize: 16.0),
-//                      ),
-////                      BaseStatsRow(value: '$hp'),
-////                      BaseStatsRow(value: '$attack'),
-////                      BaseStatsRow(value: '$defense'),
-////                      BaseStatsRow(value: '$spAtk'),
-////                      BaseStatsRow(value: '$spDef'),
-////                      BaseStatsRow(value: '$speed'),
-////                      BaseStatsRow(value: '1000'),
-//                    ],
-//                  ),
-//                  Column(
-//                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                    crossAxisAlignment: CrossAxisAlignment.start,
-//                    children: <Widget>[
-//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
-//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
-//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
-//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
-//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
-//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
-//                    ],
-//                  ),
-//                  SizedBox(width: 5),
-//                  Column(
-//                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                    crossAxisAlignment: CrossAxisAlignment.start,
-//                    children: <Widget>[
-//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
-//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
-//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
-//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
-//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
-//                      Container(width: hp * 0.5, color: Colors.red, height: 5),
-//                      Container(
-//                          width: hp * 0.5, color: Colors.white, height: 5),
-//                    ],
-//                  ),
-                  //ssdsdsd
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -514,31 +438,6 @@ class BaseStats extends StatelessWidget {
                       )
                     ],
                   ),
-//              Column(
-//                  crossAxisAlignment: CrossAxisAlignment.start,
-//                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                  children: <Widget>[
-//                    Text('20'),
-//                    Text('30'),
-//                    Text('20'),
-//                    Text('20'),
-//                    Text('30'),
-//                    Text('20'),
-//                    Text('20'),
-//                  ]),
-//              SizedBox(width: 20),
-//              Column(
-//                  crossAxisAlignment: CrossAxisAlignment.start,
-//                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                  children: <Widget>[
-//                    Container(width: 50, color: Colors.black, height: 5),
-//                    Text('30'),
-//                    Text('20'),
-//                    Text('20'),
-//                    Text('30'),
-//                    Text('20'),
-//                    Text('20'),
-//                  ]),
                 ],
               ),
             ),
@@ -601,34 +500,6 @@ class BaseStatsRow extends StatelessWidget {
   }
 }
 
-//class BaseStatsRow extends StatelessWidget {
-//  String title;
-//  String titleValue;
-//
-//  BaseStatsRow({this.title, this.titleValue});
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return Row(
-//      children: <Widget>[
-//        Text(title),
-////        SizedBox(width: 70.0),
-//        Spacer(),
-//        Text(titleValue),
-//        Spacer(),
-////        SizedBox(width: 30.0),
-//        Container(
-//          color: Colors.black,
-//          width: 50.0,
-//          height: 10,
-//        ),
-//        Spacer(),
-////                  Spacer(),
-//      ],
-//    );
-//  }
-//}
-
 class Test2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -646,30 +517,3 @@ class Test3 extends StatelessWidget {
     );
   }
 }
-
-//Center(
-//child: Container(
-////                        color: Colors.white,
-//height: 170,
-//width: 170,
-//decoration: BoxDecoration(
-//image: DecorationImage(
-//image: AssetImage('images/pokeball32.png'),
-//fit: BoxFit.fill,
-//),
-//),
-//alignment: Alignment.bottomCenter,
-//child: Container(
-//height: 650,
-//width: 650,
-////                          color: Colors.white,
-//decoration: BoxDecoration(
-////                                color: Colors.teal,
-//image: DecorationImage(
-//image: NetworkImage(pokePicture),
-////                                  AssetImage('images/pikachu.png'),
-//fit: BoxFit.fill,
-//),
-//),
-//),
-//)),
