@@ -34,6 +34,15 @@ class _DetailScreenState extends State<DetailScreen> {
   List types = [];
   List gender = [];
 
+  // BASE STATS
+  int hp;
+  int attack;
+  int defense;
+  int spAtk; //Special Attack
+  int spDef; //Special Defense
+  int speed;
+  int total;
+
   @override
   void initState() {
     super.initState();
@@ -97,19 +106,25 @@ class _DetailScreenState extends State<DetailScreen> {
     pokeNameCapitalized = pokeName.capitalize();
     pokedexNumber = pokeData['id'];
 
+    /// base stata
+    hp = pokeData['stats'][0]['base_stat'];
+    attack = pokeData['stats'][1]['base_stat'];
+    defense = pokeData['stats'][2]['base_stat'];
+    spAtk = pokeData['stats'][3]['base_stat'];
+    spDef = pokeData['stats'][4]['base_stat'];
+    speed = pokeData['stats'][5]['base_stat'];
+
+    print('-????/////////////???????///////////');
+
+    print('THis is $hp HP');
+    print('This is #defense $defense');
     //SECOND API
     pokeHeight = pokeData2[0]['height'];
     pokeWeight = pokeData2[0]['weight'];
     pokePicture = pokeData2[0]['sprite'];
     pokeDescription = pokeData2[0]['description'];
-//    pokeGenderMale = 33.2;
-//    pokeData2[0]['gender'][0];
 
-//    pokeGenderFemale = 31.5;
-//    pokeData2[0]['gender'][1];
-
-    // NOTE!
-    //  IMPLEMENTATION: IF THE GENDER LIST IS EMPTY:
+    // NOTE! IMPLEMENTATION: IF THE GENDER LIST IS EMPTY:
     gender = pokeData2[0]['gender'];
     if (gender.isEmpty) {
       pokeGenderMale = '❌';
@@ -134,6 +149,7 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
 
+    //Pokemon Types implementation
     Widget _pokemonTypes() {
       if (types.length == 1) {
         pokeType1 = types[0];
@@ -297,6 +313,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           ),
                         ),
                         child: TabTest(
+                          //About Tab
                           pokeWeight: pokeWeight,
                           pokeHeight: pokeHeight,
                           description: pokeDescription,
@@ -304,6 +321,15 @@ class _DetailScreenState extends State<DetailScreen> {
                           genderFemale: pokeGenderFemale,
                           gen: pokeGen,
                           starter: starter,
+
+                          //Base Stats Tab
+                          hp: hp,
+                          speed: speed,
+                          total: total,
+                          spDef: spDef,
+                          spAtk: spAtk,
+                          defense: defense,
+                          attack: attack,
                         ),
                       ),
                     )
