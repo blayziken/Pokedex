@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:poke_search/Screens/detail.dart';
 import 'package:poke_search/Screens/home.dart';
 import 'package:poke_search/Screens/splash.dart';
-import 'package:poke_search/tests/TabTest.dart';
+import 'file:///C:/Users/Administrator/AndroidStudioProjects/poke_search/lib/Screens/widgets/TabTest.dart';
 import 'package:poke_search/tests/httpTest.dart';
 import 'package:poke_search/tests/screen.dart';
 import './tests/ChooseSplash.dart';

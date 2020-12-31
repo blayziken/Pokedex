@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poke_search/services/NetworkAPI.dart';
-import 'package:poke_search/tests/TabTest.dart';
+import 'file:///C:/Users/Administrator/AndroidStudioProjects/poke_search/lib/Screens/widgets/TabTest.dart';
 import '../Screens/home.dart';
 //import 'package:modal_progress_hud/modal_progress_hud.dart';
 import '../services/string_extension.dart';
