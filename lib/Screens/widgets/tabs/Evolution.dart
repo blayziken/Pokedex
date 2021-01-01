@@ -223,31 +223,25 @@ class EvolutionChainRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        InkWell(
-          onTap: () {
-            print('Column 1 pressed');
-            print(imageURL1);
-          },
-          child: Column(
-            children: <Widget>[
-              Container(
-                height: 90,
-                width: 90,
-                child: Image.network(
-                  imageURL1,
-                  fit: BoxFit.fill,
-                ),
+        Column(
+          children: <Widget>[
+            Container(
+              height: 90,
+              width: 90,
+              child: Image.network(
+                imageURL1,
+                fit: BoxFit.fill,
               ),
-              SizedBox(height: 10),
-              Text(
-                name1,
-                style: TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.black87,
-                ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              name1,
+              style: TextStyle(
+                fontSize: 18.0,
+                color: Colors.black87,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         Text(
           '--->',
