@@ -64,29 +64,6 @@ class Moves extends StatelessWidget {
                           ],
                         ),
                         SizedBox(width: 80.0),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              'Weight',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 1,
-                                fontSize: 16.0,
-                                color: Colors.black54,
-                              ),
-                            ),
-                            SizedBox(height: 7),
-                            Text(
-//                              '15.2 lbs',
-                              'pokeWeight',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.black54,
-                              ),
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                   ),
