@@ -43,12 +43,15 @@ class _DetailScreenState extends State<DetailScreen> {
   int speed;
   int total;
 
+  // EVOLUTION
+  List evolutionLine = [];
+
   @override
   void initState() {
     super.initState();
 
 //    getDataFromAPI1();
-    print('---');
+
     updateUI();
   }
 
@@ -95,7 +98,7 @@ class _DetailScreenState extends State<DetailScreen> {
     return pokemonImage;
   }
 
-  ////////////////////////////////////////////////////////////////////////////////////VOID - DYNAMIC
+  //////////////////////////////////////////////////////////////////////////////////// from VOID to DYNAMIC
   dynamic updateUI() async {
     print('Entered here');
     var pokeData = await getDataFromAPI1();
@@ -106,7 +109,7 @@ class _DetailScreenState extends State<DetailScreen> {
     pokeNameCapitalized = pokeName.capitalize();
     pokedexNumber = pokeData['id'];
 
-    /// base stata
+    /// base stats
     hp = pokeData['stats'][0]['base_stat'];
     attack = pokeData['stats'][1]['base_stat'];
     defense = pokeData['stats'][2]['base_stat'];
@@ -114,10 +117,6 @@ class _DetailScreenState extends State<DetailScreen> {
     spDef = pokeData['stats'][4]['base_stat'];
     speed = pokeData['stats'][5]['base_stat'];
 
-    print('-????/////////////???????///////////');
-
-    print('THis is $hp HP');
-    print('This is #defense $defense');
     //SECOND API
     pokeHeight = pokeData2[0]['height'];
     pokeWeight = pokeData2[0]['weight'];
@@ -138,7 +137,11 @@ class _DetailScreenState extends State<DetailScreen> {
     starter = pokeData2[0]['starter'];
 
     print('TYPES----');
-    types = pokeData2[0]['types']; //////////////I REMOVED AWAIT
+    types = pokeData2[0]['types']; ////////////// I REMOVED AWAIT
+
+    evolutionLine = pokeData2[0]['family']['evolutionLine'];
+    print('----------');
+    print(evolutionLine);
 
     setState(() {
       showSpinner = false;
@@ -270,33 +273,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                 ),
                               ],
                             ),
-//                            child: Container(
-////                        color: Colors.white,
-//                              height: 200,
-//                              width: 200,
-//                              decoration: BoxDecoration(
-//                                image: DecorationImage(
-//                                  image: AssetImage('images/pokeball32.png'),
-//                                  fit: BoxFit.fill,
-//                                ),
-//                              ),
 //
-//                              alignment: Alignment.bottomCenter,
-//                              child: Container(
-//                                height: 300,
-//                                child: Image.network(
-//                                  pokePicture,
-////                                  height: 260,
-//                                  fit: BoxFit.fill,
-//                                ),
-//                              ),
-////                              decoration: BoxDecoration(
-////                                image: DecorationImage(
-////                                  image: NetworkImage(pokePicture),
-////                                  fit: BoxFit.fill,
-////                                ),
-////                              ),
-//                            ),
                           ),
                         ],
                       ),
@@ -330,6 +307,9 @@ class _DetailScreenState extends State<DetailScreen> {
                           spAtk: spAtk,
                           defense: defense,
                           attack: attack,
+
+                          //Evolution Line
+                          evolutionLine: evolutionLine,
                         ),
                       ),
                     )

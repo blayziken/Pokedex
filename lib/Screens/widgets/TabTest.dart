@@ -21,6 +21,7 @@ class TabTest extends StatefulWidget {
     this.hp,
     this.speed,
     this.total,
+    this.evolutionLine,
   });
 
   String pokeHeight;
@@ -39,6 +40,8 @@ class TabTest extends StatefulWidget {
   int spDef; //Special Defense
   int speed;
   int total;
+
+  List evolutionLine = [];
 
   @override
   _TabTestState createState() => _TabTestState();
@@ -62,6 +65,8 @@ class _TabTestState extends State<TabTest> with SingleTickerProviderStateMixin {
     var genderFemale = widget.genderFemale;
     int gen = widget.gen;
     bool starter = widget.starter;
+
+    //Base Stats
     int hpAPI = widget.hp;
     int attackAPI = widget.attack;
     int defenseAPI = widget.defense;
@@ -69,6 +74,8 @@ class _TabTestState extends State<TabTest> with SingleTickerProviderStateMixin {
     int spDefAPI = widget.spDef; //Special Defense
     int speedAPI = widget.speed;
 //    int totalAPI = widget.total;
+
+    List evolutionLine = widget.evolutionLine;
 
     return Container(
       margin: EdgeInsets.only(top: 14),
@@ -116,7 +123,7 @@ class _TabTestState extends State<TabTest> with SingleTickerProviderStateMixin {
                   speed: speedAPI,
 //                  total: totalAPI,
                 ),
-                Evolution(),
+                Evolution(evolutionLine: evolutionLine),
                 Moves(),
               ],
             ),
