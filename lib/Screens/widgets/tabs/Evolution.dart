@@ -43,83 +43,147 @@ class _EvolutionState extends State<Evolution> {
   }
 
   dynamic getImageURL() async {
-    print('Entered getImageURL()');
-
     evolutionLineHere = widget.evolutionLine; // [Bulbasaur, Ivysaur, Venusaur]
 
-    print(evolutionLineHere); //good
+    if (evolutionLineHere.length == 3) {
+      pokemonOne = evolutionLineHere[0];
+      pokemonTwo = evolutionLineHere[1];
+      pokemonThree = evolutionLineHere[2];
+      //Images
+      pokemonOneImage = await getSprite(pokemonOne);
+      pokemonTwoImage = await getSprite(pokemonTwo);
+      pokemonThreeImage = await getSprite(pokemonThree);
+    }
 
-    pokemonOne = evolutionLineHere[0];
-    pokemonTwo = evolutionLineHere[1];
-    pokemonThree = evolutionLineHere[2];
+    if (evolutionLineHere.length == 2) {
+      pokemonOne = evolutionLineHere[0];
+      pokemonTwo = evolutionLineHere[1];
+      //Images
+      pokemonOneImage = await getSprite(pokemonOne);
+      pokemonTwoImage = await getSprite(pokemonTwo);
+    }
 
-    print('This is pokemonOne ==== $pokemonOne'); //good
-
-    pokemonOneImage = await getSprite(pokemonOne);
-    pokemonTwoImage = await getSprite(pokemonTwo);
-    pokemonThreeImage = await getSprite(pokemonThree);
+    if (evolutionLineHere.length == 1) {
+      pokemonOne = evolutionLineHere[0];
+      //Images
+      pokemonOneImage = await getSprite(pokemonOne);
+    }
 
     setState(() {
       showSpinner = false;
     });
-
-    print('This is pokeomonOneImage === $pokemonOneImage'); //good
   }
 
   @override
   Widget build(BuildContext context) {
-    print('Inside build Wiget List is now ==== $evolutionLineHere');
+    var media = MediaQuery.of(context).size;
 
     Widget _evolutionPokes() {
       if (evolutionLineHere.length == 1) {
-        return Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'It\'s just ',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 20.0,
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(height: 25.0),
+            Center(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20.0, right: 50.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(height: 10),
+                      Text(
+                        'It\'s just ',
+                        style: TextStyle(
+                          fontStyle: FontStyle.italic,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Container(
+                        height: 150,
+                        width: 150,
+                        child: Image.network(
+                          pokemonOneImage,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        '$pokemonOne',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 50.0,
+                          color: Colors.green[900],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
+            ),
+          ],
+        );
+      } else if (evolutionLineHere.length == 2) {
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
               Text(
-                '$pokemonOne',
+                'Evolution Chain',
                 style: TextStyle(
                   fontWeight: FontWeight.w900,
-                  fontSize: 30.0,
-                  color: Colors.green[900],
+                  fontSize: 22.0,
+                ),
+              ),
+              SizedBox(height: 10.0),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 50.0),
+                child: EvolutionChainRow(
+                  name1: pokemonOne,
+                  imageURL1: pokemonOneImage,
+                  name2: pokemonTwo,
+                  imageURL2: pokemonTwoImage,
                 ),
               ),
             ],
           ),
         );
-      } else if (evolutionLineHere.length == 2) {
-        return EvolutionChainRow(
-          name1: pokemonOne,
-          imageURL1: pokemonOneImage,
-          name2: pokemonTwo,
-          imageURL2: pokemonTwoImage,
-        );
       } else {
-        return Column(
-          children: <Widget>[
-            EvolutionChainRow(
-              name1: pokemonOne,
-//              imageURL1: getSprite(widget.evolutionLine[0]),
-              imageURL1: pokemonOneImage,
-              name2: pokemonTwo,
-//          imageURL2: getSprite(widget.evolutionLine[1]),
-              imageURL2: pokemonTwoImage,
-            ),
-            SizedBox(height: 40.0),
-            EvolutionChainRow(
-              name1: pokemonTwo,
-              imageURL1: pokemonTwoImage,
-              name2: pokemonThree,
-              imageURL2: pokemonThreeImage,
-            ),
-          ],
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'Evolution Chain',
+                style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 22.0,
+                ),
+              ),
+              SizedBox(height: 10.0),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 50.0),
+                child: Column(
+                  children: <Widget>[
+                    EvolutionChainRow(
+                      name1: pokemonOne,
+                      imageURL1: pokemonOneImage,
+                      name2: pokemonTwo,
+                      imageURL2: pokemonTwoImage,
+                    ),
+                    SizedBox(height: 30.0),
+                    EvolutionChainRow(
+                      name1: pokemonTwo,
+                      imageURL1: pokemonTwoImage,
+                      name2: pokemonThree,
+                      imageURL2: pokemonThreeImage,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         );
       }
     }
@@ -133,40 +197,11 @@ class _EvolutionState extends State<Evolution> {
         : SingleChildScrollView(
             child: Container(
               color: Colors.grey[300],
+              height: media.height * 0.4,
+              width: double.infinity,
               child: Padding(
                 padding: const EdgeInsets.only(left: 40.0, top: 10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'Evolution Chain',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w900,
-                        fontSize: 22.0,
-                      ),
-                    ),
-                    SizedBox(height: 10.0),
-                    Container(
-//              color: Colors.teal,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20.0, right: 50.0),
-                        child: _evolutionPokes(),
-
-//                Column(
-//                  children: <Widget>[
-//                    EvolutionChainRow(
-//                      name1: 'Pikachu',
-//                      imageURL1: 'images/pikachu.png',
-//                    ),
-//                    SizedBox(height: 40.0),
-//
-////                    EvolutionChainRow(),
-//                  ],
-//                ),
-                      ),
-                    ),
-                  ],
-                ),
+                child: _evolutionPokes(),
               ),
             ),
           );
@@ -226,13 +261,6 @@ class EvolutionChainRow extends StatelessWidget {
             Container(
               height: 90,
               width: 90,
-
-//              decoration: BoxDecoration(
-//                  image: DecorationImage(
-//                image: AssetImage(imageURL2),
-//                fit: BoxFit.fill,
-//              ),),
-
               child: Image.network(
                 imageURL2,
                 fit: BoxFit.fill,
