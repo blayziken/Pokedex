@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/NetworkAPI.dart';
-import '../Screens/home.dart';
+import '../Screens/search.dart';
 
 class APIFunctions {
   APIFunctions(this.name);

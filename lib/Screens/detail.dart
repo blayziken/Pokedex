@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:poke_search/services/NetworkAPI.dart';
 import 'file:///C:/Users/Administrator/AndroidStudioProjects/poke_search/lib/Screens/widgets/TabTest.dart';
-import '../Screens/home.dart';
+import '../Screens/search.dart';
 //import 'package:modal_progress_hud/modal_progress_hud.dart';
 import '../services/string_extension.dart';
 
@@ -80,7 +80,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Home(),
+                            builder: (context) => Search(),
                           ));
                     },
                   )
