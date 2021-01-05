@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:poke_search/models/pokemon.dart';
+import 'package:poke_search/services/NetworkAPI.dart';
 
 class GridShit extends StatefulWidget {
   static const routeName = '/grid-shit';
@@ -40,82 +43,114 @@ class _GridShitState extends State<GridShit> {
 //    ),
 //  ];
 
-  List calculateList = [];
+  bool _showSpinner = true;
+  List<Pokemon> allPOKEMON = [];
 
-  void calculate() {
-    for (var i = 0; i <= 10; i++) {
-      print(i);
-      calculateList.add(Container(
-        color: Colors.red,
-        height: 20,
-        width: 20,
+  dynamic getAllPokemon() async {
+    for (var num = 1; num <= 10; num++) {
+      NetworkPokeDevAPI networkPokeDevAPI =
+          NetworkPokeDevAPI('https://pokeapi.glitch.me/v1/pokemon/$num');
+      var numData = await networkPokeDevAPI.getData2();
+//      print(numData);
+      //Add new pokemon object into allPOKEMON List
+      allPOKEMON.add(Pokemon(
+        name: numData[0]['name'],
+        image: numData[0]['sprite'],
+        type1: numData[0]['types'][0],
+        type2: '',
+        backgroundColor: Colors.purple,
       ));
+      print('Pokemon Name ($num) = ${numData[0]['name']}');
     }
+    print('done');
+    print('Length of list: ${allPOKEMON.length}');
+    setState(() {
+      _showSpinner = false;
+    });
   }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getAllPokemon();
+  }
+//  void calculate() {
+//    for (var i = 0; i <= 10; i++) {
+//      print(i);
+//      calculateList.add(Container(
+//        color: Colors.red,
+//        height: 20,
+//        width: 20,
+//      ));
+//    }
+//  }
 
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
     return Scaffold(
-        body: Container(
-      height: media.height,
-      width: double.infinity,
-      padding: EdgeInsets.all(12),
-      child: InkWell(
-        onTap: () {
-          calculate();
-        },
-        child: Center(
-          child: Text(
-            'AAA',
-            style: TextStyle(
-              fontSize: 59,
-            ),
-          ),
-        ),
-      ),
-
-//      GridView.builder(
-//          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//              crossAxisCount: 2,
-//              mainAxisSpacing: 10,
-//              crossAxisSpacing: 10,
-//              childAspectRatio: 3 / 2),
-//          itemCount: loadedPokemons.length,
-//          itemBuilder: (ctx, i) => Item(
-//                imageUrl: loadedPokemons[i].image,
-//              )),
-    ));
-//    return Scaffold(
-//      body: Container(
-//          height: media.height,
-//          width: double.infinity,
-//          child: GridView.count(
-//            crossAxisCount: 2,
-////            crossAxisSpacing: 9.0,
-////            mainAxisSpacing: 89,
-//            children: List.generate(choices.length, (index) {
-//              return Center(
-//                child: SelectCard(choice: choices[index]),
-//              );
-//            }),
-//          )),
-//    );
+        body: _showSpinner
+            ? Center(
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.red,
+                ),
+              )
+            : SingleChildScrollView(
+                child: Container(
+                  color: Colors.yellow,
+                  height: media.height,
+                  width: double.infinity,
+                  padding: EdgeInsets.all(12),
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 100.0),
+                        child: Text(
+                          'Generation I',
+                          style: TextStyle(
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: GridView.builder(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    mainAxisSpacing: 30,
+                                    crossAxisSpacing: 30,
+                                    childAspectRatio:
+                                        MediaQuery.of(context).size.width /
+                                            MediaQuery.of(context).size.height /
+                                            0.27),
+                            itemCount: allPOKEMON.length,
+                            itemBuilder: (ctx, i) => Item(
+                                  name: allPOKEMON[i].name,
+                                )),
+                      ),
+                    ],
+                  ),
+                ),
+              ));
   }
 }
 
 class Item extends StatelessWidget {
-  final String imageUrl;
+  final String name;
 
-  Item({this.imageUrl});
+  Item({this.name});
   @override
   Widget build(BuildContext context) {
     return GridTile(
       child: Container(
+//        height: 20,
+//        width: 40,
+        child: Text(name),
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(imageUrl),
-          ),
+          color: Colors.red,
+          borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
       ),
     );

@@ -24,12 +24,12 @@ class NetworkAPI {
 
 class NetworkPokeDevAPI {
   //https://pokedevs.gitbook.io/pokedex/resources/pokemon
-  NetworkPokeDevAPI(this.imageURL);
+  NetworkPokeDevAPI(this.glitchURL);
 
-  String imageURL;
+  String glitchURL;
 
   Future getData2() async {
-    http.Response pokeDevData = await http.get(imageURL);
+    http.Response pokeDevData = await http.get(glitchURL);
 
     String retrievedpokeDevData = pokeDevData.body;
 
