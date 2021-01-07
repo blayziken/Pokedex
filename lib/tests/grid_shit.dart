@@ -120,11 +120,11 @@ class _GridShitState extends State<GridShit> {
                                 SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 2,
                                     mainAxisSpacing: 30,
-                                    crossAxisSpacing: 30,
+                                    crossAxisSpacing: 10,
                                     childAspectRatio:
                                         MediaQuery.of(context).size.width /
-                                            MediaQuery.of(context).size.height /
-                                            0.27),
+                                            0.37 /
+                                            MediaQuery.of(context).size.height),
                             itemCount: allPOKEMON.length,
                             itemBuilder: (ctx, i) => Item(
                                   name: allPOKEMON[i].name,
@@ -147,10 +147,40 @@ class Item extends StatelessWidget {
       child: Container(
 //        height: 20,
 //        width: 40,
-        child: Text(name),
+        child: Row(
+//          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    name,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Spacer(),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Container(
+                color: Colors.white,
+                height: 100,
+                width: 80,
+              ),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+          ],
+        ),
         decoration: BoxDecoration(
           color: Colors.red,
-          borderRadius: BorderRadius.all(Radius.circular(12)),
+          borderRadius: BorderRadius.all(Radius.circular(18)),
         ),
       ),
     );

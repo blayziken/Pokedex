@@ -3,6 +3,7 @@ import 'package:poke_search/Screens/detail.dart';
 import 'package:poke_search/Screens/home.dart';
 import 'package:poke_search/Screens/search.dart';
 import 'package:poke_search/Screens/splash.dart';
+import 'package:poke_search/tests/containerGrid.dart';
 import 'package:poke_search/tests/grid_shit.dart';
 import 'file:///C:/Users/Administrator/AndroidStudioProjects/poke_search/lib/Screens/widgets/TabTest.dart';
 import 'package:poke_search/tests/httpTest.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Home(),
+      home: ContainerGrid(),
       routes: {
         Search.routeName: (context) => Search(),
         Splash.routeName: (context) => Splash(),
