@@ -47,7 +47,7 @@ class _GridShitState extends State<GridShit> {
   List<Pokemon> allPOKEMON = [];
 
   dynamic getAllPokemon() async {
-    for (var num = 1; num <= 10; num++) {
+    for (var num = 1; num <= 3; num++) {
       NetworkPokeDevAPI networkPokeDevAPI =
           NetworkPokeDevAPI('https://pokeapi.glitch.me/v1/pokemon/$num');
       var numData = await networkPokeDevAPI.getData2();
@@ -187,48 +187,33 @@ class Item extends StatelessWidget {
   }
 }
 
-//class Choice {
-//  const Choice({this.title, this.icon});
-//  final String title;
-//  final IconData icon;
-//}
-//
-//const List<Choice> choices = const <Choice>[
-//  const Choice(title: 'Home', icon: Icons.home),
-//  const Choice(title: 'Contact', icon: Icons.contacts),
-//  const Choice(title: 'Map', icon: Icons.home),
-//  const Choice(title: 'Phone', icon: Icons.contacts),
-//  const Choice(title: 'Camera', icon: Icons.home),
-//  const Choice(title: 'Setting', icon: Icons.contacts),
-//];
-//
-//class SelectCard extends StatelessWidget {
-//  const SelectCard({Key key, this.choice}) : super(key: key);
-//  final Choice choice;
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    final TextStyle textStyle = Theme.of(context).textTheme.headline4;
-//
-//    return Card(
-//      color: Colors.orange,
-//      child: Center(
-//        child: Column(
-//          crossAxisAlignment: CrossAxisAlignment.center,
-//          children: <Widget>[
-//            Expanded(
-//                child: Icon(
-//              choice.icon,
-//              size: 50,
-//              color: textStyle.color,
-//            )),
-//            Text(
-//              choice.title,
-//              style: textStyle,
-//            ),
-//          ],
-//        ),
-//      ),
-//    );
-//  }
-//}
+class pokeType extends StatelessWidget {
+  const pokeType({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 30,
+      width: 90,
+//                      color: Colors.white,
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.2),
+        borderRadius: BorderRadius.all(
+          Radius.circular(50.0),
+        ),
+      ),
+      child: Center(
+        child: Text(
+          'type',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18.0,
+            fontWeight: FontWeight.w900,
+          ),
+        ),
+      ),
+    );
+  }
+}
