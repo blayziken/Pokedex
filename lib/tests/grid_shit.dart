@@ -45,23 +45,41 @@ class _GridShitState extends State<GridShit> {
 //  ];
 
   bool _showSpinner = true;
+  Color backgroundColorX;
+  String type2X;
   List<Pokemon> allPOKEMON = [];
 
   dynamic getAllPokemon() async {
-    for (var num = 1; num <= 3; num++) {
+    for (var num = 1; num <= 15; num++) {
       NetworkPokeDevAPI networkPokeDevAPI =
           NetworkPokeDevAPI('https://pokeapi.glitch.me/v1/pokemon/$num');
       var numData = await networkPokeDevAPI.getData2();
 //      print(numData);
+      //Couple of IF-ELSE Statements
+      if (numData[0]['types'][0] == 'Grass') {
+        backgroundColorX = Colors.green;
+      } else if (numData[0]['types'][0] == 'Fire') {
+        backgroundColorX = Colors.red;
+      } else {
+        backgroundColorX = Colors.purple;
+      }
+
+//      if (!numData[0]['types'][1]) {
+//        type2X = '';
+//      } else {
+//        type2X = numData[0]['types'][1];
+//      }
+
       //Add new pokemon object into allPOKEMON List
       allPOKEMON.add(Pokemon(
         name: numData[0]['name'],
         image: numData[0]['sprite'],
         type1: numData[0]['types'][0],
-        type2: '',
-        backgroundColor: Colors.purple,
+        type2: type2X,
+        backgroundColor: backgroundColorX,
       ));
       print('Pokemon Name ($num) = ${numData[0]['name']}');
+      print(numData[0]['types'][1]);
     }
     print('done');
     print('Length of list: ${allPOKEMON.length}');
@@ -76,74 +94,71 @@ class _GridShitState extends State<GridShit> {
     super.initState();
     getAllPokemon();
   }
-//  void calculate() {
-//    for (var i = 0; i <= 10; i++) {
-//      print(i);
-//      calculateList.add(Container(
-//        color: Colors.red,
-//        height: 20,
-//        width: 20,
-//      ));
-//    }
-//  }
 
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
     return Scaffold(
-        body: _showSpinner
-            ? Center(
-                child: CircularProgressIndicator(
-                  backgroundColor: Colors.red,
-                ),
-              )
-            : SingleChildScrollView(
-                child: Container(
-                  color: Colors.yellow,
-                  height: media.height,
-                  width: double.infinity,
-                  padding: EdgeInsets.all(12),
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 100.0),
-                        child: Text(
-                          'Generation I',
-                          style: TextStyle(
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.w900,
-                          ),
+      body: _showSpinner
+          ? Center(
+              child: CircularProgressIndicator(
+                backgroundColor: Colors.red,
+              ),
+            )
+          : SingleChildScrollView(
+              child: Container(
+                color: Colors.yellow,
+                height: media.height,
+                width: double.infinity,
+                padding: EdgeInsets.all(12),
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(top: 100.0),
+                      child: Text(
+                        'Generation I',
+                        style: TextStyle(
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.w900,
                         ),
                       ),
-                      Expanded(
-                        child: GridView.builder(
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    mainAxisSpacing: 20,
-                                    crossAxisSpacing: 10,
-                                    childAspectRatio:
-                                        MediaQuery.of(context).size.width /
-                                            0.37 /
-                                            MediaQuery.of(context).size.height),
-                            itemCount: allPOKEMON.length,
-                            itemBuilder: (ctx, i) => Item(
-                                  name: allPOKEMON[i].name,
-                                  image: allPOKEMON[i].image,
-                                )),
+                    ),
+                    Expanded(
+                      child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 20,
+                            crossAxisSpacing: 10,
+                            childAspectRatio:
+                                MediaQuery.of(context).size.width /
+                                    0.37 /
+                                    MediaQuery.of(context).size.height),
+                        itemCount: allPOKEMON.length,
+                        itemBuilder: (ctx, i) => Item(
+                          name: allPOKEMON[i].name,
+                          image: allPOKEMON[i].image,
+                          color: allPOKEMON[i].backgroundColor,
+                          type1: allPOKEMON[i].type1,
+                          type2: allPOKEMON[i].type2,
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ));
+              ),
+            ),
+    );
   }
 }
 
 class Item extends StatelessWidget {
   final String name;
   final String image;
+  final Color color;
+  final String type1;
+  final String type2;
 
-  Item({this.name, this.image});
+  Item({this.name, this.image, this.color, this.type1, this.type2});
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +167,7 @@ class Item extends StatelessWidget {
         height: 170,
         width: 260,
         decoration: BoxDecoration(
-          color: Colors.purple,
+          color: color,
           borderRadius: BorderRadius.all(
             Radius.circular(18.0),
           ),
@@ -167,10 +182,10 @@ class Item extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 child: Container(
                   height: 120,
-                  width: 100,
+                  width: 120,
                   child: Image.network(
                     image,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                   ),
 //                  decoration: BoxDecoration(
 ////                          color: Colors.white,
@@ -201,9 +216,9 @@ class Item extends StatelessWidget {
                         SizedBox(height: 15),
                         Column(
                           children: <Widget>[
-                            pokeType(),
+                            pokeType(type: type1),
                             SizedBox(height: 10),
-                            pokeType(),
+                            pokeType(type: type2),
                           ],
                         ),
                       ],
@@ -260,6 +275,10 @@ class Item extends StatelessWidget {
 }
 
 class pokeType extends StatelessWidget {
+  final String type;
+
+  pokeType({this.type});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -274,7 +293,7 @@ class pokeType extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          'type',
+          type,
           style: TextStyle(
             color: Colors.white,
             fontSize: 18.0,
