@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: ContainerGrid(),
+      home: Home(),
       routes: {
         Search.routeName: (context) => Search(),
         Splash.routeName: (context) => Splash(),

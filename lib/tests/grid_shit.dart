@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:poke_search/models/pokemon.dart';
 import 'package:poke_search/services/NetworkAPI.dart';
@@ -119,7 +120,7 @@ class _GridShitState extends State<GridShit> {
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 2,
-                                    mainAxisSpacing: 30,
+                                    mainAxisSpacing: 20,
                                     crossAxisSpacing: 10,
                                     childAspectRatio:
                                         MediaQuery.of(context).size.width /
@@ -128,6 +129,7 @@ class _GridShitState extends State<GridShit> {
                             itemCount: allPOKEMON.length,
                             itemBuilder: (ctx, i) => Item(
                                   name: allPOKEMON[i].name,
+                                  image: allPOKEMON[i].image,
                                 )),
                       ),
                     ],
@@ -139,64 +141,130 @@ class _GridShitState extends State<GridShit> {
 
 class Item extends StatelessWidget {
   final String name;
+  final String image;
 
-  Item({this.name});
+  Item({this.name, this.image});
+
   @override
   Widget build(BuildContext context) {
     return GridTile(
       child: Container(
-//        height: 20,
-//        width: 40,
-        child: Row(
-//          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        height: 170,
+        width: 260,
+        decoration: BoxDecoration(
+          color: Colors.purple,
+          borderRadius: BorderRadius.all(
+            Radius.circular(18.0),
+          ),
+        ),
+        child: Stack(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            Positioned(
+              right: 0,
+              left: 91,
+              top: 19,
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Container(
+                  height: 120,
+                  width: 100,
+                  child: Image.network(
+                    image,
+                    fit: BoxFit.cover,
+                  ),
+//                  decoration: BoxDecoration(
+////                          color: Colors.white,
+//                      image: DecorationImage(
+//                    image: AssetImage('images/pikachu.png'),
+//                    fit: BoxFit.cover,
+//                  )),
+                ),
+              ),
+            ),
+            Positioned(
+//                    left: 3.0,
               child: Column(
                 children: <Widget>[
-                  Text(
-                    name,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
+                  Container(
+                    margin: EdgeInsets.only(left: 10, top: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          name, //Charmeleon
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 15),
+                        Column(
+                          children: <Widget>[
+                            pokeType(),
+                            SizedBox(height: 10),
+                            pokeType(),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
             ),
-            Spacer(),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: Container(
-                color: Colors.white,
-                height: 100,
-                width: 80,
-              ),
-            ),
-            SizedBox(
-              width: 10,
-            ),
           ],
         ),
-        decoration: BoxDecoration(
-          color: Colors.red,
-          borderRadius: BorderRadius.all(Radius.circular(18)),
-        ),
       ),
+
+//      Container(
+////        height: 20,
+////        width: 40,
+//        child: Row(
+////          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//          children: <Widget>[
+//            Padding(
+//              padding: const EdgeInsets.all(8.0),
+//              child: Column(
+//                children: <Widget>[
+//                  Text(
+//                    name,
+//                    style: TextStyle(
+//                      color: Colors.white,
+//                      fontSize: 20,
+//                    ),
+//                  ),
+//                ],
+//              ),
+//            ),
+//            Spacer(),
+//            Align(
+//              alignment: Alignment.bottomRight,
+//              child: Container(
+//                color: Colors.white,
+//                height: 100,
+//                width: 80,
+//              ),
+//            ),
+//            SizedBox(
+//              width: 10,
+//            ),
+//          ],
+//        ),
+//        decoration: BoxDecoration(
+//          color: Colors.red,
+//          borderRadius: BorderRadius.all(Radius.circular(18)),
+//        ),
+//      ),
     );
   }
 }
 
 class pokeType extends StatelessWidget {
-  const pokeType({
-    Key key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 30,
-      width: 90,
+      height: 25,
+      width: 80,
 //                      color: Colors.white,
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.2),
