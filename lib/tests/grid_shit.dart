@@ -46,7 +46,9 @@ class _GridShitState extends State<GridShit> {
 
   bool _showSpinner = true;
   Color backgroundColorX;
+  String type1X;
   String type2X;
+  List type;
   List<Pokemon> allPOKEMON = [];
 
   dynamic getAllPokemon() async {
@@ -55,7 +57,10 @@ class _GridShitState extends State<GridShit> {
           NetworkPokeDevAPI('https://pokeapi.glitch.me/v1/pokemon/$num');
       var numData = await networkPokeDevAPI.getData2();
 //      print(numData);
+
       //Couple of IF-ELSE Statements
+
+      //If Statement to change background of Grid Item
       if (numData[0]['types'][0] == 'Grass') {
         backgroundColorX = Colors.green;
       } else if (numData[0]['types'][0] == 'Fire') {
@@ -64,22 +69,27 @@ class _GridShitState extends State<GridShit> {
         backgroundColorX = Colors.purple;
       }
 
-//      if (!numData[0]['types'][1]) {
-//        type2X = '';
-//      } else {
-//        type2X = numData[0]['types'][1];
-//      }
+      //If Statement to determine the Pokemon types
+      if (numData[0]['types'].length == 1) {
+        type1X = numData[0]['types'][0];
+        type2X = '';
+      } else if (numData[0]['types'].length == 2) {
+        type1X = numData[0]['types'][0];
+        type2X = numData[0]['types'][1];
+      } else {
+        type1X = '';
+        type2X = '';
+      }
 
       //Add new pokemon object into allPOKEMON List
       allPOKEMON.add(Pokemon(
         name: numData[0]['name'],
         image: numData[0]['sprite'],
-        type1: numData[0]['types'][0],
+        type1: type1X,
         type2: type2X,
         backgroundColor: backgroundColorX,
       ));
       print('Pokemon Name ($num) = ${numData[0]['name']}');
-      print(numData[0]['types'][1]);
     }
     print('done');
     print('Length of list: ${allPOKEMON.length}');
@@ -162,6 +172,26 @@ class Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //
+    //Checking if Pokemon Type 2 is empty
+    Widget _pokemonTypesPlacement() {
+      if (type2 == '') {
+        return Column(
+          children: <Widget>[
+            pokeType(type: type1),
+          ],
+        );
+      } else {
+        return Column(
+          children: <Widget>[
+            pokeType(type: type1),
+            SizedBox(height: 10),
+            pokeType(type: type2),
+          ],
+        );
+      }
+    }
+
     return GridTile(
       child: Container(
         height: 170,
@@ -214,13 +244,7 @@ class Item extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 15),
-                        Column(
-                          children: <Widget>[
-                            pokeType(type: type1),
-                            SizedBox(height: 10),
-                            pokeType(type: type2),
-                          ],
-                        ),
+                        _pokemonTypesPlacement(),
                       ],
                     ),
                   ),
