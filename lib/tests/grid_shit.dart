@@ -56,10 +56,8 @@ class _GridShitState extends State<GridShit> {
       NetworkPokeDevAPI networkPokeDevAPI =
           NetworkPokeDevAPI('https://pokeapi.glitch.me/v1/pokemon/$num');
       var numData = await networkPokeDevAPI.getData2();
-//      print(numData);
 
       //Couple of IF-ELSE Statements
-
       //If Statement to change background of Grid Item
       if (numData[0]['types'][0] == 'Grass') {
         backgroundColorX = Colors.green;
@@ -141,10 +139,10 @@ class _GridShitState extends State<GridShit> {
                             crossAxisSpacing: 10,
                             childAspectRatio:
                                 MediaQuery.of(context).size.width /
-                                    0.37 /
-                                    MediaQuery.of(context).size.height),
+                                    MediaQuery.of(context).size.height /
+                                    0.38),
                         itemCount: allPOKEMON.length,
-                        itemBuilder: (ctx, i) => Item(
+                        itemBuilder: (ctx, i) => GridItem(
                           name: allPOKEMON[i].name,
                           image: allPOKEMON[i].image,
                           color: allPOKEMON[i].backgroundColor,
@@ -161,23 +159,25 @@ class _GridShitState extends State<GridShit> {
   }
 }
 
-class Item extends StatelessWidget {
+class GridItem extends StatelessWidget {
   final String name;
   final String image;
   final Color color;
   final String type1;
   final String type2;
 
-  Item({this.name, this.image, this.color, this.type1, this.type2});
+  GridItem({this.name, this.image, this.color, this.type1, this.type2});
 
   @override
   Widget build(BuildContext context) {
+    var media = MediaQuery.of(context).size;
     //
     //Checking if Pokemon Type 2 is empty
     Widget _pokemonTypesPlacement() {
       if (type2 == '') {
         return Column(
           children: <Widget>[
+            SizedBox(height: 14),
             pokeType(type: type1),
           ],
         );
@@ -194,9 +194,16 @@ class Item extends StatelessWidget {
 
     return GridTile(
       child: Container(
-        height: 170,
-        width: 260,
+//        height: 170,
+//        width: 5260,
         decoration: BoxDecoration(
+          image: DecorationImage(
+            colorFilter: new ColorFilter.mode(
+                Colors.white.withOpacity(0.1), BlendMode.dstATop),
+            fit: BoxFit.scaleDown,
+            image: AssetImage('images/pokeball.png'),
+            alignment: Alignment.bottomRight,
+          ),
           color: color,
           borderRadius: BorderRadius.all(
             Radius.circular(18.0),
@@ -231,7 +238,9 @@ class Item extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(left: 10, top: 20),
+                    color: Colors.teal,
+                    height: media.height * 0.12,
+                    margin: EdgeInsets.only(left: 10, top: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -243,7 +252,7 @@ class Item extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 15),
+                        SizedBox(height: 12),
                         _pokemonTypesPlacement(),
                       ],
                     ),
@@ -254,46 +263,6 @@ class Item extends StatelessWidget {
           ],
         ),
       ),
-
-//      Container(
-////        height: 20,
-////        width: 40,
-//        child: Row(
-////          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//          children: <Widget>[
-//            Padding(
-//              padding: const EdgeInsets.all(8.0),
-//              child: Column(
-//                children: <Widget>[
-//                  Text(
-//                    name,
-//                    style: TextStyle(
-//                      color: Colors.white,
-//                      fontSize: 20,
-//                    ),
-//                  ),
-//                ],
-//              ),
-//            ),
-//            Spacer(),
-//            Align(
-//              alignment: Alignment.bottomRight,
-//              child: Container(
-//                color: Colors.white,
-//                height: 100,
-//                width: 80,
-//              ),
-//            ),
-//            SizedBox(
-//              width: 10,
-//            ),
-//          ],
-//        ),
-//        decoration: BoxDecoration(
-//          color: Colors.red,
-//          borderRadius: BorderRadius.all(Radius.circular(18)),
-//        ),
-//      ),
     );
   }
 }
