@@ -31,3 +31,4 @@ flutter:
 
   assets:
     - images/
+    - allPokemons.json

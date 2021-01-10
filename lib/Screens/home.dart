@@ -67,7 +67,12 @@ class Home extends StatelessWidget {
                 height: 100,
               ),
               FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/run',
+                  );
+                },
                 child: Container(
 //                height: 30,
 //                width: 50,

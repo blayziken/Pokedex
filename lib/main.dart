@@ -7,6 +7,7 @@ import 'package:poke_search/tests/containerGrid.dart';
 import 'package:poke_search/tests/grid_shit.dart';
 import 'file:///C:/Users/Administrator/AndroidStudioProjects/poke_search/lib/Screens/widgets/TabTest.dart';
 import 'package:poke_search/tests/httpTest.dart';
+import 'package:poke_search/tests/run.dart';
 import 'package:poke_search/tests/screen.dart';
 import './tests/ChooseSplash.dart';
 
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         ChooseSplash.routeName: (context) => ChooseSplash(),
         Home.routeName: (context) => Home(),
         GridShit.routeName: (context) => GridShit(),
+        RunScreen.routeName: (context) => RunScreen(),
       },
     );
   }
