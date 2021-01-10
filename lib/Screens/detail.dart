@@ -49,14 +49,11 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   void initState() {
     super.initState();
-
-//    getDataFromAPI1();
-
     updateUI();
   }
 
   dynamic getDataFromAPI1() async {
-    String pokemonName = widget.pokemonName;
+    String pokemonName = widget.pokemonName.toLowerCase();
 
     NetworkAPI networkAPI =
         NetworkAPI('https://pokeapi.co/api/v2/pokemon/$pokemonName');
@@ -90,7 +87,7 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   dynamic getDataFromAPI2() async {
-    String pokemonName = widget.pokemonName;
+    String pokemonName = widget.pokemonName.toLowerCase();
 
     NetworkPokeDevAPI networkPokeDevAPI =
         NetworkPokeDevAPI('https://pokeapi.glitch.me/v1/pokemon/$pokemonName');
@@ -198,15 +195,14 @@ class _DetailScreenState extends State<DetailScreen> {
                         icon: Icon(
                           Icons.arrow_back,
                           color: Colors.white,
-                          size: 30.0,
+                          size: 25.0,
                         ),
                         onPressed: () => Navigator.pop(context),
                       ),
                     ),
 //              SizedBox(height: 50.0),
                     Padding(
-                      padding:
-                          const EdgeInsets.only(left: 30.0, top: 10, right: 25),
+                      padding: const EdgeInsets.only(left: 30.0, right: 25),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -233,16 +229,8 @@ class _DetailScreenState extends State<DetailScreen> {
                           ),
                           SizedBox(height: 5),
                           _pokemonTypes(),
-//note! Not needed anymore, _pokemonTypes() does the work, but keeping just in case.
-//                          Row(
-//                            children: <Widget>[
 //
-//                              PokeType(type: pokeType1),
-//                              SizedBox(width: 10),
-//                              PokeType(type: pokeType2),
-//                            ],
-//                          ),
-                          SizedBox(height: 10),
+//                          SizedBox(height: 10),
                           Center(
                             child: Stack(
                               children: <Widget>[
