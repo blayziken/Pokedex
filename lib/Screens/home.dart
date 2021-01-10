@@ -70,7 +70,7 @@ class Home extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushNamed(
                     context,
-                    '/run',
+                    '/generation-1',
                   );
                 },
                 child: Container(

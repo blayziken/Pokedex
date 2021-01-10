@@ -6,7 +6,7 @@ import 'package:poke_search/Screens/search.dart';
 import 'package:poke_search/Screens/splash.dart';
 import 'package:poke_search/tests/containerGrid.dart';
 import 'package:poke_search/tests/grid_shit.dart';
-import 'file:///C:/Users/Administrator/AndroidStudioProjects/poke_search/lib/Screens/widgets/TabTest.dart';
+import 'file:///C:/Users/Administrator/AndroidStudioProjects/poke_search/lib/Screens/widgets/TabGeneral.dart';
 import 'package:poke_search/tests/httpTest.dart';
 import 'package:poke_search/tests/screen.dart';
 import './tests/ChooseSplash.dart';

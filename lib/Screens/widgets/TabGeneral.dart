@@ -5,8 +5,8 @@ import 'package:poke_search/Screens/widgets/tabs/BaseStats.dart';
 import 'package:poke_search/Screens/widgets/tabs/Evolution.dart';
 import 'package:poke_search/Screens/widgets/tabs/Moves.dart';
 
-class TabTest extends StatefulWidget {
-  TabTest({
+class TabGeneral extends StatefulWidget {
+  TabGeneral({
     this.pokeHeight,
     this.pokeWeight,
     this.description,
@@ -44,10 +44,11 @@ class TabTest extends StatefulWidget {
   List evolutionLine = [];
 
   @override
-  _TabTestState createState() => _TabTestState();
+  _TabGeneralState createState() => _TabGeneralState();
 }
 
-class _TabTestState extends State<TabTest> with SingleTickerProviderStateMixin {
+class _TabGeneralState extends State<TabGeneral>
+    with SingleTickerProviderStateMixin {
   TabController _tabController;
 
   @override

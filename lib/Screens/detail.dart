@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poke_search/services/NetworkAPI.dart';
-import 'file:///C:/Users/Administrator/AndroidStudioProjects/poke_search/lib/Screens/widgets/TabTest.dart';
+import 'file:///C:/Users/Administrator/AndroidStudioProjects/poke_search/lib/Screens/widgets/TabGeneral.dart';
 import '../Screens/search.dart';
 //import 'package:modal_progress_hud/modal_progress_hud.dart';
 import '../services/string_extension.dart';
@@ -230,7 +230,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           SizedBox(height: 5),
                           _pokemonTypes(),
 //
-//                          SizedBox(height: 10),
+                          SizedBox(height: 15),
                           Center(
                             child: Stack(
                               children: <Widget>[
@@ -251,7 +251,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                 ),
                                 Center(
                                   child: Container(
-                                    height: 230,
+                                    height: 180,
                                     child: Image.network(
                                       pokePicture,
 //                                  height: 260,
@@ -277,7 +277,7 @@ class _DetailScreenState extends State<DetailScreen> {
                             topRight: Radius.circular(35.0),
                           ),
                         ),
-                        child: TabTest(
+                        child: TabGeneral(
                           //About Tab
                           pokeWeight: pokeWeight,
                           pokeHeight: pokeHeight,
