@@ -6,7 +6,13 @@ class Pokemon {
   final String type2;
   final String image;
   final Color backgroundColor;
+  final String id;
 
   Pokemon(
-      {this.name, this.type1, this.type2, this.image, this.backgroundColor});
+      {this.name,
+      this.type1,
+      this.type2,
+      this.image,
+      this.backgroundColor,
+      this.id});
 }

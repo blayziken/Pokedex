@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:poke_search/Screens/detail.dart';
 import 'dart:convert';
 
 import 'package:poke_search/models/pokemon.dart';
 
-class RunScreen extends StatefulWidget {
-  static const routeName = '/run';
+class Generation1Screen extends StatefulWidget {
+  static const routeName = '/generation-1';
 
   @override
-  _RunScreenState createState() => _RunScreenState();
+  _Generation1ScreenState createState() => _Generation1ScreenState();
 }
 
-class _RunScreenState extends State<RunScreen> {
+class _Generation1ScreenState extends State<Generation1Screen> {
   bool _showSpinner = true;
   Color backgroundColorX;
   String type1X;
@@ -19,7 +20,7 @@ class _RunScreenState extends State<RunScreen> {
   List<Pokemon> runPokemonList = [];
 
   void fetchPokemonAsset() async {
-    for (var num = 0; num <= 25; num++) {
+    for (var num = 0; num <= 105; num++) {
       String data = await DefaultAssetBundle.of(context)
           .loadString('assets/allPokemons.json');
       final jsonResult = json.decode(data);
@@ -29,7 +30,21 @@ class _RunScreenState extends State<RunScreen> {
       if (jsonResult[num]['typeofpokemon'][0] == 'Grass') {
         backgroundColorX = Colors.green;
       } else if (jsonResult[num]['typeofpokemon'][0] == 'Fire') {
-        backgroundColorX = Colors.red;
+        backgroundColorX = Colors.red[900];
+      } else if (jsonResult[num]['typeofpokemon'][0] == 'Water') {
+        backgroundColorX = Colors.lightBlue;
+      } else if (jsonResult[num]['typeofpokemon'][0] == 'Normal') {
+        backgroundColorX = Colors.indigoAccent;
+      } else if (jsonResult[num]['typeofpokemon'][0] == 'Bug') {
+        backgroundColorX = Colors.redAccent;
+      } else if (jsonResult[num]['typeofpokemon'][0] == 'Ground') {
+        backgroundColorX = Colors.brown;
+      } else if (jsonResult[num]['typeofpokemon'][0] == 'Fighting') {
+        backgroundColorX = Colors.deepOrangeAccent;
+      } else if (jsonResult[num]['typeofpokemon'][0] == 'Rock') {
+        backgroundColorX = Colors.blueGrey;
+      } else if (jsonResult[num]['typeofpokemon'][0] == 'Ghost') {
+        backgroundColorX = Colors.black26;
       } else {
         backgroundColorX = Colors.purple;
       }
@@ -52,6 +67,7 @@ class _RunScreenState extends State<RunScreen> {
         type1: type1X,
         type2: type2X,
         backgroundColor: backgroundColorX,
+        id: jsonResult[num]['id'],
       ));
     }
     setState(() {
@@ -93,6 +109,7 @@ class _RunScreenState extends State<RunScreen> {
                         ),
                       ),
                     ),
+                    SizedBox(height: 5),
                     Expanded(
                       child: GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -110,6 +127,7 @@ class _RunScreenState extends State<RunScreen> {
                           color: runPokemonList[i].backgroundColor,
                           type1: runPokemonList[i].type1,
                           type2: runPokemonList[i].type2,
+                          id: runPokemonList[i].id,
                         ),
                       ),
                     ),
@@ -127,8 +145,10 @@ class GridItem extends StatelessWidget {
   final Color color;
   final String type1;
   final String type2;
+  final String id;
 
-  GridItem({this.name, this.image, this.color, this.type1, this.type2});
+  GridItem(
+      {this.name, this.image, this.color, this.type1, this.type2, this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -155,74 +175,100 @@ class GridItem extends StatelessWidget {
     }
 
     return GridTile(
-      child: Container(
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DetailScreen(
+                pokemonName: name,
+              ),
+            ),
+          );
+        },
+        child: Container(
 //        height: 170,
 //        width: 5260,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            colorFilter: new ColorFilter.mode(
-                Colors.white.withOpacity(0.1), BlendMode.dstATop),
-            fit: BoxFit.scaleDown,
-            image: AssetImage('images/pokeball.png'),
-            alignment: Alignment.bottomRight,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              colorFilter: new ColorFilter.mode(
+                  Colors.grey.withOpacity(0.08), BlendMode.dstATop),
+              fit: BoxFit.scaleDown,
+              image: AssetImage('images/pokeball.png'),
+              alignment: Alignment.bottomRight,
+            ),
+            color: color,
+            borderRadius: BorderRadius.all(
+              Radius.circular(18.0),
+            ),
           ),
-          color: color,
-          borderRadius: BorderRadius.all(
-            Radius.circular(18.0),
-          ),
-        ),
-        child: Stack(
-          children: <Widget>[
-            Positioned(
-              right: 0,
-              left: 91,
-              top: 19,
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: Container(
-                  height: 120,
-                  width: 120,
-                  child: Image.network(
-                    image,
-                    fit: BoxFit.cover,
-                  ),
+          child: Stack(
+            children: <Widget>[
+              Positioned(
+                right: 0,
+                left: 59,
+                top: 20,
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: Container(
+                    height: 110,
+                    width: 190,
+//                  color: Colors.teal,
+                    child: Image.network(
+                      image,
+                      fit: BoxFit.fitHeight,
+                    ),
 //                  decoration: BoxDecoration(
 ////                          color: Colors.white,
 //                      image: DecorationImage(
 //                    image: AssetImage('images/pikachu.png'),
 //                    fit: BoxFit.cover,
 //                  )),
+                  ),
                 ),
               ),
-            ),
-            Positioned(
+              Positioned(
 //                    left: 3.0,
-              child: Column(
-                children: <Widget>[
-                  Container(
+                child: Column(
+                  children: <Widget>[
+                    Container(
 //                    color: Colors.teal,
-                    height: media.height * 0.12,
-                    margin: EdgeInsets.only(left: 10, top: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          name, //Charmeleon
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
+//                    height: media.height * 0.12,
+                      margin: EdgeInsets.only(left: 10, top: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                name, //Charmeleon
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                id,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25,
+                                  color: Colors.white38,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        SizedBox(height: 12),
-                        _pokemonTypesPlacement(),
-                      ],
+                          SizedBox(height: 12),
+                          _pokemonTypesPlacement(),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -238,7 +284,7 @@ class pokeType extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 25,
-      width: 80,
+      width: 70,
 //                      color: Colors.white,
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.2),
@@ -251,7 +297,7 @@ class pokeType extends StatelessWidget {
           type,
           style: TextStyle(
             color: Colors.white,
-            fontSize: 18.0,
+            fontSize: 15.0,
             fontWeight: FontWeight.w900,
           ),
         ),
