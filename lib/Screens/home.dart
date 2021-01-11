@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poke_search/Screens/search.dart';
+import 'package:poke_search/tests/httpTest.dart';
 
 class Home extends StatelessWidget {
   static const routeName = '/home';
@@ -68,10 +69,15 @@ class Home extends StatelessWidget {
               ),
               FlatButton(
                 onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    '/generation-1',
-                  );
+//                  Navigator.pushNamed(
+//                    context,
+//                    '/generation-1',
+//                  );
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => GenerationsChoose(),
+                      ));
                 },
                 child: Container(
 //                height: 30,

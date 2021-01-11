@@ -2,7 +2,9 @@
   <dictionary name="Administrator">
     <words>
       <w>bulbasaur</w>
+      <w>imageurl</w>
       <w>ivysaur</w>
+      <w>pokemons</w>
       <w>typeofpokemon</w>
       <w>venasaur</w>
     </words>

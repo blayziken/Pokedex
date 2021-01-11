@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:poke_search/Screens/Generations/Generation1.dart';
+import 'package:poke_search/Screens/Generations/GenerationI.dart';
+import 'package:poke_search/Screens/Generations/GenerationII.dart';
+import 'package:poke_search/Screens/Generations/GenerationIV.dart';
+import 'package:poke_search/Screens/Generations/GenerationV.dart';
+import 'package:poke_search/Screens/Generations/GenerationVI.dart';
 import 'package:poke_search/Screens/detail.dart';
 import 'package:poke_search/Screens/home.dart';
 import 'package:poke_search/Screens/search.dart';
 import 'package:poke_search/Screens/splash.dart';
 import 'package:poke_search/tests/containerGrid.dart';
 import 'package:poke_search/tests/grid_shit.dart';
+import 'Screens/Generations/GenerationIII.dart';
 import 'file:///C:/Users/Administrator/AndroidStudioProjects/poke_search/lib/Screens/widgets/TabGeneral.dart';
 import 'package:poke_search/tests/httpTest.dart';
 import 'package:poke_search/tests/screen.dart';
@@ -32,6 +37,11 @@ class MyApp extends StatelessWidget {
         Home.routeName: (context) => Home(),
         GridShit.routeName: (context) => GridShit(),
         Generation1Screen.routeName: (context) => Generation1Screen(),
+        GenerationIIScreen.routeName: (context) => GenerationIIScreen(),
+        GenerationIIIScreen.routeName: (context) => GenerationIIIScreen(),
+        GenerationIVScreen.routeName: (context) => GenerationIVScreen(),
+        GenerationVScreen.routeName: (context) => GenerationVScreen(),
+        GenerationVIScreen.routeName: (context) => GenerationVIScreen(),
       },
     );
   }

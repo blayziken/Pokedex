@@ -1,66 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:poke_search/Screens/Generations/widgets/PokeTypes.dart';
 import 'package:poke_search/Screens/detail.dart';
 import 'dart:convert';
-
 import 'package:poke_search/models/pokemon.dart';
+import 'GeneratorClasses/generationClass.dart';
 
-class Generation1Screen extends StatefulWidget {
-  static const routeName = '/generation-1';
+class GenerationIVScreen extends StatefulWidget {
+  static const routeName = '/generation-IV';
 
   @override
-  _Generation1ScreenState createState() => _Generation1ScreenState();
+  _GenerationIVScreenState createState() => _GenerationIVScreenState();
 }
 
-class _Generation1ScreenState extends State<Generation1Screen> {
+class _GenerationIVScreenState extends State<GenerationIVScreen> {
   bool _showSpinner = true;
-  Color backgroundColorX;
-  String type1X;
-  String type2X;
-  List type;
   List<Pokemon> runPokemonList = [];
 
-  void fetchPokemonAsset() async {
-    for (var num = 0; num <= 105; num++) {
+  void fetchGenerationIV() async {
+    for (var num = 386; num <= 492; num++) {
       String data = await DefaultAssetBundle.of(context)
           .loadString('assets/allPokemons.json');
       final jsonResult = json.decode(data);
 
-      //Couple of IF-ELSE Statements
-      //If Statement to change background of Grid Item
-      if (jsonResult[num]['typeofpokemon'][0] == 'Grass') {
-        backgroundColorX = Colors.green;
-      } else if (jsonResult[num]['typeofpokemon'][0] == 'Fire') {
-        backgroundColorX = Colors.red[900];
-      } else if (jsonResult[num]['typeofpokemon'][0] == 'Water') {
-        backgroundColorX = Colors.lightBlue;
-      } else if (jsonResult[num]['typeofpokemon'][0] == 'Normal') {
-        backgroundColorX = Colors.indigoAccent;
-      } else if (jsonResult[num]['typeofpokemon'][0] == 'Bug') {
-        backgroundColorX = Colors.redAccent;
-      } else if (jsonResult[num]['typeofpokemon'][0] == 'Ground') {
-        backgroundColorX = Colors.brown;
-      } else if (jsonResult[num]['typeofpokemon'][0] == 'Fighting') {
-        backgroundColorX = Colors.deepOrangeAccent;
-      } else if (jsonResult[num]['typeofpokemon'][0] == 'Rock') {
-        backgroundColorX = Colors.blueGrey;
-      } else if (jsonResult[num]['typeofpokemon'][0] == 'Ghost') {
-        backgroundColorX = Colors.black26;
-      } else {
-        backgroundColorX = Colors.purple;
-      }
-
-      //If Statement to determine the Pokemon types
-      if (jsonResult[num]['typeofpokemon'].length == 1) {
-        type1X = jsonResult[num]['typeofpokemon'][0];
-        type2X = '';
-      } else if (jsonResult[num]['typeofpokemon'].length == 2) {
-        type1X = jsonResult[num]['typeofpokemon'][0];
-        type2X = jsonResult[num]['typeofpokemon'][1];
-      } else {
-        type1X = '';
-        type2X = '';
-      }
-      //Add new pokemon object into allPOKEMON List
+      ifStatements(jsonResult, num);
+//      Add new pokemon object into allPOKEMON List
       runPokemonList.add(Pokemon(
         name: jsonResult[num]['name'],
         image: jsonResult[num]['imageurl'],
@@ -78,7 +41,7 @@ class _Generation1ScreenState extends State<Generation1Screen> {
   @override
   void initState() {
     super.initState();
-    fetchPokemonAsset();
+    fetchGenerationIV();
   }
 
   @override
@@ -93,7 +56,7 @@ class _Generation1ScreenState extends State<Generation1Screen> {
             )
           : SingleChildScrollView(
               child: Container(
-                color: Colors.yellow,
+                color: Colors.white12,
                 height: media.height,
                 width: double.infinity,
                 padding: EdgeInsets.all(12),
@@ -102,7 +65,7 @@ class _Generation1ScreenState extends State<Generation1Screen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 100.0),
                       child: Text(
-                        'Generation I',
+                        'Generation IV',
                         style: TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.w900,
@@ -175,18 +138,18 @@ class GridItem extends StatelessWidget {
     }
 
     return GridTile(
-      child: InkWell(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DetailScreen(
-                pokemonName: name,
-              ),
+        child: InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailScreen(
+              pokemonName: name,
             ),
-          );
-        },
-        child: Container(
+          ),
+        );
+      },
+      child: Container(
 //        height: 170,
 //        width: 5260,
           decoration: BoxDecoration(
@@ -202,13 +165,12 @@ class GridItem extends StatelessWidget {
               Radius.circular(18.0),
             ),
           ),
-          child: Stack(
-            children: <Widget>[
-              Positioned(
-                right: 0,
-                left: 59,
-                top: 20,
-                child: Align(
+          child: Stack(children: <Widget>[
+            Positioned(
+              right: 0,
+              left: 59,
+              top: 20,
+              child: Align(
                   alignment: Alignment.bottomRight,
                   child: Container(
                     height: 110,
@@ -218,27 +180,20 @@ class GridItem extends StatelessWidget {
                       image,
                       fit: BoxFit.fitHeight,
                     ),
-//                  decoration: BoxDecoration(
-////                          color: Colors.white,
-//                      image: DecorationImage(
-//                    image: AssetImage('images/pikachu.png'),
-//                    fit: BoxFit.cover,
-//                  )),
-                  ),
-                ),
-              ),
-              Positioned(
+                  )),
+            ),
+            Positioned(
 //                    left: 3.0,
                 child: Column(
-                  children: <Widget>[
-                    Container(
+              children: <Widget>[
+                Container(
 //                    color: Colors.teal,
 //                    height: media.height * 0.12,
-                      margin: EdgeInsets.only(left: 10, top: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Row(
+                    margin: EdgeInsets.only(left: 10, top: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text(
@@ -256,52 +211,15 @@ class GridItem extends StatelessWidget {
                                   fontSize: 25,
                                   color: Colors.white38,
                                 ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 12),
-                          _pokemonTypesPlacement(),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class pokeType extends StatelessWidget {
-  final String type;
-
-  pokeType({this.type});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 25,
-      width: 70,
-//                      color: Colors.white,
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.2),
-        borderRadius: BorderRadius.all(
-          Radius.circular(50.0),
-        ),
-      ),
-      child: Center(
-        child: Text(
-          type,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 15.0,
-            fontWeight: FontWeight.w900,
-          ),
-        ),
-      ),
-    );
+                              )
+                            ]),
+                        SizedBox(height: 12),
+                        _pokemonTypesPlacement(),
+                      ],
+                    ))
+              ],
+            ))
+          ])),
+    ));
   }
 }

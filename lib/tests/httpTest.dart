@@ -1,61 +1,132 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
-void getData() async {
-  http.Response response =
-      await http.get('https://pokeapi.co/api/v2/pokemon/ditto');
-//  print(response.body);
-
-  if (response.statusCode == 200) {
-//    String data = response.body;
-//    var abcd = jsonDecode(response.body)['abilities'][0]['ability']['name']
-    var abcd = jsonDecode(response.body)['name'];
-    print(abcd);
-    return;
-  } else {
-    print(response.statusCode);
-  }
+class GenerationsChoose extends StatefulWidget {
+  @override
+  _GenerationsChooseState createState() => _GenerationsChooseState();
 }
 
-//{
-//  abilities
-//  [
-//    {
-//      ability:
-//      {
-//        name: static, url: 'https://pokeapi.co/api/v2/ability/9/'
-//      }, is_hidden: false, slot: 1
-//    },
-//    {
-//      ability:
-//      {
-//        name: lightning-rod, url: 'https://pokeapi.co/api/v2/ability/31/'
-//      }, is_hidden: true, slot: 3
-//      }
-//   ]
-//}
-
-class HttpTest extends StatelessWidget {
+class _GenerationsChooseState extends State<GenerationsChoose> {
   @override
   Widget build(BuildContext context) {
-//    getData();
+    var media = MediaQuery.of(context).size;
+
     return Scaffold(
       body: Container(
+        height: media.height,
         width: double.infinity,
-        height: MediaQuery.of(context).size.height,
-        color: Colors.blueAccent,
-        child: FlatButton(
-          onPressed: () {
-            print('Pressed');
-            getData();
-          },
-          child: Text(
-            'Pressss',
-            style: TextStyle(
-              fontSize: 40.0,
-              fontWeight: FontWeight.bold,
-            ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/generation-1',
+                  );
+                },
+                child: Container(
+                  color: Colors.green,
+                  child: Text(
+                    'Generation 1',
+                    style: TextStyle(
+                      fontSize: 30.0,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 30),
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/generation-II',
+                  );
+                },
+                child: Container(
+                  color: Colors.green,
+                  child: Text(
+                    'Generation II',
+                    style: TextStyle(
+                      fontSize: 30.0,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 30),
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/generation-III',
+                  );
+                },
+                child: Container(
+                  color: Colors.green,
+                  child: Text(
+                    'Generation III',
+                    style: TextStyle(
+                      fontSize: 30.0,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 30),
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/generation-IV',
+                  );
+                },
+                child: Container(
+                  color: Colors.green,
+                  child: Text(
+                    'Generation IV',
+                    style: TextStyle(
+                      fontSize: 30.0,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 30),
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/generation-V',
+                  );
+                },
+                child: Container(
+                  color: Colors.green,
+                  child: Text(
+                    'Generation V',
+                    style: TextStyle(
+                      fontSize: 30.0,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 30),
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/generation-VI',
+                  );
+                },
+                child: Container(
+                  color: Colors.green,
+                  child: Text(
+                    'Generation VI',
+                    style: TextStyle(
+                      fontSize: 30.0,
+                    ),
+                  ),
+                ),
+              )
+            ],
           ),
         ),
       ),
