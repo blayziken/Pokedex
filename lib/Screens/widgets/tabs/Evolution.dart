@@ -84,40 +84,43 @@ class _EvolutionState extends State<Evolution> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             SizedBox(height: 25.0),
-            Center(
-              child: Container(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20.0, right: 50.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(height: 10),
-                      Text(
-                        'It\'s just ',
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          fontSize: 20.0,
+            Expanded(
+              child: Center(
+                child: Container(
+//                  height: media.height * 0.7,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0, right: 50.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(height: 10),
+                        Text(
+                          'It\'s just ',
+                          style: TextStyle(
+                            fontStyle: FontStyle.italic,
+                            fontSize: 20.0,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 10),
-                      Container(
-                        height: 150,
-                        width: 150,
-                        child: Image.network(
-                          pokemonOneImage,
-                          fit: BoxFit.fill,
+                        SizedBox(height: 10),
+                        Container(
+                          height: 150,
+                          width: 150,
+                          child: Image.network(
+                            pokemonOneImage,
+                            fit: BoxFit.fill,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        '$pokemonOne',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w900,
-                          fontSize: 50.0,
-                          color: Colors.green[900],
+                        SizedBox(height: 10),
+                        Text(
+                          '$pokemonOne',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w900,
+                            fontSize: 50.0,
+                            color: Colors.green[900],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -196,7 +199,7 @@ class _EvolutionState extends State<Evolution> {
           )
         : SingleChildScrollView(
             child: Container(
-              color: Colors.grey[300],
+//              color: Colors.grey[300],
               height: media.height * 0.4,
               width: double.infinity,
               child: Padding(
