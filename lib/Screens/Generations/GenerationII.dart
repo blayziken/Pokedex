@@ -68,12 +68,17 @@ class _GenerationIIScreenState extends State<GenerationIIScreen> {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.only(top: 100.0),
-                      child: Text(
-                        'Generation II',
-                        style: TextStyle(
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.w900,
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Generation II',
+                            style: TextStyle(
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(height: 5),

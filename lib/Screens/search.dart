@@ -122,8 +122,24 @@ class _SearchState extends State<Search> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 0),
-                  Spacer(),
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/generation-1');
+                      },
+                      child: Center(
+                        child: Text(
+                          'Check out the full pokedex❗',
+                          style: TextStyle(
+                            color: Colors.blue[900],
+                            fontSize: 15,
+                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
@@ -133,3 +149,14 @@ class _SearchState extends State<Search> {
     );
   }
 }
+
+//Align(
+//alignment: Alignment.bottomRight,
+//child: FloatingActionButton(
+//backgroundColor: Colors.lightGreen[700],
+//onPressed: () {},
+//child: Icon(
+//Icons.add,
+//),
+//),
+//)

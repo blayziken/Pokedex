@@ -73,11 +73,11 @@ class Home extends StatelessWidget {
 //                    context,
 //                    '/generation-1',
 //                  );
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => GenerationsChoose(),
-                      ));
+//                  Navigator.push(
+//                      context,
+//                      MaterialPageRoute(
+//                        builder: (context) => GenerationsChoose(),
+//                      ));
                 },
                 child: Container(
 //                height: 30,

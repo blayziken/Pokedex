@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:poke_search/Screens/widgets/detailTab.dart';
 import 'package:poke_search/Screens/widgets/tabs/AboutTab.dart';
 import 'package:poke_search/Screens/widgets/tabs/BaseStats.dart';
 import 'package:poke_search/Screens/widgets/tabs/Evolution.dart';
 import 'package:poke_search/Screens/widgets/tabs/Moves.dart';
+import 'detailTab.dart';
 
 class TabGeneral extends StatefulWidget {
   TabGeneral({
