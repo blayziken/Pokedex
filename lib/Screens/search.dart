@@ -15,8 +15,20 @@ class Search extends StatefulWidget {
   _SearchState createState() => _SearchState();
 }
 
-class _SearchState extends State<Search> {
+class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
+  AnimationController animationController;
+
   String searchName;
+  @override
+  void initState() {
+    super.initState();
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 1),
+    );
+
+    animationController.repeat();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,26 +42,27 @@ class _SearchState extends State<Search> {
             child: Container(
               height: media.height,
               width: double.infinity,
-//            decoration: BoxDecoration(
-//              image: DecorationImage(
-//                image: AssetImage('images/pokeball.png'),
-//                fit: BoxFit.cover,
-//
-//              ),
-//            ),
-
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('images/starter.jpg'),
+                  fit: BoxFit.contain,
+                ),
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Expanded(
                     flex: 2,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 100.0),
-                      child: Text(
-                        'What Pokemon\nare you looking for?',
-                        style: TextStyle(
-                          fontSize: 35.0,
-                          fontWeight: FontWeight.bold,
+                    child: Container(
+                      width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 100.0),
+                        child: Text(
+                          'What Pokemon\nare you looking for?',
+                          style: TextStyle(
+                            fontSize: 35.0,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -84,7 +97,7 @@ class _SearchState extends State<Search> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 40.0),
+                          SizedBox(height: 20.0),
                           Container(
                             width: media.width * 0.36,
                             height: 52.0,
@@ -95,16 +108,50 @@ class _SearchState extends State<Search> {
                               color: Colors.lightGreen[700],
                               splashColor: Colors.black,
                               onPressed: () {
-//                              print(searchName);
+                                print(searchName);
                                 print('Pressed');
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => DetailScreen(
-                                      pokemonName: searchName,
+                                print('--------------------------');
+                                if (searchName == null) {
+                                  print('NUlllll!!!!!!!!!!!');
+                                  return showDialog(
+                                      context: context,
+                                      builder: (ctx) => AlertDialog(
+                                            title: Text(
+                                              '🙃',
+                                              style: TextStyle(
+                                                fontSize: 25,
+                                              ),
+                                            ),
+                                            content: Text(
+                                              'No input received!',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            actions: <Widget>[
+                                              FlatButton(
+                                                child: Text(
+                                                  'Try again',
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                  ),
+                                                ),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop;
+                                                },
+                                              )
+                                            ],
+                                          ));
+                                } else {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DetailScreen(
+                                        pokemonName: searchName,
+                                      ),
                                     ),
-                                  ),
-                                );
+                                  );
+                                }
                               },
                               child: Center(
                                 child: Text(
@@ -123,21 +170,48 @@ class _SearchState extends State<Search> {
                     ),
                   ),
                   Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/generation-1');
-                      },
-                      child: Center(
-                        child: Text(
-                          'Check out the full pokedex❗',
-                          style: TextStyle(
-                            color: Colors.blue[900],
-                            fontSize: 15,
-                            fontStyle: FontStyle.italic,
-                            fontWeight: FontWeight.w800,
+                    child: Column(
+                      children: [
+                        Center(
+                          child: AnimatedBuilder(
+                            animation: animationController,
+                            builder: (BuildContext context, widget) {
+                              return Transform.rotate(
+                                angle: animationController.value * 6.3,
+                                child: Container(
+                                  height: 50,
+                                  width: 50,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                    image: AssetImage('images/unnamed.png'),
+                                    fit: BoxFit.fill,
+                                  )),
+                                ),
+                              );
+                            },
+//                            child:
                           ),
                         ),
-                      ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/All-Generation');
+                          },
+                          child: Center(
+                            child: Text(
+                              'Check out the full pokedex❗',
+                              style: TextStyle(
+                                color: Colors.blue[900],
+                                fontSize: 15,
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   )
                 ],
@@ -149,14 +223,3 @@ class _SearchState extends State<Search> {
     );
   }
 }
-
-//Align(
-//alignment: Alignment.bottomRight,
-//child: FloatingActionButton(
-//backgroundColor: Colors.lightGreen[700],
-//onPressed: () {},
-//child: Icon(
-//Icons.add,
-//),
-//),
-//)

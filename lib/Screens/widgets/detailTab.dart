@@ -10,7 +10,7 @@ class DetailTab extends StatelessWidget {
     return Tab(
         child: Text(
       title,
-      style: TextStyle(color: Colors.black54),
+      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
     ));
   }
 }

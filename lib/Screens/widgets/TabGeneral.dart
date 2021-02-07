@@ -22,6 +22,8 @@ class TabGeneral extends StatefulWidget {
     this.speed,
     this.total,
     this.evolutionLine,
+    this.normalAbilities,
+    this.hiddenAbilities,
   });
 
   String pokeHeight;
@@ -42,6 +44,8 @@ class TabGeneral extends StatefulWidget {
   int total;
 
   List evolutionLine = [];
+  List normalAbilities = [];
+  List hiddenAbilities = [];
 
   @override
   _TabGeneralState createState() => _TabGeneralState();
@@ -55,6 +59,7 @@ class _TabGeneralState extends State<TabGeneral>
   void initState() {
     _tabController = TabController(length: 4, vsync: this);
     super.initState();
+//    print(widget.types);
   }
 
   @override
@@ -77,6 +82,8 @@ class _TabGeneralState extends State<TabGeneral>
 //    int totalAPI = widget.total;
 
     List evolutionLine = widget.evolutionLine;
+    List normalAbilities = widget.normalAbilities;
+    List hiddenAbilities = widget.hiddenAbilities;
 
     return Container(
       margin: EdgeInsets.only(top: 14),
@@ -114,6 +121,9 @@ class _TabGeneralState extends State<TabGeneral>
                   genderFemale: genderFemale,
                   gen: gen,
                   starter: starter,
+                  normalAbilities: normalAbilities,
+                  hiddenAbilities: hiddenAbilities,
+//                  types: types,
                 ),
                 BaseStats(
                   attack: attackAPI,

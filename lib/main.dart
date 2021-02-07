@@ -10,8 +10,10 @@ import 'package:poke_search/Screens/home.dart';
 import 'package:poke_search/Screens/search.dart';
 import 'package:poke_search/Screens/splash.dart';
 import 'package:poke_search/Screens/widgets/floating_bubble.dart';
+import 'package:poke_search/tests/clipPointArrow.dart';
 import 'package:poke_search/tests/containerGrid.dart';
 import 'package:poke_search/tests/grid_shit.dart';
+import 'file:///C:/Users/Administrator/AndroidStudioProjects/poke_search/lib/Screens/widgets/customMenu.dart';
 import 'file:///C:/Users/Administrator/AndroidStudioProjects/poke_search/lib/Screens/widgets/floating_bubble.dart';
 import 'Screens/Generations/GenerationIII.dart';
 import 'package:poke_search/tests/httpTest.dart';
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
         Splash.routeName: (context) => Splash(),
         ChooseSplash.routeName: (context) => ChooseSplash(),
         Home.routeName: (context) => Home(),
-        GridShit.routeName: (context) => GridShit(),
+//        GridShit.routeName: (context) => GridShit(),
         AllGenerationScreen.routeName: (context) => AllGenerationScreen(),
         Generation1Screen.routeName: (context) => Generation1Screen(),
         GenerationIIScreen.routeName: (context) => GenerationIIScreen(),

@@ -6,6 +6,7 @@ import 'dart:convert';
 
 import 'package:poke_search/models/pokemon.dart';
 import 'package:poke_search/tests/containerGrid.dart';
+import 'file:///C:/Users/Administrator/AndroidStudioProjects/poke_search/lib/Screens/widgets/customMenu.dart';
 
 import 'GeneratorClasses/generationClass.dart';
 
@@ -68,27 +69,19 @@ class _Generation1ScreenState extends State<Generation1Screen> {
                 color: Colors.white12,
                 height: media.height,
                 width: double.infinity,
-                padding: EdgeInsets.all(12),
                 child: Column(
                   children: <Widget>[
+                    CustomDropDownButton(),
                     Padding(
-                      padding: const EdgeInsets.only(top: 100.0),
+                      padding: const EdgeInsets.only(top: 50.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            'Pokedex',
-                            /*@#*/
+                            'Generation I',
                             style: TextStyle(
                               fontSize: 50.0,
                               fontWeight: FontWeight.w900,
-                            ),
-                          ),
-                          Text(
-                            'Generation I',
-                            style: TextStyle(
-                              fontSize: 17.0,
-                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ],
@@ -96,23 +89,27 @@ class _Generation1ScreenState extends State<Generation1Screen> {
                     ),
                     SizedBox(height: 5),
                     Expanded(
-                      child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 20,
-                            crossAxisSpacing: 10,
-                            childAspectRatio:
-                                MediaQuery.of(context).size.width /
-                                    MediaQuery.of(context).size.height /
-                                    0.4),
-                        itemCount: runPokemonList.length,
-                        itemBuilder: (ctx, i) => GridItem(
-                          name: runPokemonList[i].name,
-                          image: runPokemonList[i].image,
-                          color: runPokemonList[i].backgroundColor,
-                          type1: runPokemonList[i].type1,
-                          type2: runPokemonList[i].type2,
-                          id: runPokemonList[i].id,
+                      child: Padding(
+                        padding: EdgeInsets.all(15.0),
+                        child: GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  mainAxisSpacing: 20,
+                                  crossAxisSpacing: 10,
+                                  childAspectRatio:
+                                      MediaQuery.of(context).size.width /
+                                          MediaQuery.of(context).size.height /
+                                          0.4),
+                          itemCount: runPokemonList.length,
+                          itemBuilder: (ctx, i) => GridItem(
+                            name: runPokemonList[i].name,
+                            image: runPokemonList[i].image,
+                            color: runPokemonList[i].backgroundColor,
+                            type1: runPokemonList[i].type1,
+                            type2: runPokemonList[i].type2,
+                            id: runPokemonList[i].id,
+                          ),
                         ),
                       ),
                     ),

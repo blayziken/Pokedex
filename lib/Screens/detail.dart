@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:poke_search/services/NetworkAPI.dart';
 import 'file:///C:/Users/Administrator/AndroidStudioProjects/poke_search/lib/Screens/widgets/TabGeneral.dart';
 import '../Screens/search.dart';
-//import 'package:modal_progress_hud/modal_progress_hud.dart';
 import '../services/string_extension.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -13,7 +12,9 @@ class DetailScreen extends StatefulWidget {
   _DetailScreenState createState() => _DetailScreenState();
 }
 
-class _DetailScreenState extends State<DetailScreen> {
+class _DetailScreenState extends State<DetailScreen>
+    with SingleTickerProviderStateMixin {
+  AnimationController animationController;
   bool showSpinner = true;
 
   String pokeName;
@@ -46,10 +47,20 @@ class _DetailScreenState extends State<DetailScreen> {
   // EVOLUTION
   List evolutionLine = [];
 
+  //MOVES
+  List normalAbilities = [];
+  List hiddenAbilities = [];
+
   @override
   void initState() {
     super.initState();
     updateUI();
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    );
+
+    animationController.repeat();
   }
 
   dynamic getDataFromAPI1() async {
@@ -64,6 +75,7 @@ class _DetailScreenState extends State<DetailScreen> {
     if (pokemonData != '' || pokemonData != null) {
       return pokemonData;
     } else {
+      print('a');
       return showDialog(
           context: context,
           builder: (ctx) => AlertDialog(
@@ -98,6 +110,33 @@ class _DetailScreenState extends State<DetailScreen> {
   //////////////////////////////////////////////////////////////////////////////////// from VOID to DYNAMIC
   dynamic updateUI() async {
     print('Entered here');
+    String userEntry = widget.pokemonName;
+
+    if (userEntry == null) {
+      print('NUlllll!!!!!!!!!!!');
+      return showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+                title: Text('Not Found!'),
+                content: Text('No such pokemon 🙃'),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text('Try again'),
+                    onPressed: () {
+//                      Navigator.of(context).pop;
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Search(),
+                          ));
+                    },
+                  )
+                ],
+              ));
+    }
+
+    //
+    //
     var pokeData = await getDataFromAPI1();
     var pokeData2 = await getDataFromAPI2();
 
@@ -129,16 +168,21 @@ class _DetailScreenState extends State<DetailScreen> {
       pokeGenderMale = pokeData2[0]['gender'][0];
       pokeGenderFemale = pokeData2[0]['gender'][1];
     }
+//
 
     pokeGen = pokeData2[0]['gen'];
     starter = pokeData2[0]['starter'];
 
-    print('TYPES----');
     types = pokeData2[0]['types']; ////////////// I REMOVED AWAIT
 
     evolutionLine = pokeData2[0]['family']['evolutionLine'];
-    print('----------');
-    print(evolutionLine);
+    //
+    normalAbilities = pokeData2[0]['abilities']['normal'];
+    print(normalAbilities);
+
+    print('-----');
+    hiddenAbilities = pokeData2[0]['abilities']['hidden'];
+    print(hiddenAbilities);
 
     setState(() {
       showSpinner = false;
@@ -192,13 +236,15 @@ class _DetailScreenState extends State<DetailScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 20.0, top: 10.0),
                       child: IconButton(
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: Colors.white,
-                          size: 25.0,
-                        ),
-                        onPressed: () => Navigator.pop(context),
-                      ),
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                            size: 25.0,
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                            animationController.dispose();
+                          }),
                     ),
 //              SizedBox(height: 50.0),
                     Padding(
@@ -230,28 +276,50 @@ class _DetailScreenState extends State<DetailScreen> {
                           SizedBox(height: 5),
                           _pokemonTypes(),
 //
-                          SizedBox(height: 15),
+                          SizedBox(height: 5),
                           Center(
                             child: Stack(
                               children: <Widget>[
                                 Positioned(
                                   child: Center(
-                                    child: Container(
-                                      height: 180,
-                                      width: 180,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: AssetImage(
-                                              'images/pokeball32.png'),
-                                          fit: BoxFit.fill,
-                                        ),
-                                      ),
+                                    child: AnimatedBuilder(
+                                      animation: animationController,
+                                      builder: (BuildContext context, Widget) {
+                                        return Transform.rotate(
+                                          angle:
+                                              animationController.value * 6.3,
+                                          child: Container(
+                                            height: 180,
+                                            width: 180,
+                                            decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                image: AssetImage(
+                                                    'images/pokeball32.png'),
+                                                fit: BoxFit.fill,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+//                                      child: Container(
+//                                            height: 180,
+//                                            width: 180,
+//                                            decoration: BoxDecoration(
+//                                              image: DecorationImage(
+//                                                image: AssetImage(
+//                                                    'images/pokeball32.png'),
+//                                                fit: BoxFit.fill,
+//                                              ),
+//                                            ),
+//                                          ) ,
                                     ),
                                   ),
                                 ),
                                 Center(
                                   child: Container(
-                                    height: 180,
+//                                    color: Colors.brown,
+                                    height: 200,
+                                    width: 200,
                                     child: Image.network(
                                       pokePicture,
 //                                  height: 260,
@@ -286,6 +354,8 @@ class _DetailScreenState extends State<DetailScreen> {
                           genderFemale: pokeGenderFemale,
                           gen: pokeGen,
                           starter: starter,
+                          normalAbilities: normalAbilities,
+                          hiddenAbilities: hiddenAbilities,
 
                           //Base Stats Tab
                           hp: hp,

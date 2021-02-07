@@ -1,265 +1,70 @@
-import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:poke_search/models/pokemon.dart';
-import 'package:poke_search/services/NetworkAPI.dart';
+import 'package:poke_search/Screens/widgets/customMenu.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gradient_widgets/gradient_widgets.dart';
 
-class GridShit extends StatefulWidget {
-  static const routeName = '/grid-shit';
-
+class TestTestTest extends StatefulWidget {
   @override
-  _GridShitState createState() => _GridShitState();
+  _TestTestTestState createState() => _TestTestTestState();
 }
 
-class _GridShitState extends State<GridShit> {
-//  List<Pokemon> loadedPokemons = [
-//    Pokemon(
-//      name: 'Charizard',
-//      image: 'images/Graphic1.png',
-//      type1: 'Fighting',
-//      type2: 'Fire',
-//      backgroundColor: Colors.red,
-//    ),
-//    Pokemon(
-//      name: 'Squitle',
-//      image: '',
-//      type1: 'Water',
-//      type2: '',
-//      backgroundColor: Colors.lightBlue,
-//    ),
-//    Pokemon(
-//      name: 'Bulbasaur',
-//      image: '',
-//      type1: 'Grass',
-//      type2: 'Poison',
-//      backgroundColor: Colors.green,
-//    ),
-//    Pokemon(
-//      name: 'Ditto',
-//      image: '',
-//      type1: 'Poison',
-//      type2: '',
-//      backgroundColor: Colors.deepPurple,
-//    ),
-//  ];
-
-  bool _showSpinner = true;
-  Color backgroundColorX;
-  String type1X;
-  String type2X;
-  List type;
-  List<Pokemon> allPOKEMON = [];
-
-  dynamic getAllPokemon() async {
-    for (var num = 1; num <= 15; num++) {
-      NetworkPokeDevAPI networkPokeDevAPI =
-          NetworkPokeDevAPI('https://pokeapi.glitch.me/v1/pokemon/$num');
-      var numData = await networkPokeDevAPI.getData2();
-
-      //Couple of IF-ELSE Statements
-      //If Statement to change background of Grid Item
-      if (numData[0]['types'][0] == 'Grass') {
-        backgroundColorX = Colors.green;
-      } else if (numData[0]['types'][0] == 'Fire') {
-        backgroundColorX = Colors.red;
-      } else {
-        backgroundColorX = Colors.purple;
-      }
-
-      //If Statement to determine the Pokemon types
-      if (numData[0]['types'].length == 1) {
-        type1X = numData[0]['types'][0];
-        type2X = '';
-      } else if (numData[0]['types'].length == 2) {
-        type1X = numData[0]['types'][0];
-        type2X = numData[0]['types'][1];
-      } else {
-        type1X = '';
-        type2X = '';
-      }
-
-      //Add new pokemon object into allPOKEMON List
-      allPOKEMON.add(Pokemon(
-        name: numData[0]['name'],
-        image: numData[0]['sprite'],
-        type1: type1X,
-        type2: type2X,
-        backgroundColor: backgroundColorX,
-      ));
-      print('Pokemon Name ($num) = ${numData[0]['name']}');
-    }
-    print('done');
-    print('Length of list: ${allPOKEMON.length}');
-    setState(() {
-      _showSpinner = false;
-    });
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getAllPokemon();
-  }
-
+class _TestTestTestState extends State<TestTestTest> {
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.of(context).size;
     return Scaffold(
-      body: _showSpinner
-          ? Center(
-              child: CircularProgressIndicator(
-                backgroundColor: Colors.red,
-              ),
-            )
-          : SingleChildScrollView(
+      body: Container(
+//        color: Colors.teal,
+        height: MediaQuery.of(context).size.height,
+        width: double.infinity,
+        child: Column(
+          children: [
+            Container(
+              height: 60,
+              width: 60,
+              child: SvgPicture.asset("images/looks_3-24px.svg"),
+            ),
+            Center(
               child: Container(
-                color: Colors.yellow,
-                height: media.height,
-                width: double.infinity,
-                padding: EdgeInsets.all(12),
-                child: Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 100.0),
-                      child: Text(
-                        'Generation I',
-                        style: TextStyle(
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
+                child: CustomDropDownButton(),
+              ),
+            ),
+            SizedBox(height: 200),
+            Container(
+              height: 150,
+              width: 150,
+              color: Colors.red,
+              child: Icon(
+                MdiIcons.genderFemale,
+                color: Colors.white,
+                size: 100,
+              ),
+            ),
+            SizedBox(height: 50),
+            GradientCard(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(60),
+                ),
+              ),
+              gradient: Gradients.blush,
+              shadowColor: Gradients.cosmicFusion.colors.last.withOpacity(0.25),
+              elevation: 8,
+              child: Container(
+                height: 40,
+                width: 100,
+                child: Center(
+                  child: Text(
+                    'Electric',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
                     ),
-                    Expanded(
-                      child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 20,
-                            crossAxisSpacing: 10,
-                            childAspectRatio:
-                                MediaQuery.of(context).size.width /
-                                    MediaQuery.of(context).size.height /
-                                    0.38),
-                        itemCount: allPOKEMON.length,
-                        itemBuilder: (ctx, i) => GridItem(
-                          name: allPOKEMON[i].name,
-                          image: allPOKEMON[i].image,
-                          color: allPOKEMON[i].backgroundColor,
-                          type1: allPOKEMON[i].type1,
-                          type2: allPOKEMON[i].type2,
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
-    );
-  }
-}
-
-class GridItem extends StatelessWidget {
-  final String name;
-  final String image;
-  final Color color;
-  final String type1;
-  final String type2;
-
-  GridItem({this.name, this.image, this.color, this.type1, this.type2});
-
-  @override
-  Widget build(BuildContext context) {
-    var media = MediaQuery.of(context).size;
-    //
-    //Checking if Pokemon Type 2 is empty
-    Widget _pokemonTypesPlacement() {
-      if (type2 == '') {
-        return Column(
-          children: <Widget>[
-            SizedBox(height: 14),
-            pokeType(type: type1),
-          ],
-        );
-      } else {
-        return Column(
-          children: <Widget>[
-            pokeType(type: type1),
-            SizedBox(height: 10),
-            pokeType(type: type2),
-          ],
-        );
-      }
-    }
-
-    return GridTile(
-      child: Container(
-//        height: 170,
-//        width: 5260,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            colorFilter: new ColorFilter.mode(
-                Colors.white.withOpacity(0.1), BlendMode.dstATop),
-            fit: BoxFit.scaleDown,
-            image: AssetImage('images/pokeball.png'),
-            alignment: Alignment.bottomRight,
-          ),
-          color: color,
-          borderRadius: BorderRadius.all(
-            Radius.circular(18.0),
-          ),
-        ),
-        child: Stack(
-          children: <Widget>[
-            Positioned(
-              right: 0,
-              left: 91,
-              top: 19,
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: Container(
-                  height: 120,
-                  width: 120,
-                  child: Image.network(
-                    image,
-                    fit: BoxFit.contain,
-                  ),
-//                  decoration: BoxDecoration(
-////                          color: Colors.white,
-//                      image: DecorationImage(
-//                    image: AssetImage('images/pikachu.png'),
-//                    fit: BoxFit.cover,
-//                  )),
-                ),
-              ),
-            ),
-            Positioned(
-//                    left: 3.0,
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    color: Colors.teal,
-                    height: media.height * 0.12,
-                    margin: EdgeInsets.only(left: 10, top: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          name, //Charmeleon
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 12),
-                        _pokemonTypesPlacement(),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
       ),
@@ -267,33 +72,255 @@ class GridItem extends StatelessWidget {
   }
 }
 
-class pokeType extends StatelessWidget {
-  final String type;
-
-  pokeType({this.type});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 25,
-      width: 80,
-//                      color: Colors.white,
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.2),
-        borderRadius: BorderRadius.all(
-          Radius.circular(50.0),
-        ),
-      ),
-      child: Center(
-        child: Text(
-          type,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18.0,
-            fontWeight: FontWeight.w900,
-          ),
-        ),
-      ),
-    );
-  }
-}
+//import 'package:flutter/material.dart';
+//import 'package:poke_search/tests/clipPointArrow.dart';
+//
+//class CustomDropDownMenu extends StatefulWidget {
+//  final List<Icon> icons;
+//  final BorderRadius borderRadius;
+//  final Color backgroundColor;
+//  final Color iconColor;
+//  final ValueChanged<int> onChange;
+//
+//  const CustomDropDownMenu({
+//    Key key,
+//    this.icons,
+//    this.borderRadius,
+//    this.backgroundColor = const Color(0xFFF67C0B9),
+//    this.iconColor = Colors.purpleAccent,
+//    this.onChange,
+//  })  : assert(icons != null),
+//        super(key: key);
+//  @override
+//  _CustomDropDownMenuState createState() => _CustomDropDownMenuState();
+//}
+//
+//class _CustomDropDownMenuState extends State<CustomDropDownMenu>
+//    with SingleTickerProviderStateMixin {
+//  GlobalKey _key;
+//  bool isMenuOpen = false;
+//  Offset buttonPosition;
+//  Size buttonSize;
+//  OverlayEntry _overlayEntry;
+//  BorderRadius _borderRadius;
+//  AnimationController _animationController;
+//
+//  @override
+//  void initState() {
+//    _animationController = AnimationController(
+//      vsync: this,
+//      duration: Duration(milliseconds: 250),
+//    );
+//    _borderRadius = widget.borderRadius ?? BorderRadius.circular(4);
+//    _key = LabeledGlobalKey("button_icon");
+//    super.initState();
+//  }
+//
+//  @override
+//  void dispose() {
+//    _animationController.dispose();
+//    super.dispose();
+//  }
+//
+//  findButton() {
+//    RenderBox renderBox = _key.currentContext.findRenderObject();
+//    buttonSize = renderBox.size;
+//    buttonPosition = renderBox.localToGlobal(Offset.zero);
+//  }
+//
+//  void closeMenu() {
+//    setState(() {
+//      _overlayEntry.remove();
+//      _animationController.reverse();
+//      isMenuOpen = !isMenuOpen;
+//    });
+//  }
+//
+//  void openMenu() {
+//    findButton();
+//    _animationController.forward();
+//    _overlayEntry = _overlayEntryBuilder();
+//    Overlay.of(context).insert(_overlayEntry);
+//    isMenuOpen = !isMenuOpen;
+//  }
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    // MAIN OPEN/CLOSE BUTTON
+//    return Container(
+//      key: _key,
+//      decoration: BoxDecoration(
+//        color: Color(0xFFF5C6373), //greyish
+////        color: Colors.lightGreen[800],
+//        borderRadius: _borderRadius,
+//      ),
+//      child: IconButton(
+//        icon: AnimatedIcon(
+//          icon: AnimatedIcons.menu_close,
+//          progress: _animationController,
+//        ),
+//        color: Colors.white,
+//        onPressed: () {
+//          if (isMenuOpen) {
+//            closeMenu();
+//          } else {
+//            openMenu();
+//          }
+//        },
+//      ),
+//    );
+//  }
+//
+//  OverlayEntry _overlayEntryBuilder() {
+//    return OverlayEntry(
+//      builder: (context) {
+//        return Positioned(
+//            top: buttonPosition.dy,
+//            left: 50,
+//            width: buttonSize.width * 7,
+//            child: Material(
+//                color: Colors.transparent,
+//                child: Stack(
+//                  children: <Widget>[
+//                    Padding(
+//                        padding: const EdgeInsets.only(top: 0.0),
+//                        child: Row(
+//                          children: [
+//                            Container(
+////                    height: widget.icons.length * buttonSize.height,
+//                                height: 50,
+//                                decoration: BoxDecoration(
+////                              color: widget.backgroundColor,
+//                                  color: Colors.lightGreen[300],
+//                                  borderRadius: _borderRadius,
+//                                ),
+//                                child: Theme(
+//                                    data: ThemeData(
+//                                      iconTheme: IconThemeData(
+////                                    color: widget.iconColor,
+//                                        color: Colors.black,
+//                                      ),
+//                                    ),
+//                                    child: Row(
+////                        mainAxisSize: MainAxisSize.min,
+//                                      children: [
+//                                        IconFullDetails(
+//                                            buttonSize: buttonSize,
+//                                            widget: widget,
+//                                            iconIndex: widget.icons[0],
+//                                            onTapFunction: () {
+//                                              Navigator.pushNamed(
+//                                                  context, '/generation-1');
+//                                              closeMenu();
+//                                            }),
+//                                        IconFullDetails(
+//                                            buttonSize: buttonSize,
+//                                            widget: widget,
+//                                            iconIndex: widget.icons[1],
+//                                            onTapFunction: () {
+//                                              Navigator.pushNamed(
+//                                                  context, '/generation-II');
+//                                              closeMenu();
+//                                            }),
+//                                        IconFullDetails(
+//                                            buttonSize: buttonSize,
+//                                            widget: widget,
+//                                            iconIndex: widget.icons[2],
+//                                            onTapFunction: () {
+//                                              Navigator.pushNamed(
+//                                                  context, '/generation-III');
+//                                              closeMenu();
+//                                            }),
+//                                        IconFullDetails(
+//                                            buttonSize: buttonSize,
+//                                            widget: widget,
+//                                            iconIndex: widget.icons[3],
+//                                            onTapFunction: () {
+//                                              Navigator.pushNamed(
+//                                                  context, '/generation-IV');
+//                                              closeMenu();
+//                                            }),
+//                                        IconFullDetails(
+//                                            buttonSize: buttonSize,
+//                                            widget: widget,
+//                                            iconIndex: widget.icons[4],
+//                                            onTapFunction: () {
+//                                              Navigator.pushNamed(
+//                                                  context, '/generation-V');
+//                                              closeMenu();
+//                                            }),
+//                                        IconFullDetails(
+//                                            buttonSize: buttonSize,
+//                                            widget: widget,
+//                                            iconIndex: widget.icons[5],
+//                                            onTapFunction: () {
+//                                              Navigator.pushNamed(
+//                                                  context, '/generation-VI');
+//                                              closeMenu();
+//                                            }),
+//                                      ],
+//                                    ))),
+//                            ClipPointArrow(),
+//                          ],
+//                        )),
+//                  ],
+//                )));
+//      },
+//    );
+//  }
+//}
+//
+//class IconFullDetails extends StatelessWidget {
+//  Icon iconIndex;
+//  Function onTapFunction;
+//  IconFullDetails({
+//    @required this.buttonSize,
+//    @required this.widget,
+//    this.iconIndex,
+//    this.onTapFunction,
+//  });
+//
+//  final Size buttonSize;
+//  final CustomDropDownMenu widget;
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return InkWell(
+//      onTap: onTapFunction,
+//      child: Container(
+//        width: buttonSize.width,
+//        height: buttonSize.height,
+//        child: iconIndex,
+//      ),
+//    );
+//  }
+//}
+//
+//class CustomDropDownButton extends StatefulWidget {
+//  @override
+//  _CustomDropDownButtonState createState() => _CustomDropDownButtonState();
+//}
+//
+//class _CustomDropDownButtonState extends State<CustomDropDownButton> {
+//  @override
+//  Widget build(BuildContext context) {
+//    return Container(
+//      child: Padding(
+//        padding: EdgeInsets.only(top: 20, right: 20.0),
+//        child: Align(
+//          alignment: Alignment.topRight,
+//          child: CustomDropDownMenu(
+//            icons: [
+//              Icon(Icons.add),
+//              Icon(Icons.search),
+//              Icon(Icons.business),
+//              Icon(Icons.wifi),
+//              Icon(Icons.lock_outline),
+//              Icon(Icons.vpn_key),
+//            ],
+//          ),
+//        ),
+//      ),
+//    );
+//  }
+//}
