@@ -18,6 +18,7 @@ class NetworkAPI {
       return jsonDecode(retrievedData);
     } else {
       print(response.statusCode);
+      return null;
     }
   }
 }

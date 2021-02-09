@@ -70,9 +70,9 @@ class _DetailScreenState extends State<DetailScreen>
         NetworkAPI('https://pokeapi.co/api/v2/pokemon/$pokemonName');
 
     var pokemonData = await networkAPI.getData();
-//    return pokemonData;
+
     //TODO: OR INSIDE AN IF STATEMENT
-    if (pokemonData != '' || pokemonData != null) {
+    if (pokemonData != null) {
       return pokemonData;
     } else {
       print('a');
@@ -110,33 +110,7 @@ class _DetailScreenState extends State<DetailScreen>
   //////////////////////////////////////////////////////////////////////////////////// from VOID to DYNAMIC
   dynamic updateUI() async {
     print('Entered here');
-    String userEntry = widget.pokemonName;
 
-    if (userEntry == null) {
-      print('NUlllll!!!!!!!!!!!');
-      return showDialog(
-          context: context,
-          builder: (ctx) => AlertDialog(
-                title: Text('Not Found!'),
-                content: Text('No such pokemon 🙃'),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text('Try again'),
-                    onPressed: () {
-//                      Navigator.of(context).pop;
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Search(),
-                          ));
-                    },
-                  )
-                ],
-              ));
-    }
-
-    //
-    //
     var pokeData = await getDataFromAPI1();
     var pokeData2 = await getDataFromAPI2();
 

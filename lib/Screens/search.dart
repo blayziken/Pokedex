@@ -2,12 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:poke_search/Screens/detail.dart';
 
-//
-import 'package:http/http.dart' as http;
-import 'package:poke_search/tests/httpTest.dart';
-import 'dart:convert';
-import '../services/NetworkAPI.dart';
-
 class Search extends StatefulWidget {
   static const routeName = '/search';
 
@@ -108,11 +102,7 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                               color: Colors.lightGreen[700],
                               splashColor: Colors.black,
                               onPressed: () {
-                                print(searchName);
-                                print('Pressed');
-                                print('--------------------------');
                                 if (searchName == null) {
-                                  print('NUlllll!!!!!!!!!!!');
                                   return showDialog(
                                       context: context,
                                       builder: (ctx) => AlertDialog(
@@ -129,15 +119,18 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                                               ),
                                             ),
                                             actions: <Widget>[
-                                              FlatButton(
+                                              InkWell(
                                                 child: Text(
                                                   'Try again',
                                                   style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontStyle: FontStyle.italic,
+                                                    color: Colors.blue,
                                                     fontSize: 15,
                                                   ),
                                                 ),
-                                                onPressed: () {
-                                                  Navigator.of(context).pop;
+                                                onTap: () {
+                                                  Navigator.pop(context);
                                                 },
                                               )
                                             ],
