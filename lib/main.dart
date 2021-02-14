@@ -5,19 +5,9 @@ import 'package:poke_search/Screens/Generations/GenerationII.dart';
 import 'package:poke_search/Screens/Generations/GenerationIV.dart';
 import 'package:poke_search/Screens/Generations/GenerationV.dart';
 import 'package:poke_search/Screens/Generations/GenerationVI.dart';
-import 'package:poke_search/Screens/detail.dart';
-import 'package:poke_search/Screens/home.dart';
 import 'package:poke_search/Screens/search.dart';
 import 'package:poke_search/Screens/splash.dart';
-import 'package:poke_search/Screens/widgets/floating_bubble.dart';
-import 'package:poke_search/tests/clipPointArrow.dart';
-import 'package:poke_search/tests/containerGrid.dart';
-import 'package:poke_search/tests/grid_shit.dart';
-import 'file:///C:/Users/Administrator/AndroidStudioProjects/poke_search/lib/Screens/widgets/customMenu.dart';
-import 'file:///C:/Users/Administrator/AndroidStudioProjects/poke_search/lib/Screens/widgets/floating_bubble.dart';
 import 'Screens/Generations/GenerationIII.dart';
-import 'package:poke_search/tests/httpTest.dart';
-import 'package:poke_search/tests/screen.dart';
 import './tests/ChooseSplash.dart';
 
 void main() {

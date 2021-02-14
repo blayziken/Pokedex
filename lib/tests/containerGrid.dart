@@ -1,6 +1,5 @@
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
-import 'package:poke_search/Screens/search.dart';
 
 class FloatingBubble extends StatefulWidget {
   @override

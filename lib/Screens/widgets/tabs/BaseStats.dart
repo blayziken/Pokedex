@@ -129,14 +129,14 @@ class BaseStats extends StatelessWidget {
                 ),
                 SizedBox(height: 15),
                 Text(
-                  'The effectiveness of each type on Bulbasaur.',
+                  'Will be added later.',
                   style: TextStyle(
                     fontSize: 15,
                   ),
                 ),
                 SizedBox(height: 15),
                 Text(
-                  'blah bla blah blah bla blah blah bla blah blah bla blah\n blah bla blahblah bla blah blah bla blah blah bla blah blah bla blah blah bla blah blah bla blah blah bla blah blah bla blah',
+                  ' blah blah blah blah',
                   style: TextStyle(
                     fontSize: 15,
                   ),
