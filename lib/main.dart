@@ -30,6 +30,8 @@ class MyApp extends StatelessWidget {
         ChooseSplash.routeName: (context) => ChooseSplash(),
 //        Home.routeName: (context) => Home(),
 //        GridShit.routeName: (context) => GridShit(),
+
+        // Generation Screen Routes
         AllGenerationScreen.routeName: (context) => AllGenerationScreen(),
         Generation1Screen.routeName: (context) => Generation1Screen(),
         GenerationIIScreen.routeName: (context) => GenerationIIScreen(),

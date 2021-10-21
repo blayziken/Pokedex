@@ -51,19 +51,19 @@ class TabGeneral extends StatefulWidget {
   _TabGeneralState createState() => _TabGeneralState();
 }
 
-class _TabGeneralState extends State<TabGeneral>
-    with SingleTickerProviderStateMixin {
+class _TabGeneralState extends State<TabGeneral> with SingleTickerProviderStateMixin {
   TabController _tabController;
 
   @override
   void initState() {
     _tabController = TabController(length: 4, vsync: this);
     super.initState();
-//    print(widget.types);
   }
 
   @override
   Widget build(BuildContext context) {
+    var media = MediaQuery.of(context).size;
+
     String pokeHeight = widget.pokeHeight;
     String pokeWeight = widget.pokeWeight;
     String description = widget.description;
@@ -86,7 +86,7 @@ class _TabGeneralState extends State<TabGeneral>
     List hiddenAbilities = widget.hiddenAbilities;
 
     return Container(
-      margin: EdgeInsets.only(top: 14),
+      margin: EdgeInsets.only(top: media.height * 0.014),
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

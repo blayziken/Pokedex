@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BaseStats extends StatelessWidget {
@@ -19,17 +20,23 @@ class BaseStats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var media = MediaQuery.of(context).size;
+
     int total = hp + attack + defense + spAtk + spDef + speed;
 
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.only(
-            left: 30.0, top: 15.0, bottom: 30.0, right: 30.0),
+        padding: EdgeInsets.only(
+          left: media.height * 0.030,
+          top: media.height * 0.04,
+          bottom: media.height * 0.030,
+          right: media.height * 0.030,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              height: 270,
+              height: media.height * 0.270, // 270,
               width: double.infinity,
 //              color: Colors.redAccent,
               child: Row(
@@ -38,75 +45,72 @@ class BaseStats extends StatelessWidget {
                 children: <Widget>[
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
                         'hp',
-                        style: TextStyle(fontSize: 16.0, color: Colors.black54),
+                        style: TextStyle(fontSize: media.height * 0.025, color: Colors.black54),
                       ),
                       Text(
                         'attack',
-                        style: TextStyle(fontSize: 16.0, color: Colors.black54),
+                        style: TextStyle(fontSize: media.height * 0.025, color: Colors.black54),
                       ),
                       Text(
                         'defense',
-                        style: TextStyle(fontSize: 16.0, color: Colors.black54),
+                        style: TextStyle(fontSize: media.height * 0.025, color: Colors.black54),
                       ),
                       Text(
                         'spAtk',
-                        style: TextStyle(fontSize: 16.0, color: Colors.black54),
+                        style: TextStyle(fontSize: media.height * 0.025, color: Colors.black54),
                       ),
                       Text(
                         'spDef',
-                        style: TextStyle(fontSize: 16.0, color: Colors.black54),
+                        style: TextStyle(fontSize: media.height * 0.025, color: Colors.black54),
                       ),
                       Text(
                         'speed',
-                        style: TextStyle(fontSize: 16.0, color: Colors.black54),
+                        style: TextStyle(fontSize: media.height * 0.025, color: Colors.black54),
                       ),
                       Text(
                         'Total',
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: media.height * 0.025, color: Colors.black, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
-                  SizedBox(width: 30),
+                  SizedBox(width: media.height * 0.050),
                   Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       BaseStatsRow(
                         value: '$hp',
-                        valueBar: hp * 1.0,
+                        valueBar: hp * 2.0,
                       ),
                       BaseStatsRow(
                         value: '$attack',
-                        valueBar: attack * 1.0,
+                        valueBar: attack * 2.0,
                       ),
                       BaseStatsRow(
                         value: '$defense',
-                        valueBar: defense * 1.0,
+                        valueBar: defense * 2.0,
                       ),
                       BaseStatsRow(
                         value: '$spAtk',
-                        valueBar: spAtk * 1.0,
+                        valueBar: spAtk * 2.0,
                       ),
                       BaseStatsRow(
                         value: '$spDef',
-                        valueBar: spDef * 1.0,
+                        valueBar: spDef * 2.0,
                       ),
                       BaseStatsRow(
                         value: '$speed',
-                        valueBar: speed * 1.0,
+                        valueBar: speed * 2.0,
                       ),
 //                      BaseStatsRow(value: '$total', st),
                       Text(
                         '$total',
                         style: TextStyle(
-                          fontSize: 18.0,
+                          fontSize: media.height * 0.025,
                           fontWeight: FontWeight.bold,
                           color: Colors.red,
                         ),
@@ -116,7 +120,7 @@ class BaseStats extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 15),
+            SizedBox(height: media.height * 0.05),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -124,21 +128,21 @@ class BaseStats extends StatelessWidget {
                   'Type defenses',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    fontSize: media.height * 0.030,
                   ),
                 ),
-                SizedBox(height: 15),
+                SizedBox(height: media.height * 0.015),
                 Text(
-                  'Will be added later.',
+                  'Coming....',
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: media.height * 0.020, // 15,
                   ),
                 ),
-                SizedBox(height: 15),
+                SizedBox(height: media.height * 0.010),
                 Text(
-                  ' blah blah blah blah',
+                  'blah blah blah blah',
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: media.height * 0.020, // 15,
                   ),
                 ),
               ],
@@ -157,19 +161,21 @@ class BaseStatsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var media = MediaQuery.of(context).size;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Container(
-          width: 40,
+          width: media.height * 0.040,
 //          color: Colors.teal,
           child: Text(
             value,
-            style: TextStyle(fontSize: 16.0),
+            style: TextStyle(fontSize: media.height * 0.022),
           ),
         ),
-        SizedBox(width: 5),
-        Container(width: valueBar, color: Colors.red, height: 5),
+        SizedBox(width: media.height * 0.010),
+        Container(width: valueBar, color: Colors.red, height: media.height * 0.005),
       ],
     );
   }

@@ -4,7 +4,7 @@ import 'package:poke_search/Screens/detail.dart';
 import 'dart:convert';
 import 'package:poke_search/models/pokemon.dart';
 import 'package:poke_search/tests/containerGrid.dart';
-import 'file:///C:/Users/Administrator/AndroidStudioProjects/poke_search/lib/Screens/widgets/customMenu.dart';
+import 'package:poke_search/Screens/widgets/customMenu.dart';
 import 'GeneratorClasses/generationClass.dart';
 
 class GenerationVIScreen extends StatefulWidget {
@@ -19,8 +19,7 @@ class _GenerationVIScreenState extends State<GenerationVIScreen> {
 
   void fetchGenerationVI() async {
     for (var num = 649; num <= 714; num++) {
-      String data = await DefaultAssetBundle.of(context)
-          .loadString('assets/allPokemons.json');
+      String data = await DefaultAssetBundle.of(context).loadString('assets/allPokemons.json');
       final jsonResult = json.decode(data);
 
       ifStatements(jsonResult, num);
@@ -79,15 +78,8 @@ class _GenerationVIScreenState extends State<GenerationVIScreen> {
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: GridView.builder(
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  mainAxisSpacing: 20,
-                                  crossAxisSpacing: 10,
-                                  childAspectRatio:
-                                      MediaQuery.of(context).size.width /
-                                          MediaQuery.of(context).size.height /
-                                          0.4),
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 10, childAspectRatio: MediaQuery.of(context).size.width / MediaQuery.of(context).size.height / 0.4),
                           itemCount: runPokemonList.length,
                           itemBuilder: (ctx, i) => GridItem(
                             name: runPokemonList[i].name,
@@ -116,8 +108,7 @@ class GridItem extends StatelessWidget {
   final String type2;
   final String id;
 
-  GridItem(
-      {this.name, this.image, this.color, this.type1, this.type2, this.id});
+  GridItem({this.name, this.image, this.color, this.type1, this.type2, this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -160,8 +151,7 @@ class GridItem extends StatelessWidget {
 //        width: 5260,
           decoration: BoxDecoration(
             image: DecorationImage(
-              colorFilter: new ColorFilter.mode(
-                  Colors.grey.withOpacity(0.08), BlendMode.dstATop),
+              colorFilter: new ColorFilter.mode(Colors.grey.withOpacity(0.08), BlendMode.dstATop),
               fit: BoxFit.scaleDown,
               image: AssetImage('images/pokeball.png'),
               alignment: Alignment.bottomRight,
@@ -199,26 +189,24 @@ class GridItem extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text(
-                                name, //Charmeleon
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                id,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 25,
-                                  color: Colors.white38,
-                                ),
-                              )
-                            ]),
+                        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+                          Text(
+                            name, //Charmeleon
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            id,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25,
+                              color: Colors.white38,
+                            ),
+                          )
+                        ]),
                         SizedBox(height: 12),
                         _pokemonTypesPlacement(),
                       ],

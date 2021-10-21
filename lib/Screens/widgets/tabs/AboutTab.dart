@@ -37,7 +37,8 @@ class About extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //
+    var media = MediaQuery.of(context).size;
+
     Widget _normalAbilities() {
       if (normalAbilities.length == 1) {
         normal1 = normalAbilities[0];
@@ -60,7 +61,7 @@ class About extends StatelessWidget {
               ability: normal1,
               gradientType: Gradients.blush,
             ),
-            SizedBox(width: 10),
+            SizedBox(width: media.height * 0.010),
             abilitiesWidget(
               ability: normal2,
               gradientType: Gradients.cosmicFusion,
@@ -79,12 +80,12 @@ class About extends StatelessWidget {
               ability: normal1,
               gradientType: Gradients.blush,
             ),
-            SizedBox(width: 10),
+            SizedBox(width: media.height * 0.010),
             abilitiesWidget(
               ability: normal2,
               gradientType: Gradients.hersheys,
             ),
-            SizedBox(width: 10),
+            SizedBox(width: media.height * 0.010),
             abilitiesWidget(
               ability: normal3,
               gradientType: Gradients.tameer,
@@ -116,7 +117,7 @@ class About extends StatelessWidget {
               ability: hidden1,
               gradientType: Gradients.tameer,
             ),
-            SizedBox(width: 10),
+            SizedBox(width: media.height * 0.010),
             abilitiesWidget(
               ability: hidden2,
               gradientType: Gradients.cosmicFusion,
@@ -135,12 +136,12 @@ class About extends StatelessWidget {
               ability: hidden1,
               gradientType: Gradients.hersheys,
             ),
-            SizedBox(width: 10),
+            SizedBox(width: media.height * 0.010),
             abilitiesWidget(
               ability: hidden2,
               gradientType: Gradients.blush,
             ),
-            SizedBox(width: 10),
+            SizedBox(width: media.height * 0.010),
             abilitiesWidget(
               ability: hidden3,
               gradientType: Gradients.tameer,
@@ -152,7 +153,7 @@ class About extends StatelessWidget {
 
     return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.only(left: 30.0, top: 20.0, right: 20.0),
+        padding: EdgeInsets.only(left: media.height * 0.030, top: media.height * 0.020, right: media.height * 0.020),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -161,30 +162,31 @@ class About extends StatelessWidget {
               child: Text(
                 description,
                 style: TextStyle(
-                  fontSize: 17,
+                  fontSize: media.height * 0.02, // 17,
                 ),
               ),
             ),
-            SizedBox(height: 15),
+            SizedBox(height: media.height * 0.015),
             Expanded(
               flex: 0,
               child: Center(
                 child: Container(
-                  height: 80,
-                  width: 300,
+                  height: media.height * 0.080,
+                  width: media.height * 0.300,
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3),
-                        )
-                      ]),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(media.height * 0.020),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: media.height * 0.005,
+                        blurRadius: media.height * 0.007,
+                        offset: Offset(0, 3),
+                      )
+                    ],
+                  ),
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 40.0, top: 15.0),
+                    padding: EdgeInsets.only(left: media.height * 0.040, top: media.height * 0.015),
                     child: Row(
                       children: <Widget>[
                         Column(
@@ -195,22 +197,22 @@ class About extends StatelessWidget {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 1,
-                                fontSize: 16.0,
+                                fontSize: media.height * 0.02,
                                 color: Colors.black,
                               ),
                             ),
-                            SizedBox(height: 7),
+                            SizedBox(height: media.height * 0.007),
                             Text(
 //                              '2\' 04"',
                               pokeHeight,
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: media.height * 0.02,
                                 color: Colors.black,
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(width: 80.0),
+                        SizedBox(width: media.height * 0.080),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
@@ -219,16 +221,16 @@ class About extends StatelessWidget {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 1,
-                                fontSize: 16.0,
+                                fontSize: media.height * 0.02,
                                 color: Colors.black,
                               ),
                             ),
-                            SizedBox(height: 7),
+                            SizedBox(height: media.height * 0.007),
                             Text(
 //                              '15.2 lbs',
                               pokeWeight,
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: media.height * 0.02,
                                 color: Colors.black,
                               ),
                             ),
@@ -240,127 +242,206 @@ class About extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 15),
+            SizedBox(height: media.height * 0.015),
             Text(
               'Breeding',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 20.0,
+                fontSize: media.height * 0.030,
               ),
             ),
-            SizedBox(height: 15),
-            Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
+            SizedBox(height: media.height * 0.015),
+            Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Text(
                       'Gender',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: media.height * 0.02,
                         color: Colors.black54,
                       ),
                     ),
-                    SizedBox(width: 36),
+                    SizedBox(height: media.height * 0.020),
+                    Text(
+                      'Generation',
+                      style: TextStyle(
+                        fontSize: media.height * 0.02,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    SizedBox(height: media.height * 0.020),
+                    Text(
+                      'Starter',
+                      style: TextStyle(
+                        fontSize: media.height * 0.02,
+                        color: Colors.black54,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(width: media.height * 0.03),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Row(
                       children: [
                         Text(
                           '$genderMale ',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: media.height * 0.02,
                           ),
                         ),
                         Icon(
                           MdiIcons.genderMale,
                           color: Colors.black,
-                          size: 16,
+                          size: media.height * 0.018,
                         ),
-                        SizedBox(width: 15),
+                        SizedBox(width: media.height * 0.015),
                         Text(
                           '$genderFemale ',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: media.height * 0.02,
                           ),
                         ),
                         Icon(
                           MdiIcons.genderFemale,
                           color: Colors.black,
-                          size: 16,
+                          size: media.height * 0.02,
                         ),
                       ],
                     ),
-                  ],
-                ),
-                SizedBox(height: 15),
-                Row(
-                  children: <Widget>[
-                    Text(
-                      'Generation',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black54,
-                      ),
-                    ),
-                    SizedBox(width: 10),
+                    SizedBox(height: media.height * 0.020),
                     Text(
                       '$gen',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: media.height * 0.02,
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(height: 15),
-                Row(
-                  children: <Widget>[
-                    Text(
-                      'Starter',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black54,
-                      ),
-                    ),
-                    SizedBox(width: 40),
+                    SizedBox(height: media.height * 0.020),
                     Text(
                       '$starter',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: media.height * 0.02,
                       ),
                     ),
                   ],
                 ),
               ],
             ),
-            SizedBox(height: 22),
+            // Column(
+            //   children: <Widget>[
+            //     Row(
+            //       children: <Widget>[
+            //         Text(
+            //           'Gender',
+            //           style: TextStyle(
+            //             fontSize: media.height * 0.02,
+            //             color: Colors.black54,
+            //           ),
+            //         ),
+            //         SizedBox(width: media.height * 0.05),
+            //         Row(
+            //           children: [
+            //             Text(
+            //               '$genderMale ',
+            //               style: TextStyle(
+            //                 fontSize: media.height * 0.02,
+            //               ),
+            //             ),
+            //             Icon(
+            //               MdiIcons.genderMale,
+            //               color: Colors.black,
+            //               size: media.height * 0.016,
+            //             ),
+            //             SizedBox(width: media.height * 0.015),
+            //             Text(
+            //               '$genderFemale ',
+            //               style: TextStyle(
+            //                 fontSize: media.height * 0.02,
+            //               ),
+            //             ),
+            //             Icon(
+            //               MdiIcons.genderFemale,
+            //               color: Colors.black,
+            //               size: media.height * 0.02,
+            //             ),
+            //           ],
+            //         ),
+            //       ],
+            //     ),
+            //     SizedBox(height: media.height * 0.015),
+            //     Row(
+            //       children: <Widget>[
+            //         Text(
+            //           'Generation',
+            //           style: TextStyle(
+            //             fontSize: media.height * 0.02,
+            //             color: Colors.black54,
+            //           ),
+            //         ),
+            //         SizedBox(width: media.height * 0.010),
+            //         Text(
+            //           '$gen',
+            //           style: TextStyle(
+            //             fontSize: media.height * 0.02,
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //     SizedBox(height: media.height * 0.015),
+            //     Row(
+            //       children: <Widget>[
+            //         Text(
+            //           'Starter',
+            //           style: TextStyle(
+            //             fontSize: media.height * 0.02,
+            //             color: Colors.black54,
+            //           ),
+            //         ),
+            //         SizedBox(width: media.height * 0.040),
+            //         Text(
+            //           '$starter',
+            //           style: TextStyle(
+            //             fontSize: media.height * 0.02,
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ],
+            // ),
+            SizedBox(height: media.height * 0.022),
             Text(
               'Abilities',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 20.0,
+                fontSize: media.height * 0.03,
               ),
             ),
-            SizedBox(height: 12),
+            SizedBox(height: media.height * 0.012),
             Text(
               'Normal',
               style: TextStyle(
-                fontSize: 15.0,
+                fontSize: media.height * 0.02,
                 fontStyle: FontStyle.italic,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 2),
+            SizedBox(height: media.height * 0.002),
             Column(
               children: [_normalAbilities()],
             ),
-            SizedBox(height: 10),
+            SizedBox(height: media.height * 0.020),
             Text(
               'Hidden',
               style: TextStyle(
-                fontSize: 15.0,
+                fontSize: media.height * 0.02,
                 fontStyle: FontStyle.italic,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 2),
+            SizedBox(height: media.height * 0.002),
             Column(
               children: [_hiddenAbilities()],
             ),
@@ -379,24 +460,26 @@ class abilitiesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var media = MediaQuery.of(context).size;
+
     return GradientCard(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(60),
+          Radius.circular(media.height * 0.060),
         ),
       ),
       gradient: gradientType,
       shadowColor: Gradients.cosmicFusion.colors.last.withOpacity(0.25),
-      elevation: 8,
+      elevation: media.height * 0.008,
       child: Container(
-        height: 30,
-        width: 110,
+        height: media.height * 0.030, // 30,
+        width: media.height * 0.110, // 110,
         child: Center(
           child: Text(
             ability,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 15.0,
+              fontSize: media.height * 0.015, // 15.0,
               fontWeight: FontWeight.bold,
             ),
           ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:poke_search/Screens/widgets/TabGeneral.dart';
+import 'package:poke_search/provider/api_provider.dart';
 import 'package:poke_search/services/NetworkAPI.dart';
-import 'file:///C:/Users/Administrator/AndroidStudioProjects/poke_search/lib/Screens/widgets/TabGeneral.dart';
 import '../Screens/search.dart';
 import '../services/string_extension.dart';
+import 'error_page.dart';
 
 class DetailScreen extends StatefulWidget {
   DetailScreen({this.pokemonName});
@@ -12,8 +14,7 @@ class DetailScreen extends StatefulWidget {
   _DetailScreenState createState() => _DetailScreenState();
 }
 
-class _DetailScreenState extends State<DetailScreen>
-    with SingleTickerProviderStateMixin {
+class _DetailScreenState extends State<DetailScreen> with SingleTickerProviderStateMixin {
   AnimationController animationController;
   bool showSpinner = true;
 
@@ -63,56 +64,65 @@ class _DetailScreenState extends State<DetailScreen>
     animationController.repeat();
   }
 
-  dynamic getDataFromAPI1() async {
-    String pokemonName = widget.pokemonName.toLowerCase();
-
-    NetworkAPI networkAPI =
-        NetworkAPI('https://pokeapi.co/api/v2/pokemon/$pokemonName');
-
-    var pokemonData = await networkAPI.getData();
-
-    //TODO: OR INSIDE AN IF STATEMENT
-    if (pokemonData != null) {
-      return pokemonData;
-    } else {
-      print('a');
-      return showDialog(
-          context: context,
-          builder: (ctx) => AlertDialog(
-                title: Text('Not Found!'),
-                content: Text('No such pokemon 🙃'),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text('Try again'),
-                    onPressed: () {
-//                      Navigator.of(context).pop;
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Search(),
-                          ));
-                    },
-                  )
-                ],
-              ));
-    }
-  }
-
-  dynamic getDataFromAPI2() async {
-    String pokemonName = widget.pokemonName.toLowerCase();
-
-    NetworkPokeDevAPI networkPokeDevAPI =
-        NetworkPokeDevAPI('https://pokeapi.glitch.me/v1/pokemon/$pokemonName');
-    var pokemonImage = await networkPokeDevAPI.getData2();
-    return pokemonImage;
-  }
+//   dynamic getDataFromAPI1() async {
+//     String pokemonName = widget.pokemonName.toLowerCase();
+//
+//     NetworkAPI networkAPI = NetworkAPI('https://pokeapi.co/api/v2/pokemon/$pokemonName');
+//
+//     var pokemonData = await networkAPI.getData();
+//
+//     //TODO: OR INSIDE AN IF STATEMENT
+//     if (pokemonData != null) {
+//       return pokemonData;
+//     } else {
+//       print('aaaaaaaaaaaaaaaaaaaa');
+// //       return showDialog(
+// //         context: context,
+// //         builder: (ctx) => AlertDialog(
+// //           title: Text('Not Found!'),
+// //           content: Text('No such pokemon 🙃'),
+// //           actions: <Widget>[
+// //             FlatButton(
+// //               child: Text('Try again'),
+// //               onPressed: () {
+// // //                      Navigator.of(context).pop;
+// //                 Navigator.push(
+// //                     context,
+// //                     MaterialPageRoute(
+// //                       builder: (context) => Search(),
+// //                     ));
+// //               },
+// //             )
+// //           ],
+// //         ),
+// //       );
+//       Navigator.push(
+//         context,
+//         MaterialPageRoute(
+//           builder: (context) => ErrorPage(),
+//         ),
+//       );
+//       return null;
+//     }
+//   }
+//
+// ////////////////////////////////
+//   dynamic getDataFromAPI2() async {
+//     String pokemonName = widget.pokemonName.toLowerCase();
+//
+//     NetworkPokeDevAPI networkPokeDevAPI = NetworkPokeDevAPI('https://pokeapi.glitch.me/v1/pokemon/$pokemonName');
+//     var pokemonImage = await networkPokeDevAPI.getData2();
+//     return pokemonImage;
+//   }
 
   //////////////////////////////////////////////////////////////////////////////////// from VOID to DYNAMIC
   dynamic updateUI() async {
     print('Entered here');
 
-    var pokeData = await getDataFromAPI1();
-    var pokeData2 = await getDataFromAPI2();
+    // var pokeData = await getDataFromAPI1();
+    var pokeData = await getDataFromAPI1(widget.pokemonName, context);
+    var pokeData2 = await getDataFromAPI2(widget.pokemonName);
+    // var pokeData2 = await getDataFromAPI2();
 
     //FIRST API
     pokeName = pokeData['name'];
@@ -150,11 +160,10 @@ class _DetailScreenState extends State<DetailScreen>
     types = pokeData2[0]['types']; ////////////// I REMOVED AWAIT
 
     evolutionLine = pokeData2[0]['family']['evolutionLine'];
-    //
+
     normalAbilities = pokeData2[0]['abilities']['normal'];
     print(normalAbilities);
 
-    print('-----');
     hiddenAbilities = pokeData2[0]['abilities']['hidden'];
     print(hiddenAbilities);
 
@@ -178,7 +187,7 @@ class _DetailScreenState extends State<DetailScreen>
         return Row(
           children: <Widget>[
             PokeType(type: pokeType1),
-            SizedBox(width: 10),
+            SizedBox(width: media.height * 0.010),
             PokeType(type: pokeType2),
           ],
         );
@@ -208,21 +217,22 @@ class _DetailScreenState extends State<DetailScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(left: 20.0, top: 10.0),
+                      padding: EdgeInsets.only(left: media.height * 0.02, top: media.height * 0.01),
                       child: IconButton(
-                          icon: Icon(
-                            Icons.arrow_back,
-                            color: Colors.white,
-                            size: 25.0,
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                            animationController.dispose();
-                          }),
+                        padding: EdgeInsets.all(0),
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                          size: media.height * 0.025, // 25.0,
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                          animationController.dispose();
+                        },
+                      ),
                     ),
-//              SizedBox(height: 50.0),
                     Padding(
-                      padding: const EdgeInsets.only(left: 30.0, right: 25),
+                      padding: EdgeInsets.only(left: media.height * 0.030, top: media.height * 0.025, right: media.height * 0.020),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -233,7 +243,7 @@ class _DetailScreenState extends State<DetailScreen>
                                 pokeNameCapitalized,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w900,
-                                  fontSize: 45.0,
+                                  fontSize: media.height * 0.045, // 45.0,
                                   color: Colors.white,
                                 ),
                               ),
@@ -242,15 +252,15 @@ class _DetailScreenState extends State<DetailScreen>
                                 style: TextStyle(
                                   fontWeight: FontWeight.w900,
                                   color: Colors.white,
-                                  fontSize: 20.0,
+                                  fontSize: media.height * 0.030, // 20.0,
                                 ),
                               )
                             ],
                           ),
-                          SizedBox(height: 5),
+                          SizedBox(height: media.height * 0.005),
                           _pokemonTypes(),
 //
-                          SizedBox(height: 5),
+                          SizedBox(height: media.height * 0.005),
                           Center(
                             child: Stack(
                               children: <Widget>[
@@ -260,15 +270,13 @@ class _DetailScreenState extends State<DetailScreen>
                                       animation: animationController,
                                       builder: (BuildContext context, Widget) {
                                         return Transform.rotate(
-                                          angle:
-                                              animationController.value * 6.3,
+                                          angle: animationController.value * 6.3,
                                           child: Container(
-                                            height: 180,
-                                            width: 180,
+                                            height: media.height * 0.2, // 200,
+                                            width: media.height * 0.2, // 200,
                                             decoration: BoxDecoration(
                                               image: DecorationImage(
-                                                image: AssetImage(
-                                                    'images/pokeball32.png'),
+                                                image: AssetImage('images/pokeball32.png'),
                                                 fit: BoxFit.fill,
                                               ),
                                             ),
@@ -291,19 +299,19 @@ class _DetailScreenState extends State<DetailScreen>
                                 ),
                                 Center(
                                   child: Container(
-//                                    color: Colors.brown,
-                                    height: 200,
-                                    width: 200,
+                                    // color: Colors.brown,
+                                    height: media.height * 0.2, // 200,
+                                    width: media.height * 0.2, // 200,
+
                                     child: Image.network(
                                       pokePicture,
-//                                  height: 260,
+                                      // height: 260,
                                       fit: BoxFit.fill,
                                     ),
                                   ),
                                 ),
                               ],
                             ),
-//
                           ),
                         ],
                       ),
@@ -315,8 +323,8 @@ class _DetailScreenState extends State<DetailScreen>
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(35.0),
-                            topRight: Radius.circular(35.0),
+                            topLeft: Radius.circular(media.height * 0.035),
+                            topRight: Radius.circular(media.height * 0.035),
                           ),
                         ),
                         child: TabGeneral(
@@ -360,14 +368,16 @@ class PokeType extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var media = MediaQuery.of(context).size;
+
     return Container(
-      height: 30,
-      width: 100,
+      height: media.height * 0.030,
+      width: media.height * 0.1, // 100,
 //                      color: Colors.white,
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.2),
         borderRadius: BorderRadius.all(
-          Radius.circular(50.0),
+          Radius.circular(media.height * 0.025),
         ),
       ),
       child: Center(
@@ -375,8 +385,9 @@ class PokeType extends StatelessWidget {
           type,
           style: TextStyle(
             color: Colors.white,
-            fontSize: 18.0,
+            fontSize: media.height * 0.020, // 18.0,
             fontWeight: FontWeight.w900,
+            letterSpacing: 0.5,
           ),
         ),
       ),

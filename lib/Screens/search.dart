@@ -18,7 +18,7 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
     super.initState();
     animationController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 1),
+      duration: Duration(seconds: 7),
     );
 
     animationController.repeat();
@@ -32,7 +32,7 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: EdgeInsets.all(media.height * 0.020),
             child: Container(
               height: media.height,
               width: double.infinity,
@@ -50,11 +50,11 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                     child: Container(
                       width: double.infinity,
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 100.0),
+                        padding: EdgeInsets.only(top: media.height * 0.110),
                         child: Text(
                           'What Pokemon\nare you looking for?',
                           style: TextStyle(
-                            fontSize: 35.0,
+                            fontSize: media.height * 0.045, // 35.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -68,95 +68,96 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                         children: <Widget>[
                           Container(
                             width: media.width * 0.6,
+                            height: media.height * 0.060, // 50,
                             decoration: BoxDecoration(
                               color: Colors.grey.withOpacity(0.4),
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            child: TextField(
-                              style: TextStyle(
-                                fontSize: 20.0,
-                              ),
-                              onChanged: (value) {
-                                searchName = value;
-                              },
-                              decoration: InputDecoration(
-                                enabledBorder: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                                hintText: 'Search Pokemon',
-                                prefixIcon: Icon(Icons.search),
-                                contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 16.0,
+                            child: Center(
+                              child: TextField(
+                                style: TextStyle(
+                                  fontSize: media.height * 0.02, // 20.0,
+                                ),
+                                onChanged: (value) {
+                                  searchName = value;
+                                },
+                                decoration: InputDecoration(
+                                  enabledBorder: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  hintText: 'Search Pokemon',
+                                  prefixIcon: Icon(Icons.search),
+                                  contentPadding: EdgeInsets.symmetric(
+                                    horizontal: media.height * 0.020, // 20,
+                                    vertical: media.height * 0.016, // 16.0,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                          SizedBox(height: 20.0),
-                          Container(
-                            width: media.width * 0.36,
-                            height: 52.0,
-                            child: RaisedButton(
-                              shape: RoundedRectangleBorder(
+                          SizedBox(height: media.height * 0.06),
+                          InkWell(
+                            child: Container(
+                              width: media.width * 0.35,
+                              height: media.height * 0.060, // 52.0,
+                              decoration: BoxDecoration(
+                                color: Colors.black, // lightGreen[700],
                                 borderRadius: BorderRadius.circular(30),
                               ),
-                              color: Colors.lightGreen[700],
-                              splashColor: Colors.black,
-                              onPressed: () {
-                                if (searchName == null) {
-                                  return showDialog(
-                                      context: context,
-                                      builder: (ctx) => AlertDialog(
-                                            title: Text(
-                                              '🙃',
-                                              style: TextStyle(
-                                                fontSize: 25,
-                                              ),
-                                            ),
-                                            content: Text(
-                                              'No input received!',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            actions: <Widget>[
-                                              InkWell(
-                                                child: Text(
-                                                  'Try again',
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontStyle: FontStyle.italic,
-                                                    color: Colors.blue,
-                                                    fontSize: 15,
-                                                  ),
-                                                ),
-                                                onTap: () {
-                                                  Navigator.pop(context);
-                                                },
-                                              )
-                                            ],
-                                          ));
-                                } else {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => DetailScreen(
-                                        pokemonName: searchName,
-                                      ),
-                                    ),
-                                  );
-                                }
-                              },
+
                               child: Center(
                                 child: Text(
-                                  ' GO🚀',
+                                  ' GO 🚀',
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 30.0,
+                                    fontSize: media.height * 0.030, // 30.0,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ),
                             ),
+                            onTap: () {
+                              if (searchName == null) {
+                                return showDialog(
+                                    context: context,
+                                    builder: (ctx) => AlertDialog(
+                                          title: Text(
+                                            '🙃',
+                                            style: TextStyle(
+                                              fontSize: media.height * 0.025, // 25,
+                                            ),
+                                          ),
+                                          content: Text(
+                                            'Enter an input',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          actions: <Widget>[
+                                            InkWell(
+                                              child: Text(
+                                                'Ok',
+                                                style: TextStyle(
+                                                  color: Colors.green,
+                                                  fontSize: media.height * 0.020,
+                                                ),
+                                              ),
+                                              onTap: () {
+                                                Navigator.pop(context);
+                                              },
+                                            )
+                                          ],
+                                        ));
+                              } else {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailScreen(
+                                      pokemonName: searchName,
+                                    ),
+                                  ),
+                                );
+                              }
+                            },
                           ),
                         ],
                       ),
@@ -172,8 +173,8 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                               return Transform.rotate(
                                 angle: animationController.value * 6.3,
                                 child: Container(
-                                  height: 50,
-                                  width: 50,
+                                  height: media.height * 0.050, // 50,
+                                  width: media.height * 0.050, // 50,
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
                                     image: AssetImage('images/unnamed.png'),
@@ -182,11 +183,10 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                                 ),
                               );
                             },
-//                            child:
                           ),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: media.height * 0.010, // 10,
                         ),
                         InkWell(
                           onTap: () {
@@ -197,7 +197,7 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                               'Check out the full pokedex❗',
                               style: TextStyle(
                                 color: Colors.blue[900],
-                                fontSize: 15,
+                                fontSize: media.height * 0.015, // 15,
                                 fontStyle: FontStyle.italic,
                                 fontWeight: FontWeight.w800,
                               ),

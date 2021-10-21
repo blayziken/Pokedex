@@ -8,9 +8,10 @@ class DetailTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tab(
-        child: Text(
-      title,
-      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-    ));
+      child: Text(
+        title,
+        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+      ),
+    );
   }
 }

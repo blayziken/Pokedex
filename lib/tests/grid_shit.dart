@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:poke_search/Screens/widgets/customMenu.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 
 class TestTestTest extends StatefulWidget {
@@ -22,7 +22,7 @@ class _TestTestTestState extends State<TestTestTest> {
             Container(
               height: 60,
               width: 60,
-              child: SvgPicture.asset("images/looks_3-24px.svg"),
+              // child: SvgPicture.asset("images/looks_3-24px.svg"),
             ),
             Center(
               child: Container(

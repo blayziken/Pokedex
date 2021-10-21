@@ -16,7 +16,7 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 2), () {
+    Timer(Duration(seconds: 4), () {
       Navigator.pushNamed(context, '/search');
     });
   }
@@ -35,19 +35,19 @@ class _SplashState extends State<Splash> {
             fit: BoxFit.fill,
           ),
         ),
-        child: Column(
-//          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: CircularProgressIndicator(
-                backgroundColor: Colors.green,
-              ),
-            ),
-            SizedBox(height: 30),
-          ],
-        ),
+//         child: Column(
+// //          crossAxisAlignment: CrossAxisAlignment.end,
+//           mainAxisAlignment: MainAxisAlignment.end,
+//           children: [
+//             Align(
+//               alignment: Alignment.bottomCenter,
+//               child: CircularProgressIndicator(
+//                 backgroundColor: Colors.green,
+//               ),
+//             ),
+//             SizedBox(height: 30),
+//           ],
+//         ),
       ),
     );
   }
