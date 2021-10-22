@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:poke_search/services/NetworkAPI.dart';
 
 class Evolution extends StatefulWidget {
@@ -11,7 +12,9 @@ class Evolution extends StatefulWidget {
   _EvolutionState createState() => _EvolutionState();
 }
 
-class _EvolutionState extends State<Evolution> {
+class _EvolutionState extends State<Evolution> with SingleTickerProviderStateMixin {
+  AnimationController animationController;
+
   bool showSpinner = true;
 
   String pokemonOneImage;
@@ -29,15 +32,19 @@ class _EvolutionState extends State<Evolution> {
     super.initState();
 
     getImageURL();
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 7),
+    );
+
+    animationController.repeat();
   }
 
   dynamic getSprite(name) async {
-    NetworkPokeDevAPI networkPokeDevAPI =
-        NetworkPokeDevAPI('https://pokeapi.glitch.me/v1/pokemon/$name');
+    NetworkPokeDevAPI networkPokeDevAPI = NetworkPokeDevAPI('https://pokeapi.glitch.me/v1/pokemon/$name');
 
     var pokemonImage = await networkPokeDevAPI.getData2();
-//    return pokemonImage;
-//
+
     var networkImage = pokemonImage[0]['sprite'];
     return networkImage;
   }
@@ -83,39 +90,40 @@ class _EvolutionState extends State<Evolution> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(height: 25.0),
+            SizedBox(height: media.height * 0.025),
             Expanded(
+              flex: 0,
               child: Center(
                 child: Container(
 //                  height: media.height * 0.7,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 20.0, right: 50.0),
+                    padding: EdgeInsets.only(left: media.height * 0.020, right: media.height * 0.050),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        SizedBox(height: 10),
+                        SizedBox(height: media.height * 0.010),
                         Text(
                           'It\'s just ',
                           style: TextStyle(
                             fontStyle: FontStyle.italic,
-                            fontSize: 20.0,
+                            fontSize: media.height * 0.030,
                           ),
                         ),
-                        SizedBox(height: 10),
+                        SizedBox(height: media.height * 0.010),
                         Container(
-                          height: 150,
-                          width: 150,
+                          height: media.height * 0.30,
+                          width: media.height * 0.30,
                           child: Image.network(
                             pokemonOneImage,
-                            fit: BoxFit.fill,
+                            fit: BoxFit.cover,
                           ),
                         ),
-                        SizedBox(height: 10),
+                        SizedBox(height: media.height * 0.010),
                         Text(
                           '$pokemonOne',
                           style: TextStyle(
                             fontWeight: FontWeight.w900,
-                            fontSize: 50.0,
+                            fontSize: media.height * 0.050,
                             color: Colors.green[900],
                           ),
                         ),
@@ -132,16 +140,16 @@ class _EvolutionState extends State<Evolution> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
-                'Evolution Chain',
-                style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 22.0,
-                ),
-              ),
-              SizedBox(height: 10.0),
+              // Text(
+              //   'Evolution Chain',
+              //   style: TextStyle(
+              //     fontWeight: FontWeight.w900,
+              //     fontSize: media.height * 0.022,
+              //   ),
+              // ),
+              SizedBox(height: media.height * 0.010),
               Padding(
-                padding: const EdgeInsets.only(left: 10.0, right: 50.0),
+                padding: EdgeInsets.only(left: media.height * 0.010, right: media.height * 0.050),
                 child: EvolutionChainRow(
                   name1: pokemonOne,
                   imageURL1: pokemonOneImage,
@@ -157,32 +165,35 @@ class _EvolutionState extends State<Evolution> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
-                'Evolution Chain',
-                style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 22.0,
-                ),
-              ),
-              SizedBox(height: 10.0),
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0, right: 50.0),
-                child: Column(
-                  children: <Widget>[
-                    EvolutionChainRow(
-                      name1: pokemonOne,
-                      imageURL1: pokemonOneImage,
-                      name2: pokemonTwo,
-                      imageURL2: pokemonTwoImage,
-                    ),
-                    SizedBox(height: 30.0),
-                    EvolutionChainRow(
-                      name1: pokemonTwo,
-                      imageURL1: pokemonTwoImage,
-                      name2: pokemonThree,
-                      imageURL2: pokemonThreeImage,
-                    ),
-                  ],
+              // Text(
+              //   'Evolution Chain',
+              //   style: TextStyle(
+              //     fontWeight: FontWeight.w900,
+              //     fontSize: media.height * 0.022,
+              //   ),
+              // ),
+              // SizedBox(height: media.height * 0.010),
+              Expanded(
+                flex: 0,
+                child: Padding(
+                  padding: EdgeInsets.only(left: media.height * 0.010, right: media.height * 0.050, top: media.height * 0.010),
+                  child: Column(
+                    children: <Widget>[
+                      EvolutionChainRow(
+                        name1: pokemonOne,
+                        imageURL1: pokemonOneImage,
+                        name2: pokemonTwo,
+                        imageURL2: pokemonTwoImage,
+                      ),
+                      SizedBox(height: media.height * 0.030),
+                      EvolutionChainRow(
+                        name1: pokemonTwo,
+                        imageURL1: pokemonTwoImage,
+                        name2: pokemonThree,
+                        imageURL2: pokemonThreeImage,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -193,17 +204,32 @@ class _EvolutionState extends State<Evolution> {
 
     return showSpinner
         ? Center(
-            child: CircularProgressIndicator(
-              backgroundColor: Colors.green,
+            child: AnimatedBuilder(
+              animation: animationController,
+              builder: (BuildContext context, widget) {
+                return Transform.rotate(
+                  angle: animationController.value * 6.3,
+                  child: Container(
+                    height: media.height * 0.060, // 50,
+                    width: media.height * 0.060, // 50,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('images/unnamed.png'),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
           )
         : SingleChildScrollView(
             child: Container(
 //              color: Colors.grey[300],
-              height: media.height * 0.4,
+//               height: media.height * 0.4,
               width: double.infinity,
               child: Padding(
-                padding: const EdgeInsets.only(left: 40.0, top: 10.0),
+                padding: EdgeInsets.only(left: media.height * 0.040, top: media.height * 0.010),
                 child: _evolutionPokes(),
               ),
             ),
@@ -223,52 +249,56 @@ class EvolutionChainRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var media = MediaQuery.of(context).size;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Column(
           children: <Widget>[
             Container(
-              height: 90,
-              width: 90,
+              height: media.height * 0.15,
+              width: media.height * 0.15,
               child: Image.network(
                 imageURL1,
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: media.height * 0.020),
             Text(
               name1,
               style: TextStyle(
-                fontSize: 18.0,
+                fontSize: media.height * 0.018,
                 color: Colors.black87,
+                fontWeight: FontWeight.w800,
               ),
             ),
           ],
         ),
         Text(
-          '--->',
+          '>',
           style: TextStyle(
-            fontSize: 25.0,
+            fontSize: media.height * 0.025,
             fontWeight: FontWeight.bold,
           ),
         ),
         Column(
           children: <Widget>[
             Container(
-              height: 90,
-              width: 90,
+              height: media.height * 0.15,
+              width: media.height * 0.15,
               child: Image.network(
                 imageURL2,
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: media.height * 0.020),
             Text(
               name2,
               style: TextStyle(
-                fontSize: 18.0,
+                fontSize: media.height * 0.018,
                 color: Colors.black87,
+                fontWeight: FontWeight.w800,
               ),
             ),
           ],

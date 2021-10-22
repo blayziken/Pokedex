@@ -36,7 +36,7 @@ dynamic getDataFromAPI1(String pokemonName, BuildContext context) async {
 //       ),
 //     );
 
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => ErrorPage(),

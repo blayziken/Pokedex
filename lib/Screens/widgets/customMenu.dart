@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:poke_search/Screens/Generations/GenerationI.dart';
 import 'package:poke_search/tests/clipPointArrow.dart';
-// import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomDropDownMenu extends StatefulWidget {
   final List<Icon> icons;
@@ -58,6 +59,7 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> with SingleTick
       _overlayEntry.remove();
       _animationController.reverse();
       isMenuOpen = !isMenuOpen;
+      _animationController.dispose();
     });
   }
 
@@ -71,6 +73,8 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> with SingleTick
 
   @override
   Widget build(BuildContext context) {
+    var media = MediaQuery.of(context).size;
+
     // MAIN OPEN/CLOSE BUTTON
     return Container(
       key: _key,
@@ -105,8 +109,9 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> with SingleTick
           romanNavigation(
             assetImageString: 'images/looks_one-24px.svg',
             onTap: () {
-              Navigator.pushNamed(context, '/generation-1');
               closeMenu();
+              CircularProgressIndicator();
+              Navigator.pushNamed(context, '/generation-1');
             },
           ),
           romanNavigation(
@@ -151,41 +156,45 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> with SingleTick
     return OverlayEntry(
       builder: (context) {
         return Positioned(
-            top: buttonPosition.dy,
-            left: 40,
-            width: buttonSize.width * 7,
-            child: Material(
-                color: Colors.transparent,
-                child: Stack(
-                  children: <Widget>[
-                    Padding(
-                        padding: const EdgeInsets.only(top: 0.0),
-                        child: Row(
-                          children: [
-                            Container(
+          top: buttonPosition.dy,
+          // left: MediaQuery.of(context).size.height * 0.04, // 40,
+          right: MediaQuery.of(context).size.height * 0.07,
+          width: buttonSize.width * 7,
+          child: Material(
+            color: Colors.transparent,
+            child: Stack(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(top: 0.0),
+                  child: Row(
+                    children: [
+                      Container(
 //                    height: widget.icons.length * buttonSize.height,
-                              height: 50,
-                              decoration: BoxDecoration(
+                        height: MediaQuery.of(context).size.height * 0.050,
+                        decoration: BoxDecoration(
 //                              color: widget.backgroundColor,
 //                                  color: Colors.lightGreen[300],
-//                                color: Colors.black26,
-                                borderRadius: _borderRadius,
-                              ),
-                              child: Theme(
-                                data: ThemeData(
-                                  iconTheme: IconThemeData(
+//                             color: Colors.black26,
+                          borderRadius: _borderRadius,
+                        ),
+                        child: Theme(
+                          data: ThemeData(
+                            iconTheme: IconThemeData(
 //                                    color: widget.iconColor,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                child: _allRomanNavigation(),
-                              ),
+                              color: Colors.black,
                             ),
-                            ClipPointArrow(),
-                          ],
-                        )),
-                  ],
-                )));
+                          ),
+                          child: _allRomanNavigation(),
+                        ),
+                      ),
+                      ClipPointArrow(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
       },
     );
   }
@@ -200,13 +209,13 @@ class romanNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-        height: 60,
-        width: 50,
-//         child: SvgPicture.asset(
-//           assetImageString,
-//           color: Colors.lightGreen[700],
-// //                                              color: Colors.transparent,
-//         ),
+        height: MediaQuery.of(context).size.height * 0.060,
+        width: MediaQuery.of(context).size.height * 0.050,
+        child: SvgPicture.asset(
+          assetImageString,
+          color: Colors.lightGreen[700],
+//                                              color: Colors.transparent,
+        ),
       ),
       onTap: onTap,
     );
@@ -249,7 +258,7 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
   Widget build(BuildContext context) {
     return Container(
       child: Padding(
-        padding: EdgeInsets.only(top: 20, right: 20.0),
+        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.020, right: MediaQuery.of(context).size.height * 0.020),
         child: Align(
           alignment: Alignment.topRight,
           child: CustomDropDownMenu(),

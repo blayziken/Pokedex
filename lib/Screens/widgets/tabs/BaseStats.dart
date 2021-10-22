@@ -28,125 +28,131 @@ class BaseStats extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.only(
           left: media.height * 0.030,
-          top: media.height * 0.04,
+          top: media.height * 0.05,
           bottom: media.height * 0.030,
           right: media.height * 0.030,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Container(
-              height: media.height * 0.270, // 270,
-              width: double.infinity,
+            Expanded(
+              flex: 0,
+              child: Container(
+                height: media.height * 0.4, // 270,
+                // width: double.infinity,
 //              color: Colors.redAccent,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
 //                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        'hp',
-                        style: TextStyle(fontSize: media.height * 0.025, color: Colors.black54),
-                      ),
-                      Text(
-                        'attack',
-                        style: TextStyle(fontSize: media.height * 0.025, color: Colors.black54),
-                      ),
-                      Text(
-                        'defense',
-                        style: TextStyle(fontSize: media.height * 0.025, color: Colors.black54),
-                      ),
-                      Text(
-                        'spAtk',
-                        style: TextStyle(fontSize: media.height * 0.025, color: Colors.black54),
-                      ),
-                      Text(
-                        'spDef',
-                        style: TextStyle(fontSize: media.height * 0.025, color: Colors.black54),
-                      ),
-                      Text(
-                        'speed',
-                        style: TextStyle(fontSize: media.height * 0.025, color: Colors.black54),
-                      ),
-                      Text(
-                        'Total',
-                        style: TextStyle(fontSize: media.height * 0.025, color: Colors.black, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                  SizedBox(width: media.height * 0.050),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      BaseStatsRow(
-                        value: '$hp',
-                        valueBar: hp * 2.0,
-                      ),
-                      BaseStatsRow(
-                        value: '$attack',
-                        valueBar: attack * 2.0,
-                      ),
-                      BaseStatsRow(
-                        value: '$defense',
-                        valueBar: defense * 2.0,
-                      ),
-                      BaseStatsRow(
-                        value: '$spAtk',
-                        valueBar: spAtk * 2.0,
-                      ),
-                      BaseStatsRow(
-                        value: '$spDef',
-                        valueBar: spDef * 2.0,
-                      ),
-                      BaseStatsRow(
-                        value: '$speed',
-                        valueBar: speed * 2.0,
-                      ),
-//                      BaseStatsRow(value: '$total', st),
-                      Text(
-                        '$total',
-                        style: TextStyle(
-                          fontSize: media.height * 0.025,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.red,
+                  children: <Widget>[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          'hp',
+                          style: TextStyle(fontSize: media.height * 0.025, color: Colors.black54),
                         ),
-                      )
-                    ],
-                  ),
-                ],
+                        Text(
+                          'attack',
+                          style: TextStyle(fontSize: media.height * 0.025, color: Colors.black54),
+                        ),
+                        Text(
+                          'defense',
+                          style: TextStyle(fontSize: media.height * 0.025, color: Colors.black54),
+                        ),
+                        Text(
+                          'spAtk',
+                          style: TextStyle(fontSize: media.height * 0.025, color: Colors.black54),
+                        ),
+                        Text(
+                          'spDef',
+                          style: TextStyle(fontSize: media.height * 0.025, color: Colors.black54),
+                        ),
+                        Text(
+                          'speed',
+                          style: TextStyle(fontSize: media.height * 0.025, color: Colors.black54),
+                        ),
+                        SizedBox(height: media.height * 0.010),
+                        Text(
+                          'Total',
+                          style: TextStyle(fontSize: media.height * 0.025, color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    SizedBox(width: media.height * 0.050),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        BaseStatsRow(
+                          value: '$hp',
+                          valueBar: hp * 1.0,
+                        ),
+                        BaseStatsRow(
+                          value: '$attack',
+                          valueBar: attack * 1.0,
+                        ),
+                        BaseStatsRow(
+                          value: '$defense',
+                          valueBar: defense * 1.0,
+                        ),
+                        BaseStatsRow(
+                          value: '$spAtk',
+                          valueBar: spAtk * 1.0,
+                        ),
+                        BaseStatsRow(
+                          value: '$spDef',
+                          valueBar: spDef * 1.0,
+                        ),
+                        BaseStatsRow(
+                          value: '$speed',
+                          valueBar: speed * 1.0,
+                        ),
+//                      BaseStatsRow(value: '$total', st),
+                        SizedBox(height: media.height * 0.010),
+
+                        Text(
+                          '$total',
+                          style: TextStyle(
+                            fontSize: media.height * 0.025,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red,
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-            SizedBox(height: media.height * 0.05),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Type defenses',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: media.height * 0.030,
-                  ),
-                ),
-                SizedBox(height: media.height * 0.015),
-                Text(
-                  'Coming....',
-                  style: TextStyle(
-                    fontSize: media.height * 0.020, // 15,
-                  ),
-                ),
-                SizedBox(height: media.height * 0.010),
-                Text(
-                  'blah blah blah blah',
-                  style: TextStyle(
-                    fontSize: media.height * 0.020, // 15,
-                  ),
-                ),
-              ],
-            ),
+            // SizedBox(height: media.height * 0.05),
+            // Column(
+            //   crossAxisAlignment: CrossAxisAlignment.start,
+            //   children: <Widget>[
+            //     Text(
+            //       'Type defenses',
+            //       style: TextStyle(
+            //         fontWeight: FontWeight.bold,
+            //         fontSize: media.height * 0.030,
+            //       ),
+            //     ),
+            //     SizedBox(height: media.height * 0.015),
+            //     Text(
+            //       'Coming....',
+            //       style: TextStyle(
+            //         fontSize: media.height * 0.020, // 15,
+            //       ),
+            //     ),
+            //     SizedBox(height: media.height * 0.010),
+            //     Text(
+            //       'blah blah blah blah',
+            //       style: TextStyle(
+            //         fontSize: media.height * 0.020, // 15,
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),

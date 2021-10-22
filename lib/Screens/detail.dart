@@ -14,8 +14,9 @@ class DetailScreen extends StatefulWidget {
   _DetailScreenState createState() => _DetailScreenState();
 }
 
-class _DetailScreenState extends State<DetailScreen> with SingleTickerProviderStateMixin {
+class _DetailScreenState extends State<DetailScreen> with TickerProviderStateMixin {
   AnimationController animationController;
+  AnimationController animationController2;
   bool showSpinner = true;
 
   String pokeName;
@@ -62,6 +63,13 @@ class _DetailScreenState extends State<DetailScreen> with SingleTickerProviderSt
     );
 
     animationController.repeat();
+
+    animationController2 = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 7),
+    );
+
+    animationController2.repeat();
   }
 
 //   dynamic getDataFromAPI1() async {
@@ -197,8 +205,29 @@ class _DetailScreenState extends State<DetailScreen> with SingleTickerProviderSt
     return Scaffold(
       body: showSpinner
           ? Center(
-              child: CircularProgressIndicator(
-                backgroundColor: Colors.green,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AnimatedBuilder(
+                    animation: animationController2,
+                    builder: (BuildContext context, widget) {
+                      return Transform.rotate(
+                        angle: animationController2.value * 6.3,
+                        child: Container(
+                          height: media.height * 0.060, // 50,
+                          width: media.height * 0.060, // 50,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('images/unnamed.png'),
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
             )
           : SafeArea(

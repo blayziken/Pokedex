@@ -56,7 +56,7 @@ class _TabGeneralState extends State<TabGeneral> with SingleTickerProviderStateM
 
   @override
   void initState() {
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
     super.initState();
   }
 
@@ -94,17 +94,14 @@ class _TabGeneralState extends State<TabGeneral> with SingleTickerProviderStateM
           Expanded(
             flex: 0,
             child: Container(
-//                  height: 50,
               width: double.infinity,
-//                  color: Colors.,
               child: TabBar(
-                indicatorColor: Colors.blue,
+                indicatorColor: Colors.green,
                 controller: _tabController,
                 tabs: <Widget>[
                   DetailTab('About'),
                   DetailTab('Base Stats'),
                   DetailTab('Evolution'),
-                  DetailTab('Moves'),
                 ],
               ),
             ),
@@ -135,7 +132,6 @@ class _TabGeneralState extends State<TabGeneral> with SingleTickerProviderStateM
 //                  total: totalAPI,
                 ),
                 Evolution(evolutionLine: evolutionLine),
-                Moves(),
               ],
             ),
           )

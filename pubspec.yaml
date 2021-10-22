@@ -19,7 +19,7 @@ dependencies:
   lottie:
   clippy_flutter:
   material_design_icons_flutter:
-  flutter_svg:
+  flutter_svg: ^0.23.0+1
   gradient_widgets:
 
 dev_dependencies:

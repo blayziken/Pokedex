@@ -100,7 +100,7 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                               width: media.width * 0.35,
                               height: media.height * 0.060, // 52.0,
                               decoration: BoxDecoration(
-                                color: Colors.black, // lightGreen[700],
+                                color: Colors.lightGreen[700],
                                 borderRadius: BorderRadius.circular(30),
                               ),
 
@@ -186,7 +186,7 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                           ),
                         ),
                         SizedBox(
-                          height: media.height * 0.010, // 10,
+                          height: media.height * 0.015, // 10,
                         ),
                         InkWell(
                           onTap: () {
@@ -197,7 +197,7 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                               'Check out the full pokedex❗',
                               style: TextStyle(
                                 color: Colors.blue[900],
-                                fontSize: media.height * 0.015, // 15,
+                                fontSize: media.height * 0.02, // 15,
                                 fontStyle: FontStyle.italic,
                                 fontWeight: FontWeight.w800,
                               ),

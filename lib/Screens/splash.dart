@@ -32,7 +32,7 @@ class _SplashState extends State<Splash> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage('images/poke_search.png'),
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
           ),
         ),
 //         child: Column(

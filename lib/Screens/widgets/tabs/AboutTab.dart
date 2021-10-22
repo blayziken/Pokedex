@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -23,8 +26,8 @@ class About extends StatelessWidget {
   int gen;
   bool starter;
 //  List types;
-  String pokeType1;
-  String pokeType2;
+//   String pokeType1;
+//   String pokeType2;
   // Abilities
   List normalAbilities = [];
   List hiddenAbilities = [];
@@ -37,6 +40,10 @@ class About extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Timer(Duration(seconds: 2), () {
+      print(normalAbilities);
+      print(hiddenAbilities);
+    });
     var media = MediaQuery.of(context).size;
 
     Widget _normalAbilities() {
@@ -148,6 +155,14 @@ class About extends StatelessWidget {
             ),
           ],
         );
+      } else {
+        return Padding(
+          padding: EdgeInsets.only(top: media.height * 0.005),
+          child: Text(
+            'No hidden abilities',
+            style: TextStyle(color: Colors.red, fontSize: media.height * 0.017, fontWeight: FontWeight.w700),
+          ),
+        );
       }
     }
 
@@ -171,7 +186,7 @@ class About extends StatelessWidget {
               flex: 0,
               child: Center(
                 child: Container(
-                  height: media.height * 0.080,
+                  height: media.height * 0.070,
                   width: media.height * 0.300,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -186,7 +201,7 @@ class About extends StatelessWidget {
                     ],
                   ),
                   child: Padding(
-                    padding: EdgeInsets.only(left: media.height * 0.040, top: media.height * 0.015),
+                    padding: EdgeInsets.only(left: media.height * 0.040, top: media.height * 0.01),
                     child: Row(
                       children: <Widget>[
                         Column(

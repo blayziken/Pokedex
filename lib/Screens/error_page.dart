@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:poke_search/Screens/search.dart';
 
 class ErrorPage extends StatelessWidget {
@@ -16,27 +17,41 @@ class ErrorPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Spacer(),
-
-              Text(
-                'Error',
-                style: TextStyle(fontSize: media.height * 0.055, color: Colors.green, fontWeight: FontWeight.bold, letterSpacing: 1),
+              Container(
+                height: media.height * 0.350,
+                width: media.height * 0.350,
+                decoration: BoxDecoration(
+                  // color: Colors.brown,
+                  image: DecorationImage(
+                    image: AssetImage("images/charizard.png"),
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
-              SizedBox(height: media.height * 0.020),
+              SizedBox(height: media.height * 0.03),
               Text(
-                'There\'s no such pokemon',
-                style: TextStyle(fontSize: media.height * 0.020),
+                'Not Found',
+                style: TextStyle(fontSize: media.height * 0.055, color: Colors.red, fontWeight: FontWeight.bold, letterSpacing: 1),
+              ),
+              SizedBox(height: media.height * 0.010),
+              Text(
+                'There\'s no such pokemon 😢',
+                style: TextStyle(fontSize: media.height * 0.025),
               ),
               // SizedBox(height: media.height * 0.020),
               Spacer(),
               InkWell(
                 child: Container(
-                  color: Colors.red,
-                  height: media.height * 0.040,
-                  width: media.height * 0.070,
+                  height: media.height * 0.060,
+                  width: media.height * 0.17,
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(50),
+                  ),
                   child: Center(
                     child: Text(
-                      'Back',
-                      style: TextStyle(color: Colors.white, fontSize: media.height * 0.025),
+                      'Try Again ?',
+                      style: TextStyle(color: Colors.white, fontSize: media.height * 0.03, fontWeight: FontWeight.w800),
                     ),
                   ),
                 ),
