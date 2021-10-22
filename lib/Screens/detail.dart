@@ -4,7 +4,7 @@ import 'package:poke_search/provider/api_provider.dart';
 import 'package:poke_search/services/NetworkAPI.dart';
 import '../Screens/search.dart';
 import '../services/string_extension.dart';
-import 'error_page.dart';
+import 'Error_Screens/error_page.dart';
 
 class DetailScreen extends StatefulWidget {
   DetailScreen({this.pokemonName});

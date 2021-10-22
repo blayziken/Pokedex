@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:poke_search/Screens/search.dart';
 
-class ErrorPage extends StatelessWidget {
+class NoInternet extends StatelessWidget {
+  static const routeName = '/no-internet';
+
   @override
   Widget build(BuildContext context) {
     Size media = MediaQuery.of(context).size;
@@ -16,26 +18,26 @@ class ErrorPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Spacer(),
+              Spacer(flex: 2),
               Container(
-                height: media.height * 0.350,
-                width: media.height * 0.350,
+                height: media.height * 0.150,
+                width: media.height * 0.150,
                 decoration: BoxDecoration(
                   // color: Colors.brown,
                   image: DecorationImage(
-                    image: AssetImage("images/charizard.png"),
+                    image: AssetImage("images/pikachu.png"),
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
-              SizedBox(height: media.height * 0.03),
+              SizedBox(height: media.height * 0.05),
               Text(
-                'Not Found',
+                'Oops!',
                 style: TextStyle(fontSize: media.height * 0.055, color: Colors.red, fontWeight: FontWeight.bold, letterSpacing: 1),
               ),
               SizedBox(height: media.height * 0.010),
               Text(
-                'There\'s no such pokemon 😢',
+                'Check your internet connection. 😟',
                 style: TextStyle(fontSize: media.height * 0.025),
               ),
               // SizedBox(height: media.height * 0.020),
@@ -64,7 +66,9 @@ class ErrorPage extends StatelessWidget {
                   );
                 },
               ),
-              Spacer(),
+              Spacer(
+                flex: 1,
+              ),
             ],
           ),
         ),

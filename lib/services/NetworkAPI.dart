@@ -17,8 +17,10 @@ class NetworkAPI {
       print('retrievedData gotten');
       return jsonDecode(retrievedData);
     } else {
+      print('-----------------------------');
       print(response.statusCode);
       return null;
+      // throw error;
     }
   }
 }

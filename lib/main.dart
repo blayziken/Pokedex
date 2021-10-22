@@ -7,6 +7,8 @@ import 'package:poke_search/Screens/Generations/GenerationV.dart';
 import 'package:poke_search/Screens/Generations/GenerationVI.dart';
 import 'package:poke_search/Screens/search.dart';
 import 'package:poke_search/Screens/splash.dart';
+import 'Screens/Error_Screens/error_page.dart';
+import 'Screens/Error_Screens/no_internet.dart';
 import 'Screens/Generations/GenerationIII.dart';
 import './tests/ChooseSplash.dart';
 
@@ -39,6 +41,10 @@ class MyApp extends StatelessWidget {
         GenerationIVScreen.routeName: (context) => GenerationIVScreen(),
         GenerationVScreen.routeName: (context) => GenerationVScreen(),
         GenerationVIScreen.routeName: (context) => GenerationVIScreen(),
+
+        // Error Screen Routes
+        ErrorPage.routeName: (context) => ErrorPage(),
+        NoInternet.routeName: (context) => NoInternet(),
       },
     );
   }
