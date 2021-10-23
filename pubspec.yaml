@@ -30,10 +30,10 @@ dev_dependencies:
 
 flutter_native_splash:
   color: "#ffffff"
-  image: "images/Graphic4.png"
+  image: "images/poke_search.png"
   android: true
   ios: true
-  android_gravity: fill
+  android_gravity: fill_horizontal
   ios_content_mode: scaleAspectFill
 
 flutter:

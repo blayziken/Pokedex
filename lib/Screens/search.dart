@@ -29,24 +29,26 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
     var media = MediaQuery.of(context).size;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.all(media.height * 0.020),
-            child: Container(
-              height: media.height,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('images/starter.jpg'),
-                  fit: BoxFit.contain,
-                ),
+          child: Container(
+            height: media.height,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('images/starter.jpg'),
+                fit: BoxFit.contain,
+                colorFilter: ColorFilter.mode(Colors.white10, BlendMode.lighten),
               ),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(media.height * 0.020),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Expanded(
-                    flex: 2,
+                    flex: 0,
                     child: Container(
                       width: double.infinity,
                       child: Padding(
@@ -61,6 +63,7 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                       ),
                     ),
                   ),
+                  SizedBox(height: media.height * 0.08),
                   Expanded(
                     flex: 3,
                     child: Center(
@@ -94,7 +97,7 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                               ),
                             ),
                           ),
-                          SizedBox(height: media.height * 0.06),
+                          SizedBox(height: media.height * 0.01),
                           InkWell(
                             child: Container(
                               width: media.width * 0.35,
@@ -163,7 +166,9 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                       ),
                     ),
                   ),
+                  Spacer(),
                   Expanded(
+                    flex: 1,
                     child: Column(
                       children: [
                         Center(
