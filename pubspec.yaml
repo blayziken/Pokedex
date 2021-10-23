@@ -33,6 +33,8 @@ flutter_native_splash:
   image: "images/Graphic4.png"
   android: true
   ios: true
+  android_gravity: fill
+  ios_content_mode: scaleAspectFill
 
 flutter:
   uses-material-design: true
