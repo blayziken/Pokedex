@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Splash(),
+      home: Search(), // Splash(),
       routes: {
         Search.routeName: (context) => Search(),
         Splash.routeName: (context) => Splash(),
