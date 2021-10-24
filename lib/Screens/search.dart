@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:poke_search/Screens/detail.dart';
+import 'package:poke_search/models/connectivity.dart';
 
 class Search extends StatefulWidget {
   static const routeName = '/search';
@@ -11,17 +12,24 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
   AnimationController animationController;
-
   String searchName;
+
   @override
   void initState() {
     super.initState();
+    CheckInternetConnection().checkConnection(context);
+
     animationController = AnimationController(
       vsync: this,
       duration: Duration(seconds: 7),
     );
-
     animationController.repeat();
+  }
+
+  @override
+  void dispose() {
+    CheckInternetConnection().checkConnection(context).cancel();
+    super.dispose();
   }
 
   @override

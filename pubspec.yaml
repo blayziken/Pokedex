@@ -21,6 +21,7 @@ dependencies:
   material_design_icons_flutter:
   flutter_svg: ^0.23.0+1
   gradient_widgets:
+  connectivity_plus:
 
 dev_dependencies:
 #  flutter_launcher_icons: ^0.9.2
