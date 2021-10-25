@@ -79,7 +79,7 @@ class _DetailScreenState extends State<DetailScreen> with TickerProviderStateMix
 //
 //     var pokemonData = await networkAPI.getData();
 //
-//     //TODO: OR INSIDE AN IF STATEMENT
+//     //
 //     if (pokemonData != null) {
 //       return pokemonData;
 //     } else {

@@ -25,7 +25,6 @@ class CheckInternetConnection {
         showCustomDialog(internetStatus, contentMessage, context);
         break;
       case ConnectivityResult.ethernet:
-        // TODO: Handle this case.
         break;
     }
   }

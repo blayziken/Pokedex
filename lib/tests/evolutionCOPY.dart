@@ -31,7 +31,6 @@ class _EvolutionState extends State<Evolution> {
 
   @override
 //  void initState() {
-//    // TODO: implement initState
 //    super.initState();
 //  }
 //
@@ -57,8 +56,7 @@ class _EvolutionState extends State<Evolution> {
 //  }
 
   dynamic getSprite(name) async {
-    NetworkPokeDevAPI networkPokeDevAPI =
-        NetworkPokeDevAPI('https://pokeapi.glitch.me/v1/pokemon/$name');
+    NetworkPokeDevAPI networkPokeDevAPI = NetworkPokeDevAPI('https://pokeapi.glitch.me/v1/pokemon/$name');
 
     var pokemonImage = await networkPokeDevAPI.getData2();
     String networkImage = pokemonImage[0]['sprite'];
