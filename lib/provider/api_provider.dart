@@ -1,8 +1,6 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:poke_search/Screens/Error_Screens/error_page.dart';
-import 'package:poke_search/Screens/search.dart';
 import 'package:poke_search/services/NetworkAPI.dart';
 
 dynamic getDataFromAPI1(String pokemonName, BuildContext context) async {
@@ -35,7 +33,8 @@ dynamic getDataFromAPI1(String pokemonName, BuildContext context) async {
 dynamic getDataFromAPI2(String pokemonName) async {
   String name = pokemonName.toLowerCase();
 
-  NetworkPokeDevAPI networkPokeDevAPI = NetworkPokeDevAPI('https://pokeapi.glitch.me/v1/pokemon/$name');
+  NetworkPokeDevAPI networkPokeDevAPI =
+      NetworkPokeDevAPI('https://pokeapi.glitch.me/v1/pokemon/$name');
   var pokemonImage = await networkPokeDevAPI.getData2();
   return pokemonImage;
 }
