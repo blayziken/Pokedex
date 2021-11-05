@@ -95,22 +95,22 @@ class _AllGenerationScreenState extends State<AllGenerationScreen> with SingleTi
                   child: Column(
                     children: <Widget>[
                       CustomDropDownButton(),
-                      Padding(
-                        padding: EdgeInsets.only(top: media.height * 0.020),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              'Pokedex',
-                              style: TextStyle(
-                                fontSize: media.height * 0.060,
-                                fontWeight: FontWeight.w900,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: media.height * 0.005),
+                      // Padding(
+                      //   padding: EdgeInsets.only(top: media.height * 0.020),
+                      //   child: Column(
+                      //     crossAxisAlignment: CrossAxisAlignment.center,
+                      //     children: <Widget>[
+                      //       Text(
+                      //         'Pokedex',
+                      //         style: TextStyle(
+                      //           fontSize: media.height * 0.060,
+                      //           fontWeight: FontWeight.w900,
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                      SizedBox(height: media.height * 0.025),
                       Expanded(
                         child: Padding(
                           padding: EdgeInsets.all(media.height * 0.015),

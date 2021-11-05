@@ -95,7 +95,7 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                                 decoration: InputDecoration(
                                   enabledBorder: InputBorder.none,
                                   focusedBorder: InputBorder.none,
-                                  hintText: 'Search Pokemon',
+                                  hintText: 'Search',
                                   prefixIcon: Icon(Icons.search),
                                   contentPadding: EdgeInsets.symmetric(
                                     horizontal: media.height * 0.020, // 20,
@@ -207,7 +207,8 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                           },
                           child: Center(
                             child: Text(
-                              'Check out the full pokedex❗',
+                              'Check out various Generations 😤',
+                              // 'Check out the full pokedex❗',
                               style: TextStyle(
                                 color: Colors.blue[900],
                                 fontSize: media.height * 0.02, // 15,

@@ -1,4 +1,4 @@
-package com.example.poke_search
+package com.poke_search
 
 import io.flutter.embedding.android.FlutterActivity
 
